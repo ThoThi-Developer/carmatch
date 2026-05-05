@@ -1,236 +1,272 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CarMatch — O app que conecta você ao comprador certo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarMatch — Onde o carro encontra o comprador certo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #000000;
-    --bg-2: #0A0A0A;
-    --surface: #14191B;
-    --surface-2: #1A1F22;
-    --border: #1F2426;
-    --border-2: #2A3033;
-    --text: #FFFFFF;
-    --text-2: #A1A1A6;
-    --text-3: #6E6E73;
-    --accent: #FF3B30;
-    --accent-hi: #FF6B62;
-    --accent-low: rgba(255, 59, 48, 0.12);
-    --success: #34C759;
-    --r-sm: 8px;
-    --r-md: 12px;
-    --r-lg: 20px;
-    --r-xl: 32px;
-    --container: 1200px;
-    --gutter: 24px;
-    --font: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --bg: #0A0A0A;
+    --bg-alt: #111111;
+    --bg-card: #161616;
+    --red: #FF3B30;
+    --red-soft: rgba(255, 59, 48, 0.12);
+    --red-glow: rgba(255, 59, 48, 0.35);
+    --text: #F4F4F4;
+    --text-muted: #8E8E93;
+    --text-dim: #5A5A5C;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --green: #34C759;
+    --orange: #FF9500;
+    --yellow: #FFCC00;
+    --blue: #007AFF;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font);
-    -webkit-font-smoothing: antialiased;
-    line-height: 1.5;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
     overflow-x: hidden;
-  }
-  a { color: inherit; text-decoration: none; }
-  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-
-  .container {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 0 var(--gutter);
-    position: relative;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
-  /* ===== Background atmosphere ===== */
-  .ambient {
+  ::selection { background: var(--red); color: #fff; }
+
+  /* Grain overlay for texture */
+  body::before {
+    content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
-    background:
-      radial-gradient(ellipse 70% 50% at 80% 0%, rgba(255, 59, 48, 0.10), transparent 60%),
-      radial-gradient(ellipse 50% 40% at 0% 60%, rgba(255, 59, 48, 0.05), transparent 60%);
+    z-index: 1000;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  main, nav, footer { position: relative; z-index: 2; }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-  /* ===== Nav ===== */
+  /* ============ NAV ============ */
   nav {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.7);
     border-bottom: 1px solid var(--border);
   }
-  nav .container {
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    height: 72px;
+    align-items: center;
   }
+
   .logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.02em;
   }
-  .logo span { color: var(--accent); }
-  nav ul {
+  .logo span { color: var(--red); }
+
+  .nav-links {
     display: flex;
-    gap: 36px;
-    list-style: none;
-  }
-  nav ul a {
-    color: var(--text-2);
-    font-size: 15px;
-    font-weight: 500;
-    transition: color 0.18s;
-  }
-  nav ul a:hover { color: var(--text); }
-
-  /* ===== Buttons ===== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 22px;
-    height: 44px;
-    border-radius: var(--r-md);
+    gap: 32px;
     font-size: 14px;
-    font-weight: 600;
-    transition: all 0.15s ease;
-    white-space: nowrap;
-    letter-spacing: -0.005em;
+    color: var(--text-muted);
   }
-  .btn-primary { background: var(--accent); color: white; }
-  .btn-primary:hover { background: var(--accent-hi); transform: translateY(-1px); box-shadow: 0 12px 30px rgba(255,59,48,0.3); }
-  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border-2); }
-  .btn-secondary:hover { border-color: var(--text-2); }
-  .btn-lg { height: 56px; padding: 0 28px; font-size: 16px; }
-
-  /* ===== Store badges ===== */
-  .stores { display: flex; gap: 12px; flex-wrap: wrap; }
-  .store {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 22px;
-    background: black;
-    border: 1px solid var(--border-2);
-    border-radius: var(--r-md);
-    transition: all 0.18s;
-    height: 56px;
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
   }
-  .store:hover { border-color: var(--text-2); transform: translateY(-1px); }
-  .store svg { width: 28px; height: 28px; flex-shrink: 0; }
-  .store-text { line-height: 1.1; }
-  .store-text small { font-size: 11px; color: var(--text-3); display: block; margin-bottom: 2px; }
-  .store-text span { font-size: 16px; font-weight: 600; display: block; letter-spacing: -0.01em; }
+  .nav-links a:hover { color: var(--text); }
 
-  /* ===== HERO ===== */
+  .nav-pill {
+    background: var(--red-soft);
+    color: var(--red);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+  }
+
+  /* ============ HERO ============ */
   .hero {
-    padding: 80px 0 120px;
+    min-height: 100vh;
+    padding: 140px 0 80px;
+    position: relative;
     overflow: hidden;
   }
-  .hero .container {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 48px;
-    align-items: center;
+
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    right: -10%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, var(--red-glow) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0.5;
   }
 
-  .eyebrow {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-tag {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 14px;
-    background: var(--accent-low);
-    border: 1px solid rgba(255, 59, 48, 0.25);
-    border-radius: 999px;
-    font-size: 13px;
-    color: var(--accent-hi);
-    font-weight: 500;
-    margin-bottom: 24px;
-    animation: fadeUp 0.7s ease both;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease 0.1s both;
   }
-  .eyebrow .stars { color: var(--warning, #FF9500); letter-spacing: -1px; }
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    background: var(--red);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--red);
+    animation: pulse 2s infinite;
+  }
 
-  .hero h1 {
-    font-size: clamp(40px, 6vw, 76px);
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1.hero-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 700;
     line-height: 0.98;
-    letter-spacing: -0.035em;
-    font-weight: 700;
+    letter-spacing: -0.04em;
     margin-bottom: 24px;
-    animation: fadeUp 0.8s ease 0.1s both;
+    animation: fadeUp 0.8s ease 0.2s both;
   }
-  .hero h1 .accent { color: var(--accent); }
+  h1.hero-title .accent {
+    color: var(--red);
+  }
+  h1.hero-title .italic {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
 
-  .hero .lede {
+  .hero-sub {
     font-size: 19px;
-    color: var(--text-2);
-    margin-bottom: 36px;
-    max-width: 480px;
-    animation: fadeUp 0.8s ease 0.25s both;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.55;
+    animation: fadeUp 0.8s ease 0.35s both;
   }
 
-  .hero-stores {
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s ease 0.4s both;
-  }
-
-  .hero-meta {
+  .hero-cta {
     display: flex;
-    gap: 28px;
-    align-items: center;
-    flex-wrap: wrap;
-    color: var(--text-3);
-    font-size: 13px;
-    animation: fadeUp 0.8s ease 0.55s both;
-  }
-  .hero-meta .item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .hero-meta .check {
-    color: var(--success);
-    font-weight: 700;
+    gap: 14px;
+    animation: fadeUp 0.8s ease 0.5s both;
   }
 
-  /* ===== Phone Mockup ===== */
+  .btn {
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 8px 30px rgba(255, 59, 48, 0.35);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(255, 59, 48, 0.5);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover {
+    background: var(--bg-card);
+    border-color: var(--text-muted);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ PHONE MOCKUP ============ */
   .phone-stage {
     position: relative;
-    aspect-ratio: 1/1;
-    animation: fadeIn 1s ease 0.3s both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    animation: fadeUp 1s ease 0.4s both;
   }
 
   .phone {
-    width: 320px;
-    height: 660px;
-    background: linear-gradient(145deg, #2A3033, #14191B);
-    border-radius: 48px;
-    padding: 14px;
     position: relative;
+    width: 300px;
+    height: 612px;
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 48px;
+    border: 2px solid #2a2a2a;
+    padding: 12px;
     box-shadow:
+      0 50px 100px rgba(0, 0, 0, 0.6),
       0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 60px 100px -20px rgba(0, 0, 0, 0.8),
-      0 30px 60px -20px rgba(255, 59, 48, 0.15);
-    margin: 0 auto;
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   }
-  .phone-hero {
-    transform: rotate(-3deg) translateX(20px);
-    transition: transform 0.5s ease;
-  }
-  .phone-hero:hover { transform: rotate(-2deg) translateX(15px) scale(1.02); }
 
   .phone-screen {
     width: 100%;
@@ -239,1232 +275,1863 @@
     border-radius: 36px;
     overflow: hidden;
     position: relative;
-    display: flex;
-    flex-direction: column;
   }
 
   .notch {
     position: absolute;
-    top: 6px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
     height: 28px;
-    background: black;
-    border-radius: 14px;
+    background: #000;
+    border-radius: 100px;
     z-index: 10;
   }
 
-  /* App status bar */
   .status-bar {
+    padding: 14px 24px 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 14px 22px 8px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: white;
-    flex-shrink: 0;
+    color: #fff;
+    font-family: 'Geist Mono', monospace;
   }
-  .status-bar .time { font-variant-numeric: tabular-nums; }
-  .status-bar .icons { display: flex; gap: 5px; align-items: center; opacity: 0.9; }
-  .status-bar .icons svg { width: 14px; height: 14px; }
 
-  /* App content */
   .app-content {
-    flex: 1;
-    padding: 8px 20px 0;
+    padding: 50px 20px 20px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 
   .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0 24px;
+    padding: 4px 4px 16px;
   }
-  .app-header .app-logo {
-    font-size: 17px;
+  .app-logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    font-size: 17px;
+    letter-spacing: -0.02em;
   }
-  .app-header .app-logo span { color: var(--accent); }
-  .app-header .bell {
-    width: 32px; height: 32px;
-    display: grid; place-items: center;
-    color: white;
-    position: relative;
-  }
-  .app-header .bell::after {
-    content: '';
-    position: absolute;
-    top: 6px; right: 6px;
-    width: 8px; height: 8px;
+  .app-logo span { color: var(--red); }
+
+  .bell {
+    width: 28px; height: 28px;
     border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid black;
+    background: rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
   }
 
-  /* Match found screen */
-  .match-screen {
+  /* Swipe card stack */
+  .card-stack {
+    position: relative;
     flex: 1;
+    margin: 8px 0;
+  }
+
+  .car-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #1f1f1f 0%, #0a0a0a 100%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+  .car-card.back-2 {
+    transform: scale(0.94) translateY(-12px);
+    opacity: 0.5;
+  }
+  .car-card.back-1 {
+    transform: scale(0.97) translateY(-6px);
+    opacity: 0.75;
+  }
+
+  .car-img {
+    height: 60%;
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding-bottom: 80px;
-    gap: 24px;
+    overflow: hidden;
   }
-  .match-circle {
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: grid;
-    place-items: center;
-    box-shadow: 0 0 0 8px rgba(255,59,48,0.2), 0 0 60px rgba(255,59,48,0.5);
-    animation: pulseLg 2.5s ease-in-out infinite;
-  }
-  .match-circle::before {
+  .car-img::before {
     content: '';
     position: absolute;
-    inset: -16px;
-    border-radius: 50%;
-    border: 1.5px solid var(--accent);
-    opacity: 0;
-    animation: ringExpand 2.5s ease-out infinite;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, var(--red-glow), transparent 60%);
+    opacity: 0.6;
   }
-  .match-circle svg { width: 48px; height: 48px; color: white; }
-  .match-screen h2 {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+
+  /* SVG car shape */
+  .car-svg {
+    width: 80%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    z-index: 1;
   }
-  .match-screen p {
-    color: var(--text-2);
-    font-size: 14px;
-    max-width: 220px;
-    line-height: 1.5;
+
+  .car-info {
+    padding: 16px;
+    color: #fff;
   }
-  .match-screen .red-pill {
-    background: var(--accent);
-    color: white;
-    padding: 14px 28px;
-    border-radius: 999px;
-    font-size: 14px;
+  .car-name {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px;
     font-weight: 600;
-    margin-top: 12px;
+    margin-bottom: 2px;
+  }
+  .car-price {
+    color: var(--red);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .car-meta {
+    display: flex;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-family: 'Geist Mono', monospace;
+  }
+  .car-meta span {
+    background: rgba(255,255,255,0.06);
+    padding: 3px 8px;
+    border-radius: 100px;
   }
 
-  /* Tab bar */
-  .tab-bar {
-    position: absolute;
-    bottom: 18px;
-    left: 14px;
-    right: 14px;
-    background: rgba(20, 25, 27, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    height: 64px;
+  .swipe-actions {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 12px;
+    justify-content: center;
+    gap: 24px;
+    padding: 12px 0 24px;
   }
-  .tab {
+  .swipe-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
-    color: var(--text-3);
-    font-size: 10px;
-    font-weight: 500;
+    justify-content: center;
+    font-size: 22px;
+    border: 2px solid;
+    background: rgba(255,255,255,0.04);
+    cursor: pointer;
   }
-  .tab.active { color: var(--accent); }
-  .tab svg { width: 22px; height: 22px; }
+  .swipe-btn.dislike {
+    border-color: var(--text-muted);
+    color: var(--text-muted);
+  }
+  .swipe-btn.like {
+    border-color: var(--red);
+    color: var(--red);
+    box-shadow: 0 0 20px var(--red-glow);
+  }
 
-  /* Floating notification cards (around hero phone) */
+  /* Floating decorative elements */
   .float-card {
     position: absolute;
-    background: var(--surface);
-    border: 1px solid var(--border-2);
-    border-radius: var(--r-md);
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-    width: 230px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 12px 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    font-size: 13px;
     z-index: 5;
   }
-  .float-card .ico {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: grid; place-items: center;
-    color: white;
-    font-weight: 700;
-    font-size: 13px;
+  .float-card.match {
+    top: 20%;
+    right: -40px;
+    animation: float 4s ease-in-out infinite;
   }
-  .float-card .ico.accent { background: var(--accent); }
-  .float-card .ico.success { background: var(--success); }
-  .float-card .txt { flex: 1; min-width: 0; }
-  .float-card .t {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .float-card.message {
+    bottom: 18%;
+    left: -50px;
+    animation: float 4s ease-in-out infinite 1.5s;
   }
-  .float-card .s {
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .float-card .heart {
+    color: var(--red);
+    margin-right: 6px;
+  }
+  .float-card .small {
+    color: var(--text-muted);
     font-size: 11px;
-    color: var(--text-3);
     margin-top: 2px;
   }
 
-  .float-1 {
-    top: 8%;
-    left: -8%;
-    animation: floatA 5s ease-in-out infinite, fadeUp 0.8s ease 1s both;
-  }
-  .float-2 {
-    bottom: 18%;
-    right: -10%;
-    animation: floatB 6s ease-in-out infinite, fadeUp 0.8s ease 1.3s both;
-  }
-  .float-3 {
-    top: 45%;
-    left: -12%;
-    animation: floatA 7s ease-in-out infinite, fadeUp 0.8s ease 1.6s both;
-    animation-delay: -2s, 1.6s;
+  @media (max-width: 968px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .phone-stage { min-height: 500px; }
+    .phone { transform: scale(0.85); }
+    .float-card.match { right: 0; }
+    .float-card.message { left: 0; }
   }
 
-  /* ===== Live ticker ===== */
-  .ticker {
-    background: var(--bg-2);
+  /* ============ SECTIONS COMMON ============ */
+  section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-tag {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    max-width: 800px;
+  }
+  .section-title .italic {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .section-title .red { color: var(--red); }
+
+  .section-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* ============ THE PROBLEM ============ */
+  .problem {
+    background: var(--bg-alt);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 18px 0;
-    overflow: hidden;
-  }
-  .ticker-track {
-    display: flex;
-    gap: 48px;
-    animation: scroll 40s linear infinite;
-    width: max-content;
-  }
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-2);
-    font-size: 13px;
-    white-space: nowrap;
-  }
-  .ticker-item .dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 8px var(--success);
-  }
-  .ticker-item strong { color: var(--text); font-weight: 600; }
-  .ticker-item .price { color: var(--accent); font-weight: 700; }
-
-  /* ===== Section ===== */
-  section { padding: 100px 0; }
-  .sec-eyebrow {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  h2 {
-    font-size: clamp(32px, 4.5vw, 56px);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    font-weight: 700;
-  }
-  h2 .accent { color: var(--accent); }
-  .sec-sub {
-    font-size: 18px;
-    color: var(--text-2);
-    margin-top: 16px;
-    max-width: 580px;
   }
 
-  /* ===== Features grid (3-up small phones) ===== */
-  .feat-head {
-    text-align: center;
-    margin-bottom: 64px;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .feat-head .sec-sub { margin-left: auto; margin-right: auto; }
-
-  .feat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .feat {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 32px 28px 0;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.25s;
-  }
-  .feat:hover {
-    border-color: var(--border-2);
-    transform: translateY(-4px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-  }
-  .feat-icon {
-    width: 44px; height: 44px;
-    border-radius: var(--r-sm);
-    background: var(--accent-low);
-    color: var(--accent);
-    display: grid; place-items: center;
-    margin-bottom: 20px;
-  }
-  .feat h3 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    letter-spacing: -0.015em;
-  }
-  .feat p {
-    color: var(--text-2);
-    font-size: 15px;
-    line-height: 1.55;
-    margin-bottom: 32px;
-    min-height: 70px;
-  }
-  .feat .mini-phone {
-    width: 100%;
-    aspect-ratio: 0.95/1;
-    background: linear-gradient(145deg, #2A3033, #14191B);
-    border-radius: 24px 24px 0 0;
-    padding: 10px 10px 0;
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
-    position: relative;
-    margin: 0 -28px;
-    overflow: hidden;
-  }
-  .feat .mini-phone::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70px; height: 18px;
-    background: black;
-    border-radius: 9px;
-  }
-  .feat .mini-screen {
-    width: 100%;
-    height: 100%;
-    background: #000;
-    border-radius: 16px 16px 0 0;
-    padding: 20px 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* Mini-screen variants */
-  .ms-list-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-  }
-  .ms-list-row .av {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2A3033, #4A5358);
-    flex-shrink: 0;
-  }
-  .ms-list-row .av.alt2 { background: linear-gradient(135deg, #FF6B62, #FF3B30); }
-  .ms-list-row .av.alt3 { background: linear-gradient(135deg, #34C759, #1B8A3D); }
-  .ms-list-row .info { flex: 1; min-width: 0; }
-  .ms-list-row .name {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .ms-list-row .meta {
-    font-size: 10px;
-    color: var(--text-3);
-    margin-top: 2px;
-  }
-  .ms-list-row .pill {
-    font-size: 9px;
-    padding: 3px 7px;
-    border-radius: 999px;
-    font-weight: 600;
-  }
-  .ms-list-row .pill.hi { background: rgba(255,59,48,0.18); color: var(--accent); }
-  .ms-list-row .pill.md { background: rgba(255,149,0,0.18); color: #FF9500; }
-
-  /* Mini chat */
-  .ms-chat {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-  }
-  .ms-bubble {
-    max-width: 80%;
-    padding: 8px 12px;
-    border-radius: 14px;
-    font-size: 11px;
-    line-height: 1.4;
-  }
-  .ms-bubble.them {
-    background: var(--surface);
-    color: var(--text);
-    border-top-left-radius: 4px;
-  }
-  .ms-bubble.me {
-    background: var(--accent);
-    color: white;
-    align-self: flex-end;
-    border-top-right-radius: 4px;
-  }
-  .ms-typing {
-    display: flex;
-    gap: 3px;
-    padding: 10px 12px;
-    background: var(--surface);
-    border-radius: 14px;
-    border-top-left-radius: 4px;
-    width: fit-content;
-  }
-  .ms-typing span {
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--text-3);
-    animation: typingBounce 1.4s infinite;
-  }
-  .ms-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .ms-typing span:nth-child(3) { animation-delay: 0.4s; }
-
-  /* Mini stats */
-  .ms-stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 12px;
-  }
-  .ms-stat-card .label {
-    font-size: 9px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 4px;
-  }
-  .ms-stat-card .num {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-  }
-  .ms-stat-card .num.accent { color: var(--accent); }
-  .ms-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .ms-chart {
-    margin-top: 4px;
-    height: 60px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 8px 12px;
-    position: relative;
-    overflow: hidden;
-  }
-  .ms-chart svg { width: 100%; height: 100%; }
-
-  /* ===== Spotlight section (big phone alongside copy) ===== */
-  .spotlight {
-    background: linear-gradient(180deg, var(--bg-2), var(--bg));
-    border-top: 1px solid var(--border);
-  }
-  .spot-row {
+  .problem-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
+    margin-top: 60px;
   }
-  .spot-row.reverse { direction: rtl; }
-  .spot-row.reverse > * { direction: ltr; }
-  .spot-row + .spot-row { margin-top: 140px; }
-  .spot-copy h3 {
-    font-size: clamp(28px, 3.5vw, 44px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    margin-bottom: 18px;
-    font-weight: 700;
-  }
-  .spot-copy h3 .accent { color: var(--accent); }
-  .spot-copy p {
-    color: var(--text-2);
-    font-size: 17px;
-    line-height: 1.55;
-    margin-bottom: 24px;
-  }
-  .spot-bullets {
+
+  .pain-list {
     list-style: none;
-    display: grid;
-    gap: 12px;
-  }
-  .spot-bullets li {
     display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    color: var(--text-2);
-    font-size: 15px;
-  }
-  .spot-bullets li svg {
-    width: 20px; height: 20px;
-    color: var(--accent);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .spot-bullets li strong { color: var(--text); font-weight: 600; }
-
-  .spot-phone-wrap {
-    display: grid;
-    place-items: center;
-    aspect-ratio: 1/1;
-    position: relative;
-  }
-
-  /* ===== Numbers banner ===== */
-  .numbers {
-    background: var(--bg-2);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 64px 0;
-  }
-  .numbers .container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    text-align: center;
-  }
-  .num-item .v {
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    line-height: 1;
-    margin-bottom: 8px;
-    font-variant-numeric: tabular-nums;
-  }
-  .num-item .v .accent { color: var(--accent); }
-  .num-item .l { color: var(--text-3); font-size: 14px; }
-
-  /* ===== Testimonials ===== */
-  .testimonials {
-    background: var(--bg);
-  }
-  .test-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    flex-direction: column;
     gap: 20px;
-    margin-top: 56px;
   }
-  .test-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r-lg);
-    padding: 28px;
-    transition: all 0.2s;
-  }
-  .test-card:hover { border-color: var(--border-2); }
-  .test-stars {
-    color: #FF9500;
-    font-size: 14px;
-    margin-bottom: 16px;
-    letter-spacing: -1px;
-  }
-  .test-text {
-    font-size: 16px;
-    color: var(--text);
-    line-height: 1.5;
-    margin-bottom: 24px;
-    letter-spacing: -0.005em;
-  }
-  .test-author { display: flex; align-items: center; gap: 12px; }
-  .test-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2A3033, #4A5358);
-    flex-shrink: 0;
-  }
-  .test-avatar.a2 { background: linear-gradient(135deg, #FF6B62, #FF3B30); }
-  .test-avatar.a3 { background: linear-gradient(135deg, #34C759, #1B8A3D); }
-  .test-author .who { line-height: 1.3; }
-  .test-author .who strong { font-size: 14px; color: var(--text); font-weight: 600; }
-  .test-author .who small { font-size: 12px; color: var(--text-3); display: block; }
 
-  /* ===== Final CTA ===== */
-  .final-cta {
-    text-align: center;
-    padding: 140px 0;
+  .pain-item {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.3s;
+  }
+  .pain-item:hover {
+    border-color: var(--border-strong);
+    transform: translateX(4px);
+  }
+  .pain-icon {
+    width: 36px; height: 36px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--red-soft);
+    color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .pain-text {
+    flex: 1;
+  }
+  .pain-text h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .pain-text p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .stats-card {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
     position: relative;
     overflow: hidden;
   }
-  .final-cta::before {
+  .stats-card::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(255,59,48,0.15), transparent 70%);
-    pointer-events: none;
-  }
-  .final-cta h2 {
-    font-size: clamp(40px, 6vw, 80px);
-    margin-bottom: 24px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .final-cta p {
-    font-size: 19px;
-    color: var(--text-2);
-    margin-bottom: 40px;
-    max-width: 560px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .final-cta .stores { justify-content: center; }
-  .final-cta .qr-hint {
-    margin-top: 32px;
-    color: var(--text-3);
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    top: -50%; right: -50%;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, var(--red-glow), transparent 60%);
+    opacity: 0.3;
   }
 
-  /* ===== Footer ===== */
-  footer {
-    background: var(--bg-2);
-    border-top: 1px solid var(--border);
-    padding: 64px 0 32px;
-  }
-  footer .container {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-  }
-  .foot-brand .logo { margin-bottom: 16px; }
-  .foot-brand p {
-    color: var(--text-3);
-    font-size: 14px;
-    line-height: 1.55;
-    max-width: 320px;
-    margin-bottom: 24px;
-  }
-  .foot-brand .stores { margin-top: 0; }
-  .foot-brand .store {
-    height: 44px; padding: 8px 14px;
-    flex: 0 0 auto;
-  }
-  .foot-brand .store svg { width: 20px; height: 20px; }
-  .foot-brand .store-text small { font-size: 9px; }
-  .foot-brand .store-text span { font-size: 12px; }
-  .foot-col h4 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-3);
-    margin-bottom: 18px;
-    font-weight: 600;
-  }
-  .foot-col ul { list-style: none; }
-  .foot-col li { margin-bottom: 10px; }
-  .foot-col a { color: var(--text-2); font-size: 14px; transition: color 0.15s; }
-  .foot-col a:hover { color: var(--text); }
-  .foot-bottom {
-    grid-column: 1 / -1;
-    margin-top: 56px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
+  .stat-row {
     display: flex;
     justify-content: space-between;
-    color: var(--text-3);
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .stat-row:last-child { border-bottom: 0; }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .stat-value {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .stat-value .small {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  @media (max-width: 968px) {
+    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ============ SOLUTION (Tinder Metaphor) ============ */
+  .solution-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+  }
+  .solution-intro .section-title {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .solution-intro .section-tag {
+    justify-content: center;
+  }
+  .solution-intro .section-tag::before { display: none; }
+  .solution-intro .section-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .swipe-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .swipe-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .swipe-step:hover {
+    border-color: var(--red);
+    transform: translateY(-4px);
+  }
+  .step-num {
+    font-family: 'Geist Mono', monospace;
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .step-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .step-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .swipe-demo { grid-template-columns: 1fr; }
+  }
+
+  /* ============ PILLARS ============ */
+  .pillars {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .pillar {
+    padding: 36px 28px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .pillar:hover {
+    transform: translateY(-6px);
+    border-color: var(--red);
+  }
+  .pillar-ico {
+    width: 56px; height: 56px;
+    margin: 0 auto 20px;
+    background: var(--red-soft);
+    color: var(--red);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .pillar h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .pillar p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  @media (max-width: 768px) {
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ============ HOW IT WORKS ============ */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: start;
+  }
+
+  .flow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .flow-step {
+    display: flex;
+    gap: 20px;
+    padding: 20px 24px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+  }
+  .flow-step:hover, .flow-step.active {
+    background: var(--bg-card);
+    border-color: var(--border);
+  }
+  .flow-step.active {
+    border-color: var(--red);
+  }
+  .flow-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--bg-alt);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .flow-step.active .flow-num {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+  .flow-step h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .flow-step p {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .flow-visual {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    min-height: 480px;
+    position: relative;
+    overflow: hidden;
+  }
+  .flow-visual::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--red-glow), transparent 70%);
+    pointer-events: none;
+  }
+  .flow-mock {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    position: relative;
+  }
+  .flow-mock h5 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .flow-mock .sub {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .mock-input {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .mock-input .label {
+    color: var(--text-dim);
+    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    margin-bottom: 4px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .mock-input .val {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .mock-btn {
+    background: var(--red);
+    color: #fff;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  @media (max-width: 968px) {
+    .flow-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* ============ SCREENS GALLERY ============ */
+  .screens {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+  }
+  .screen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .screen {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 32px 24px;
+    transition: all 0.3s;
+  }
+  .screen:hover {
+    transform: translateY(-4px);
+    border-color: var(--red);
+  }
+  .screen-mock {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 380px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .screen h4 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .screen p {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* Specific screen mocks */
+  .mock-list-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-alt);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), #8B1F1A);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .mock-list-item .info { flex: 1; min-width: 0; }
+  .mock-list-item .name {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mock-list-item .desc {
+    color: var(--text-muted);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mock-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-family: 'Geist Mono', monospace;
+    margin-top: 4px;
+  }
+  .mock-tag.high { background: rgba(255, 59, 48, 0.15); color: var(--red); }
+  .mock-tag.med { background: rgba(255, 149, 0, 0.15); color: var(--orange); }
+  .mock-tag.low { background: rgba(52, 199, 89, 0.15); color: var(--green); }
+
+  .chart-mock {
+    height: 80px;
+    margin: 16px 0;
+    background: linear-gradient(180deg, var(--red-soft), transparent);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chart-line {
+    position: absolute;
+    inset: 0;
+  }
+
+  .stat-mini {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
     font-size: 12px;
-    flex-wrap: wrap;
+  }
+  .stat-mini:last-child { border-bottom: 0; }
+  .stat-mini .v {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  @media (max-width: 968px) {
+    .screen-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ BRAND IDENTITY ============ */
+  .brand {
+    padding: 120px 0;
+  }
+  .brand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+  }
+
+  .brand-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+  }
+  .brand-card h3 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .colors-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
   }
+  .color-chip {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    position: relative;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: flex-end;
+    padding: 8px;
+  }
+  .color-chip .hex {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(0,0,0,0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+  }
+  .color-chip.dark .hex { color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.6); }
 
-  /* ===== Animations ===== */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  .typo-display {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.04em;
   }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  .typo-meta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
-  @keyframes pulseLg {
-    0%, 100% { box-shadow: 0 0 0 8px rgba(255,59,48,0.2), 0 0 60px rgba(255,59,48,0.5); }
-    50% { box-shadow: 0 0 0 16px rgba(255,59,48,0.05), 0 0 80px rgba(255,59,48,0.7); }
+  .typo-sample {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.5;
   }
-  @keyframes ringExpand {
-    0% { transform: scale(0.85); opacity: 0.7; }
-    100% { transform: scale(1.4); opacity: 0; }
+  .typo-weights {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
   }
-  @keyframes floatA {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes floatB {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(10px); }
-  }
-  @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  @keyframes typingBounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30% { transform: translateY(-3px); opacity: 1; }
+  .weight {
+    padding: 6px 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 12px;
+    font-family: 'Geist Mono', monospace;
   }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 980px) {
-    .hero { padding: 56px 0 80px; }
-    .hero .container { grid-template-columns: 1fr; gap: 80px; }
-    .phone-stage { max-width: 380px; margin: 0 auto; }
-    .phone-hero { transform: rotate(-2deg); }
-    .feat-grid { grid-template-columns: 1fr; gap: 16px; }
-    .feat p { min-height: auto; }
-    .spot-row, .spot-row.reverse { grid-template-columns: 1fr; gap: 48px; direction: ltr; }
-    .spot-row + .spot-row { margin-top: 80px; }
-    .numbers .container { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; }
-    .test-grid { grid-template-columns: 1fr; }
-    footer .container { grid-template-columns: 1fr 1fr; gap: 32px; }
-    nav ul { display: none; }
-    section { padding: 64px 0; }
-    .float-1 { left: -2%; width: 200px; }
-    .float-2 { right: -2%; width: 200px; }
-    .float-3 { display: none; }
+  @media (max-width: 768px) {
+    .brand-grid { grid-template-columns: 1fr; }
   }
-  @media (max-width: 540px) {
-    .phone { width: 280px; height: 580px; }
-    .stores { flex-direction: column; align-items: stretch; }
-    .store { width: 100%; }
-    footer .container { grid-template-columns: 1fr; }
+
+  /* ============ BUSINESS MODEL ============ */
+  .biz {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .biz-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .biz-card {
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.3s;
+  }
+  .biz-card.featured {
+    border-color: var(--red);
+    background: linear-gradient(180deg, rgba(255, 59, 48, 0.06), var(--bg-card));
+    position: relative;
+  }
+  .biz-card.featured::before {
+    content: 'RECOMENDADO';
+    position: absolute;
+    top: -10px;
+    right: 24px;
+    background: var(--red);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.06em;
+  }
+  .biz-tag {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .biz-price {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+  .biz-price .sm {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .biz-card h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .biz-card .desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .biz-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .biz-features li {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .biz-features li::before {
+    content: '✓';
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  @media (max-width: 968px) {
+    .biz-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============ FEEDBACK CTA ============ */
+  .feedback {
+    padding: 140px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .feedback::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, var(--red-glow), transparent 60%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .feedback-inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .feedback h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+  .feedback h2 .italic {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    color: var(--red);
+    font-weight: 400;
+  }
+  .feedback p {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  .questions {
+    text-align: left;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+  }
+  .questions h3 {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+  .questions ol {
+    list-style: none;
+    counter-reset: q;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .questions ol li {
+    counter-increment: q;
+    padding-left: 40px;
+    position: relative;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .questions ol li::before {
+    content: counter(q, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'Geist Mono', monospace;
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .questions ol li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    color: var(--text-dim);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* Reveal animations on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 </head>
 <body>
-<div class="ambient"></div>
 
-<!-- ===== NAV ===== -->
 <nav>
-  <div class="container">
+  <div class="nav-inner">
     <div class="logo">Car<span>Match</span></div>
-    <ul>
-      <li><a href="#features">Recursos</a></li>
-      <li><a href="#como-funciona">Como funciona</a></li>
-      <li><a href="#avaliacoes">Avaliações</a></li>
-      <li><a href="#suporte">Suporte</a></li>
-    </ul>
-    <a href="#download" class="btn btn-primary">Baixar grátis</a>
+    <div class="nav-links">
+      <a href="#problema">Problema</a>
+      <a href="#solucao">Solução</a>
+      <a href="#como">Como funciona</a>
+      <a href="#telas">Telas</a>
+      <a href="#modelo">Modelo</a>
+    </div>
+    <div class="nav-pill">conceito · v1</div>
   </div>
 </nav>
 
-<main>
-
-<!-- ===== HERO ===== -->
-<section class="hero">
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
   <div class="container">
-    <div class="hero-copy">
-      <div class="eyebrow">
-        <span class="stars">★★★★★</span>
-        4,9 na App Store · Top 10 em Veículos
-      </div>
-      <h1>O app que conecta você ao <span class="accent">comprador certo</span>.</h1>
-      <p class="lede">Vender (ou comprar) carro nunca foi tão simples. Anuncie em 2 minutos, receba matches em tempo real e feche negócio direto pelo app.</p>
-
-      <div class="stores hero-stores">
-        <a href="#" class="store">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-          <div class="store-text"><small>Disponível na</small><span>App Store</span></div>
-        </a>
-        <a href="#" class="store">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.39.24-.74.6-.89l11.5 9.39L3.6 21.39c-.36-.15-.6-.5-.6-.89z"/></svg>
-          <div class="store-text"><small>Disponível no</small><span>Google Play</span></div>
-        </a>
-      </div>
-
-      <div class="hero-meta">
-        <div class="item"><span class="check">✓</span> Grátis pra baixar</div>
-        <div class="item"><span class="check">✓</span> Sem taxa pra anunciar</div>
-        <div class="item"><span class="check">✓</span> Suporte em português</div>
-      </div>
-    </div>
-
-    <!-- Phone with floating cards -->
-    <div class="phone-stage">
-      <!-- Floating notification cards -->
-      <div class="float-card float-1">
-        <div class="ico accent">CM</div>
-        <div class="txt">
-          <div class="t">Match encontrado!</div>
-          <div class="s">Carlos S. · Interesse alto</div>
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag">
+          <span class="dot"></span>
+          Tinder para venda de carros
         </div>
-      </div>
-      <div class="float-card float-2">
-        <div class="ico success">✓</div>
-        <div class="txt">
-          <div class="t">Anúncio publicado</div>
-          <div class="s">Visível pra 12k pessoas</div>
-        </div>
-      </div>
-      <div class="float-card float-3">
-        <div class="ico accent">3</div>
-        <div class="txt">
-          <div class="t">3 novos interessados</div>
-          <div class="s">há poucos minutos</div>
+        <h1 class="hero-title">
+          Onde o carro <span class="italic">encontra</span> o <span class="accent">comprador certo.</span>
+        </h1>
+        <p class="hero-sub">
+          Conectamos vendedores e compradores de forma inteligente. Sem anúncios genéricos, sem perda de tempo, sem desconhecidos perguntando "tá na garagem?".
+        </p>
+        <div class="hero-cta">
+          <a href="#solucao" class="btn btn-primary">
+            Ver como funciona
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#feedback" class="btn btn-ghost">Dar feedback</a>
         </div>
       </div>
 
-      <!-- Main phone -->
-      <div class="phone phone-hero">
-        <div class="phone-screen">
-          <div class="notch"></div>
-          <div class="status-bar">
-            <span class="time">9:41</span>
-            <div class="icons">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 22h2v-8H2v8zm4 0h2V8H6v14zm4 0h2V2h-2v20zm4 0h2v-6h-2v6zm4 0h2v-12h-2v12z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.24 4.24 0 0 0-6 0zm-4-4l2 2a7.07 7.07 0 0 1 10 0l2-2a9.9 9.9 0 0 0-14 0z"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="18" height="12" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/></svg>
-            </div>
-          </div>
-          <div class="app-content">
-            <div class="app-header">
-              <div class="app-logo">Car<span>Match</span></div>
-              <div class="bell">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-              </div>
-            </div>
-            <div class="match-screen">
-              <div class="match-circle">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <h2>Match encontrado!</h2>
-              <p>Você tem 12 interessados no seu carro. Veja agora.</p>
-              <div class="red-pill">Ver interessados →</div>
-            </div>
-            <div class="tab-bar">
-              <div class="tab active">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l-9 9h2v8h6v-6h2v6h6v-8h2z"/></svg>
-                <span>Início</span>
-              </div>
-              <div class="tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                <span>Anúncios</span>
-              </div>
-              <div class="tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                <span>Match</span>
-              </div>
-              <div class="tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                <span>Mensagens</span>
-              </div>
-              <div class="tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                <span>Perfil</span>
-              </div>
-            </div>
-          </div>
+      <!-- Phone mockup -->
+      <div class="phone-stage">
+
+        <div class="float-card match">
+          <div><span class="heart">♥</span> Match!</div>
+          <div class="small">Carlos curtiu seu carro</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== LIVE TICKER ===== -->
-<div class="ticker">
-  <div class="ticker-track">
-    <div class="ticker-item"><span class="dot"></span><strong>Carlos</strong> em SP fez match · <span class="price">R$ 89.900</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Amanda</strong> em RJ vendeu em 2 dias</div>
-    <div class="ticker-item"><span class="dot"></span><strong>Rafael</strong> em MG fez match · <span class="price">R$ 145.000</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Juliana</strong> em PR comprou pelo app</div>
-    <div class="ticker-item"><span class="dot"></span><strong>Bruno</strong> em RS fez match · <span class="price">R$ 65.000</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Patrícia</strong> em SP vendeu em 3 dias</div>
-    <!-- duplicate for seamless loop -->
-    <div class="ticker-item"><span class="dot"></span><strong>Carlos</strong> em SP fez match · <span class="price">R$ 89.900</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Amanda</strong> em RJ vendeu em 2 dias</div>
-    <div class="ticker-item"><span class="dot"></span><strong>Rafael</strong> em MG fez match · <span class="price">R$ 145.000</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Juliana</strong> em PR comprou pelo app</div>
-    <div class="ticker-item"><span class="dot"></span><strong>Bruno</strong> em RS fez match · <span class="price">R$ 65.000</span></div>
-    <div class="ticker-item"><span class="dot"></span><strong>Patrícia</strong> em SP vendeu em 3 dias</div>
-  </div>
-</div>
-
-<!-- ===== FEATURES (3-up) ===== -->
-<section id="features">
-  <div class="container">
-    <div class="feat-head">
-      <div class="sec-eyebrow">O que tem no app</div>
-      <h2>Tudo que você precisa <span class="accent">na palma da mão</span>.</h2>
-      <p class="sec-sub">Do anúncio à venda. Sem precisar abrir 5 sites diferentes.</p>
-    </div>
-
-    <div class="feat-grid">
-
-      <!-- FEATURE 1: Match list -->
-      <div class="feat">
-        <div class="feat-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="float-card message">
+          <div>💬 Nova mensagem</div>
+          <div class="small">"Tem interesse em troca?"</div>
         </div>
-        <h3>Matches em tempo real</h3>
-        <p>O algoritmo cruza milhares de buscas e te avisa na hora quando aparece um interessado de verdade.</p>
-        <div class="mini-phone">
-          <div class="mini-screen">
-            <div class="ms-list-row">
-              <div class="av alt2"></div>
-              <div class="info">
-                <div class="name">Carlos Silva</div>
-                <div class="meta">Honda Civic 2020</div>
-              </div>
-              <div class="pill hi">Alto</div>
-            </div>
-            <div class="ms-list-row">
-              <div class="av alt3"></div>
-              <div class="info">
-                <div class="name">Amanda Lima</div>
-                <div class="meta">Toyota Corolla 2019</div>
-              </div>
-              <div class="pill hi">Alto</div>
-            </div>
-            <div class="ms-list-row">
-              <div class="av"></div>
-              <div class="info">
-                <div class="name">Bruno Santos</div>
-                <div class="meta">Jeep Compass 2021</div>
-              </div>
-              <div class="pill md">Médio</div>
-            </div>
-            <div class="ms-list-row">
-              <div class="av alt2"></div>
-              <div class="info">
-                <div class="name">Juliana Costa</div>
-                <div class="meta">Fiat Toro 2020</div>
-              </div>
-              <div class="pill md">Médio</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- FEATURE 2: Chat -->
-      <div class="feat">
-        <div class="feat-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <h3>Chat direto, sem fricção</h3>
-        <p>Negocie diretamente com o comprador. Mensagem, voz, foto. Tudo dentro do app, sem dar seu telefone.</p>
-        <div class="mini-phone">
-          <div class="mini-screen">
-            <div class="ms-chat">
-              <div class="ms-bubble them">Oi! Ainda tá disponível?</div>
-              <div class="ms-bubble me">Tá sim! Quando você pode ver?</div>
-              <div class="ms-bubble them">Posso amanhã às 10h. Pode mandar a localização?</div>
-              <div class="ms-bubble me">Combinado! Te mando agora.</div>
-              <div class="ms-typing"><span></span><span></span><span></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FEATURE 3: Stats / dashboard -->
-      <div class="feat">
-        <div class="feat-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/></svg>
-        </div>
-        <h3>Acompanhe tudo em tempo real</h3>
-        <p>Veja quantas pessoas viram, salvaram e demonstraram interesse no seu carro. Decisão baseada em dados.</p>
-        <div class="mini-phone">
-          <div class="mini-screen">
-            <div class="ms-row">
-              <div class="ms-stat-card">
-                <div class="label">Visualizações</div>
-                <div class="num">1.248</div>
-              </div>
-              <div class="ms-stat-card">
-                <div class="label">Interessados</div>
-                <div class="num accent">32</div>
-              </div>
-            </div>
-            <div class="ms-stat-card">
-              <div class="label">Engajamento</div>
-              <div class="num">+ 24%</div>
-            </div>
-            <div class="ms-chart">
-              <svg viewBox="0 0 200 60" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#FF3B30" stop-opacity="0.4"/>
-                    <stop offset="100%" stop-color="#FF3B30" stop-opacity="0"/>
-                  </linearGradient>
-                </defs>
-                <path d="M0,50 L20,45 L40,42 L60,38 L80,30 L100,32 L120,22 L140,18 L160,12 L180,8 L200,4 L200,60 L0,60 Z" fill="url(#cg)"/>
-                <path d="M0,50 L20,45 L40,42 L60,38 L80,30 L100,32 L120,22 L140,18 L160,12 L180,8 L200,4" fill="none" stroke="#FF3B30" stroke-width="1.5"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== SPOTLIGHT (big features) ===== -->
-<section class="spotlight" id="como-funciona">
-  <div class="container">
-    <div class="feat-head" style="margin-bottom: 80px;">
-      <div class="sec-eyebrow">Como funciona</div>
-      <h2>Vender carro <span class="accent">em três telas</span>.</h2>
-      <p class="sec-sub">Anuncie hoje. Receba matches amanhã. Feche negócio na semana.</p>
-    </div>
-
-    <!-- Spotlight 1 -->
-    <div class="spot-row">
-      <div class="spot-copy">
-        <div class="sec-eyebrow">01 · Anuncie</div>
-        <h3>Em <span class="accent">2 minutos</span> seu carro está no ar.</h3>
-        <p>Tira algumas fotos, preenche o essencial e publica. O app sugere preço justo baseado em dados de mercado.</p>
-        <ul class="spot-bullets">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><strong>Sem taxa</strong> pra anunciar</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Sugestão de <strong>preço justo</strong> baseada em IA</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Verificação automática de <strong>documentação</strong></span></li>
-        </ul>
-      </div>
-      <div class="spot-phone-wrap">
         <div class="phone">
           <div class="phone-screen">
             <div class="notch"></div>
-            <div class="status-bar"><span class="time">9:41</span><div class="icons"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 22h2v-8H2v8zm4 0h2V8H6v14zm4 0h2V2h-2v20zm4 0h2v-6h-2v6zm4 0h2v-12h-2v12z"/></svg></div></div>
-            <div class="app-content" style="padding: 0 20px;">
-              <div class="app-header">
-                <div class="app-logo">Novo anúncio</div>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 12px;">
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
-                  <div style="font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Marca</div>
-                  <div style="font-size: 14px; font-weight: 600;">Jeep</div>
-                </div>
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
-                  <div style="font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Modelo</div>
-                  <div style="font-size: 14px; font-weight: 600;">Compass Limited</div>
-                </div>
-                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
-                  <div style="font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Ano</div>
-                  <div style="font-size: 14px; font-weight: 600;">2021</div>
-                </div>
-                <div style="background: rgba(255,59,48,0.1); border: 1px solid rgba(255,59,48,0.3); border-radius: 10px; padding: 14px;">
-                  <div style="font-size: 11px; color: var(--accent-hi); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Sugestão IA</div>
-                  <div style="font-size: 18px; font-weight: 700; color: var(--accent);">R$ 129.900</div>
-                </div>
-                <div style="background: var(--accent); color: white; padding: 14px; border-radius: 10px; text-align: center; font-weight: 600; font-size: 14px; margin-top: 4px;">Publicar anúncio</div>
-              </div>
+            <div class="status-bar">
+              <span>9:41</span>
+              <span>●●●● 5G</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Spotlight 2 (reversed) -->
-    <div class="spot-row reverse">
-      <div class="spot-copy">
-        <div class="sec-eyebrow">02 · Receba matches</div>
-        <h3>O algoritmo <span class="accent">trabalha por você</span>.</h3>
-        <p>Enquanto você toca sua vida, a CarMatch cruza seu anúncio com milhares de pessoas buscando exatamente o que você tem. Notificação na hora que aparece interessado de verdade.</p>
-        <ul class="spot-bullets">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><strong>98% de precisão</strong> nos matches</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Notificação <strong>em tempo real</strong></span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Filtro inteligente: <strong>sem curiosos</strong></span></li>
-        </ul>
-      </div>
-      <div class="spot-phone-wrap">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="notch"></div>
-            <div class="status-bar"><span class="time">9:41</span><div class="icons"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 22h2v-8H2v8zm4 0h2V8H6v14zm4 0h2V2h-2v20zm4 0h2v-6h-2v6zm4 0h2v-12h-2v12z"/></svg></div></div>
             <div class="app-content">
               <div class="app-header">
-                <div class="app-logo">Matches <span style="background: var(--accent); color: white; font-size: 11px; padding: 2px 7px; border-radius: 999px; margin-left: 6px;">12</span></div>
+                <div class="app-logo">Car<span>Match</span></div>
+                <div class="bell">🔔</div>
               </div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                <div class="ms-list-row" style="padding: 12px;"><div class="av alt2" style="width: 38px; height: 38px;"></div><div class="info"><div class="name" style="font-size: 13px;">Carlos Silva</div><div class="meta">Honda Civic 2020 · há 2 min</div></div><div class="pill hi" style="font-size: 10px;">Alto</div></div>
-                <div class="ms-list-row" style="padding: 12px;"><div class="av alt3" style="width: 38px; height: 38px;"></div><div class="info"><div class="name" style="font-size: 13px;">Amanda Lima</div><div class="meta">Toyota Corolla 2019 · há 8 min</div></div><div class="pill hi" style="font-size: 10px;">Alto</div></div>
-                <div class="ms-list-row" style="padding: 12px;"><div class="av" style="width: 38px; height: 38px;"></div><div class="info"><div class="name" style="font-size: 13px;">Bruno Santos</div><div class="meta">Jeep Compass 2021 · há 14 min</div></div><div class="pill md" style="font-size: 10px;">Médio</div></div>
-                <div class="ms-list-row" style="padding: 12px;"><div class="av alt2" style="width: 38px; height: 38px;"></div><div class="info"><div class="name" style="font-size: 13px;">Juliana Costa</div><div class="meta">Fiat Toro 2020 · há 22 min</div></div><div class="pill md" style="font-size: 10px;">Médio</div></div>
-                <div class="ms-list-row" style="padding: 12px;"><div class="av alt3" style="width: 38px; height: 38px;"></div><div class="info"><div class="name" style="font-size: 13px;">Ricardo Alves</div><div class="meta">VW Nivus 2022 · há 35 min</div></div><div class="pill md" style="font-size: 10px;">Médio</div></div>
+
+              <div class="card-stack">
+                <div class="car-card back-2"></div>
+                <div class="car-card back-1"></div>
+                <div class="car-card">
+                  <div class="car-img">
+                    <svg class="car-svg" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+                      <text x="120" y="72" text-anchor="middle"
+                            font-family="'Bricolage Grotesque', sans-serif"
+                            font-weight="800"
+                            font-size="76"
+                            fill="#ffffff"
+                            letter-spacing="-3">Jeep</text>
+                      <g transform="translate(120, 88)" opacity="0.85">
+                        <rect x="-32" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="-22" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="-12" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="-2" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="8" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="18" y="0" width="3" height="6" fill="#ffffff"/>
+                        <rect x="28" y="0" width="3" height="6" fill="#ffffff"/>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="car-info">
+                    <div class="car-name">Jeep Compass</div>
+                    <div class="car-price">R$ 129.900</div>
+                    <div class="car-meta">
+                      <span>2021</span>
+                      <span>32.000 km</span>
+                      <span>Aut.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swipe-actions">
+                <div class="swipe-btn dislike">✕</div>
+                <div class="swipe-btn like">♥</div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-</section>
+</header>
 
-<!-- ===== NUMBERS BANNER ===== -->
-<section class="numbers">
+<!-- PROBLEM -->
+<section class="problem" id="problema">
   <div class="container">
-    <div class="num-item">
-      <div class="v"><span class="accent">+150k</span></div>
-      <div class="l">Downloads no Brasil</div>
+    <div class="reveal">
+      <div class="section-tag">01 — O Problema</div>
+      <h2 class="section-title">Vender carro hoje é uma <span class="italic">dor de cabeça</span>.</h2>
+      <p class="section-sub">Os classificados atuais foram desenhados pra atrair tráfego, não pra fechar negócio. O resultado: muito ruído, pouco match.</p>
     </div>
-    <div class="num-item">
-      <div class="v">4,9 ★</div>
-      <div class="l">Avaliação na App Store</div>
-    </div>
-    <div class="num-item">
-      <div class="v">3,2 dias</div>
-      <div class="l">Tempo médio até venda</div>
-    </div>
-    <div class="num-item">
-      <div class="v"><span class="accent">98%</span></div>
-      <div class="l">Precisão dos matches</div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== TESTIMONIALS ===== -->
-<section class="testimonials" id="avaliacoes">
-  <div class="container">
-    <div class="feat-head">
-      <div class="sec-eyebrow">O que dizem</div>
-      <h2>Pessoas reais. <span class="accent">Vendas reais.</span></h2>
-      <p class="sec-sub">Mais de 4.800 avaliações 5 estrelas na App Store.</p>
-    </div>
-    <div class="test-grid">
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Vendi meu Civic em 4 dias. Tinha tentado em 3 sites de classificados antes, só recebia mensagem de gente curiosa. No CarMatch o filtro é absurdo."</div>
-        <div class="test-author">
-          <div class="test-avatar"></div>
-          <div class="who"><strong>Carlos S.</strong><small>São Paulo, SP</small></div>
+    <div class="problem-grid">
+      <ul class="pain-list reveal">
+        <li class="pain-item">
+          <div class="pain-icon">📞</div>
+          <div class="pain-text">
+            <h4>Curiosos sem fim</h4>
+            <p>"Tá disponível?" "Aceita quanto à vista?" "Topa trocar por moto?". 10 perguntas pra cada negócio real.</p>
+          </div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-icon">⏰</div>
+          <div class="pain-text">
+            <h4>Tempo desperdiçado</h4>
+            <p>Marca visita. Não aparece. Marca de novo. Aparece mas não tinha pesquisado nada. Repete.</p>
+          </div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-icon">🔒</div>
+          <div class="pain-text">
+            <h4>Insegurança</h4>
+            <p>Estranhos no WhatsApp, encontros em lugares aleatórios, golpes de "depósito antecipado".</p>
+          </div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-icon">🎯</div>
+          <div class="pain-text">
+            <h4>Match ruim</h4>
+            <p>Anúncio genérico atrai público errado. Vendedor de SUV familiar recebendo lead de quem queria hatch esportivo.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="stats-card reveal">
+        <div class="stat-row">
+          <div class="stat-label">Tempo médio pra vender carro</div>
+          <div class="stat-value">62<span class="small"> dias</span></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Contatos sem intenção de compra</div>
+          <div class="stat-value">73<span class="small">%</span></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Visitas que não viram negócio</div>
+          <div class="stat-value">8 <span class="small">de cada 10</span></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label">Vendedores insatisfeitos com plataformas atuais</div>
+          <div class="stat-value">61<span class="small">%</span></div>
         </div>
       </div>
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Comprei meu primeiro carro pelo app. O match foi tão certeiro que parecia que o algoritmo me conhecia melhor que eu mesma. Recomendo demais."</div>
-        <div class="test-author">
-          <div class="test-avatar a2"></div>
-          <div class="who"><strong>Amanda L.</strong><small>Rio de Janeiro, RJ</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solucao">
+  <div class="container">
+    <div class="solution-intro reveal">
+      <div class="section-tag">02 — A Solução</div>
+      <h2 class="section-title">E se vender carro fosse como dar <span class="red">match</span>?</h2>
+      <p class="section-sub">CarMatch usa swipe, perfil e algoritmo pra conectar quem quer vender com quem realmente quer comprar. Simples assim.</p>
+    </div>
+
+    <div class="swipe-demo">
+      <div class="swipe-step reveal">
+        <div class="step-num">PASSO 01</div>
+        <div class="step-icon">📸</div>
+        <div class="step-title">Cadastra o carro</div>
+        <p class="step-desc">Fotos, modelo, ano, KM, preço. 5 minutos. O perfil do carro é o "card" que vai ser visto.</p>
+      </div>
+      <div class="swipe-step reveal">
+        <div class="step-num">PASSO 02</div>
+        <div class="step-icon">🔥</div>
+        <div class="step-title">Compradores dão swipe</div>
+        <p class="step-desc">Quem busca dá like no que combina com o filtro dele. Sem like, sem contato. Filtro automático de curiosos.</p>
+      </div>
+      <div class="swipe-step reveal">
+        <div class="step-num">PASSO 03</div>
+        <div class="step-icon">💬</div>
+        <div class="step-title">Match → conversa</div>
+        <p class="step-desc">Quando vendedor aceita o interesse, o chat libera. Conversa só com gente qualificada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">03 — Diferenciais</div>
+      <h2 class="section-title">Quatro pilares, <span class="italic">um propósito.</span></h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <div class="pillar-ico">⚡</div>
+        <h3>Rápido</h3>
+        <p>Conexões que aceleram o negócio. Match direto, sem rodeios.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ico">◎</div>
+        <h3>Inteligente</h3>
+        <p>Algoritmo que aprende perfil e mostra só o que importa.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ico">🛡</div>
+        <h3>Confiável</h3>
+        <p>Verificação de perfil, transparência em cada etapa.</p>
+      </div>
+      <div class="pillar reveal">
+        <div class="pillar-ico">👥</div>
+        <h3>Humano</h3>
+        <p>Tecnologia que aproxima pessoas — não que cria distância.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">04 — Fluxo</div>
+      <h2 class="section-title">Do cadastro à <span class="red">venda fechada.</span></h2>
+      <p class="section-sub">7 passos. Cada um pensado pra reduzir atrito e aumentar conversão.</p>
+    </div>
+
+    <div class="flow-grid">
+      <div class="flow-list reveal">
+        <div class="flow-step active" data-step="1">
+          <div class="flow-num">1</div>
+          <div>
+            <h4>Boas-vindas</h4>
+            <p>Tela de entrada simples, com o conceito claro.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="2">
+          <div class="flow-num">2</div>
+          <div>
+            <h4>Criar conta</h4>
+            <p>Email, telefone ou login social. 30 segundos.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="3">
+          <div class="flow-num">3</div>
+          <div>
+            <h4>Tipo de perfil</h4>
+            <p>Vendedor, comprador, ou os dois. Define a experiência.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="4">
+          <div class="flow-num">4</div>
+          <div>
+            <h4>Dados do carro</h4>
+            <p>Marca, modelo, versão, ano, KM. Auto-completa quando possível.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="5">
+          <div class="flow-num">5</div>
+          <div>
+            <h4>Fotos</h4>
+            <p>Mínimo de 4. Dicas de enquadramento integradas.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="6">
+          <div class="flow-num">6</div>
+          <div>
+            <h4>Confirmação</h4>
+            <p>Preview do anúncio antes de publicar.</p>
+          </div>
+        </div>
+        <div class="flow-step" data-step="7">
+          <div class="flow-num">7</div>
+          <div>
+            <h4>Publicado!</h4>
+            <p>Anúncio no ar. Notificação a cada interesse.</p>
+          </div>
         </div>
       </div>
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"O chat dentro do app é a melhor parte. Não precisei dar meu WhatsApp pra ninguém. Fechei a venda do Compass sem stress nenhum."</div>
-        <div class="test-author">
-          <div class="test-avatar a3"></div>
-          <div class="who"><strong>Rafael M.</strong><small>Belo Horizonte, MG</small></div>
+
+      <div class="flow-visual reveal">
+        <div class="flow-mock" id="flow-mock">
+          <h5>Boas-vindas</h5>
+          <div class="sub">Conectamos você ao comprador certo</div>
+          <div style="display:flex; align-items:center; justify-content:center; padding:32px 0 24px;">
+            <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="welcomeGlow" cx="0.5" cy="0.5">
+                  <stop offset="0" stop-color="#FF3B30" stop-opacity="0.45"/>
+                  <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="welcomeRed" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#FF5A50"/>
+                  <stop offset="1" stop-color="#C42820"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Background glow -->
+              <ellipse cx="140" cy="90" rx="130" ry="70" fill="url(#welcomeGlow)"/>
+
+              <!-- Animated connection arc -->
+              <path d="M 60 75 Q 140 15 220 75" stroke="#FF3B30" stroke-width="1.5"
+                    stroke-dasharray="4 5" fill="none" opacity="0.55">
+                <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite"/>
+              </path>
+
+              <!-- Left avatar (Vendedor) -->
+              <g transform="translate(60, 90)">
+                <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
+                <circle cy="-7" r="9" fill="#888"/>
+                <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
+                <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
+                      font-size="9" fill="#888" letter-spacing="1.5">VENDEDOR</text>
+              </g>
+
+              <!-- Right avatar (Comprador) -->
+              <g transform="translate(220, 90)">
+                <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+                <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
+                <circle cy="-7" r="9" fill="#888"/>
+                <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
+                <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
+                      font-size="9" fill="#888" letter-spacing="1.5">COMPRADOR</text>
+              </g>
+
+              <!-- Center match badge with heart -->
+              <g transform="translate(140, 90)">
+                <circle r="32" fill="url(#welcomeRed)">
+                  <animate attributeName="r" values="30;33;30" dur="1.6s" repeatCount="indefinite"/>
+                </circle>
+                <circle r="40" fill="none" stroke="#FF3B30" stroke-width="1" opacity="0.3">
+                  <animate attributeName="r" values="32;48;32" dur="1.6s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite"/>
+                </circle>
+                <path d="M0 8 C-13 -5 -13 -16 -6 -16 C-2 -16 0 -13 0 -10 C0 -13 2 -16 6 -16 C13 -16 13 -5 0 8 Z"
+                      fill="#ffffff" transform="scale(0.85)"/>
+              </g>
+
+              <!-- Small "Match!" tag below center -->
+              <g transform="translate(140, 145)">
+                <rect x="-22" y="-9" width="44" height="18" rx="9" fill="#FF3B30"/>
+                <text y="3" text-anchor="middle" font-family="'Geist Mono', monospace"
+                      font-size="9" font-weight="600" fill="#fff" letter-spacing="1">MATCH</text>
+              </g>
+
+              <!-- Subtle car silhouette at bottom -->
+              <g transform="translate(140, 178)" opacity="0.5">
+                <path d="M-32 0 Q-28 -10 -18 -12 L18 -12 Q28 -10 32 0 L32 5 Q32 8 29 8 L23 8 Q22 4 18 4 Q14 4 13 8 L-13 8 Q-14 4 -18 4 Q-22 4 -23 8 L-29 8 Q-32 8 -32 5 Z"
+                      fill="#555"/>
+                <circle cx="-18" cy="6" r="3" fill="#222"/>
+                <circle cx="18" cy="6" r="3" fill="#222"/>
+              </g>
+            </svg>
+          </div>
+          <div class="mock-btn">Começar</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== FINAL CTA ===== -->
-<section class="final-cta" id="download">
+<!-- SCREENS -->
+<section class="screens" id="telas">
   <div class="container">
-    <h2>Baixe agora. Venda <span class="accent">essa semana</span>.</h2>
-    <p>Grátis pra baixar, grátis pra anunciar. Sem pegadinha, sem letra miúda.</p>
-    <div class="stores">
-      <a href="#" class="store">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-        <div class="store-text"><small>Disponível na</small><span>App Store</span></div>
-      </a>
-      <a href="#" class="store">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.39.24-.74.6-.89l11.5 9.39L3.6 21.39c-.36-.15-.6-.5-.6-.89z"/></svg>
-        <div class="store-text"><small>Disponível no</small><span>Google Play</span></div>
-      </a>
+    <div class="reveal">
+      <div class="section-tag">05 — Telas Principais</div>
+      <h2 class="section-title">Como o app é por <span class="italic">dentro.</span></h2>
     </div>
-    <div class="qr-hint">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Escaneie o QR Code com a câmera do seu celular
+
+    <div class="screen-grid">
+      <div class="screen reveal">
+        <div class="screen-mock">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <strong style="font-family:'Bricolage Grotesque'; font-size:18px;">Matches</strong>
+            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">12</span>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar">CS</div>
+            <div class="info">
+              <div class="name">Carlos Silva</div>
+              <div class="desc">Honda Civic 2020</div>
+              <span class="mock-tag high">interesse alto</span>
+            </div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#FF9500,#995900);">AL</div>
+            <div class="info">
+              <div class="name">Amanda Lima</div>
+              <div class="desc">Toyota Corolla 2019</div>
+              <span class="mock-tag high">interesse alto</span>
+            </div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#007AFF,#003D80);">BS</div>
+            <div class="info">
+              <div class="name">Bruno Santos</div>
+              <div class="desc">Jeep Compass 2021</div>
+              <span class="mock-tag med">interesse médio</span>
+            </div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#34C759,#1F7D36);">JC</div>
+            <div class="info">
+              <div class="name">Juliana Costa</div>
+              <div class="desc">Fiat Toro 2020</div>
+              <span class="mock-tag med">interesse médio</span>
+            </div>
+          </div>
+        </div>
+        <h4>Matches</h4>
+        <p>Lista de pessoas interessadas no seu carro, ranqueadas por nível de interesse.</p>
+      </div>
+
+      <div class="screen reveal">
+        <div class="screen-mock">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+            <div>
+              <div style="font-size:11px; color:var(--text-muted); font-family:'Geist Mono';">SEU ANÚNCIO</div>
+              <strong style="font-family:'Bricolage Grotesque'; font-size:18px; display:block; margin-top:4px;">Jeep Compass Limited</strong>
+              <div style="color:var(--red); font-weight:700; margin-top:2px;">R$ 129.900</div>
+            </div>
+            <span style="background:rgba(52,199,89,0.15); color:var(--green); padding:4px 10px; border-radius:100px; font-size:10px; font-family:'Geist Mono';">ATIVO</span>
+          </div>
+          <div class="chart-mock">
+            <svg class="chart-line" viewBox="0 0 200 80" preserveAspectRatio="none">
+              <path d="M 0 60 Q 30 55 50 50 T 100 35 T 150 25 T 200 10" fill="none" stroke="#FF3B30" stroke-width="2"/>
+              <path d="M 0 60 Q 30 55 50 50 T 100 35 T 150 25 T 200 10 L 200 80 L 0 80 Z" fill="url(#chartg)" opacity="0.3"/>
+              <defs>
+                <linearGradient id="chartg" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#FF3B30"/>
+                  <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="stat-mini"><span>Visualizações (7d)</span><span class="v">1.248</span></div>
+          <div class="stat-mini"><span>Interessados</span><span class="v">32</span></div>
+          <div class="stat-mini"><span>Matches</span><span class="v">12</span></div>
+          <div class="mock-btn" style="margin-top:16px;">Impulsionar anúncio</div>
+        </div>
+        <h4>Resumo do anúncio</h4>
+        <p>Métricas em tempo real. Vendedor sabe exatamente como o carro está performando.</p>
+      </div>
+
+      <div class="screen reveal">
+        <div class="screen-mock">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <strong style="font-family:'Bricolage Grotesque'; font-size:18px;">Mensagens</strong>
+            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">3 novas</span>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar">CS</div>
+            <div class="info">
+              <div class="name">Carlos Silva</div>
+              <div class="desc">Tenho interesse no seu carro!</div>
+            </div>
+            <div style="font-size:10px; color:var(--text-muted);">14:30</div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#FF9500,#995900);">AL</div>
+            <div class="info">
+              <div class="name">Amanda Lima</div>
+              <div class="desc">Ainda disponível?</div>
+            </div>
+            <div style="font-size:10px; color:var(--text-muted);">ontem</div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#007AFF,#003D80);">BS</div>
+            <div class="info">
+              <div class="name">Bruno Santos</div>
+              <div class="desc">Podemos marcar pra ver?</div>
+            </div>
+            <div style="font-size:10px; color:var(--text-muted);">ontem</div>
+          </div>
+          <div class="mock-list-item">
+            <div class="avatar" style="background:linear-gradient(135deg,#34C759,#1F7D36);">JC</div>
+            <div class="info">
+              <div class="name">Juliana Costa</div>
+              <div class="desc">Qual é o valor mínimo?</div>
+            </div>
+            <div style="font-size:10px; color:var(--text-muted);">ter</div>
+          </div>
+        </div>
+        <h4>Conversas</h4>
+        <p>Chat só desbloqueia depois do match. Conversa só com quem demonstrou interesse real.</p>
+      </div>
     </div>
   </div>
 </section>
 
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer id="suporte">
+<!-- BRAND -->
+<section class="brand">
   <div class="container">
-    <div class="foot-brand">
-      <div class="logo">Car<span>Match</span></div>
-      <p>O app que conecta vendedores e compradores certos. Mais rápido, mais simples, mais inteligente.</p>
-      <div class="stores">
-        <a href="#" class="store">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01z"/></svg>
-          <div class="store-text"><small>Disponível na</small><span>App Store</span></div>
-        </a>
-        <a href="#" class="store">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5V3.5c0-.39.24-.74.6-.89l11.5 9.39L3.6 21.39c-.36-.15-.6-.5-.6-.89z"/></svg>
-          <div class="store-text"><small>Disponível no</small><span>Google Play</span></div>
-        </a>
+    <div class="reveal">
+      <div class="section-tag">06 — Identidade</div>
+      <h2 class="section-title">Marca limpa, <span class="italic">posição clara.</span></h2>
+      <p class="section-sub">Visual minimalista, vermelho como assinatura, tipografia firme. Confiança e velocidade no mesmo gesto.</p>
+    </div>
+
+    <div class="brand-grid">
+      <div class="brand-card reveal">
+        <h3>Tipografia</h3>
+        <div class="typo-display">Aa</div>
+        <div class="typo-meta">Bricolage Grotesque · Display</div>
+        <p class="typo-sample">Títulos firmes, com personalidade. Letras justas que transmitem velocidade e modernidade — sem perder a legibilidade.</p>
+        <div class="typo-weights">
+          <span class="weight">Light 300</span>
+          <span class="weight">Regular 400</span>
+          <span class="weight">Medium 500</span>
+          <span class="weight">Bold 700</span>
+        </div>
+      </div>
+
+      <div class="brand-card reveal">
+        <h3>Paleta</h3>
+        <div class="colors-row">
+          <div class="color-chip" style="background:#000000"><span class="hex">#000000</span></div>
+          <div class="color-chip" style="background:#FF3B30"><span class="hex">#FF3B30</span></div>
+          <div class="color-chip dark" style="background:#F2F2F2"><span class="hex">#F2F2F2</span></div>
+          <div class="color-chip" style="background:#8E8E93"><span class="hex">#8E8E93</span></div>
+          <div class="color-chip dark" style="background:#FFFFFF"><span class="hex">#FFFFFF</span></div>
+        </div>
+        <div style="margin-top:24px; font-size:13px; color:var(--text-muted); margin-bottom:12px;">Apoio</div>
+        <div class="colors-row">
+          <div class="color-chip" style="background:#FF9500"><span class="hex">#FF9500</span></div>
+          <div class="color-chip" style="background:#FFCC00"><span class="hex">#FFCC00</span></div>
+          <div class="color-chip" style="background:#007AFF"><span class="hex">#007AFF</span></div>
+          <div class="color-chip" style="background:#34C759"><span class="hex">#34C759</span></div>
+          <div class="color-chip" style="background:#AF52DE"><span class="hex">#AF52DE</span></div>
+        </div>
+        <p style="margin-top:24px; font-size:13px; color:var(--text-muted); line-height:1.5;">Preto domina. Vermelho é o acento de ação — CTAs, alertas, status críticos. Cores de apoio só pra categorização secundária.</p>
       </div>
     </div>
-    <div class="foot-col">
-      <h4>Produto</h4>
-      <ul>
-        <li><a href="#">Recursos</a></li>
-        <li><a href="#">Como funciona</a></li>
-        <li><a href="#">Avaliações</a></li>
-        <li><a href="#">Novidades</a></li>
-      </ul>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section class="biz" id="modelo">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">07 — Modelo de Negócio</div>
+      <h2 class="section-title">Como o CarMatch <span class="red">ganha dinheiro.</span></h2>
+      <p class="section-sub">Hipótese inicial — vai precisar testar com mercado. Estrutura tipo Tinder: free pra todo mundo, premium pra quem quer mais visibilidade ou ferramentas.</p>
     </div>
-    <div class="foot-col">
-      <h4>Empresa</h4>
-      <ul>
-        <li><a href="#">Sobre</a></li>
-        <li><a href="#">Carreiras</a></li>
-        <li><a href="#">Imprensa</a></li>
-        <li><a href="#">Blog</a></li>
-      </ul>
+
+    <div class="biz-grid">
+      <div class="biz-card reveal">
+        <div class="biz-tag">Tier 1</div>
+        <h3>Grátis</h3>
+        <div class="biz-price">R$ 0<span class="sm">/mês</span></div>
+        <p class="desc">Anúncio básico, swipe ilimitado, chat com matches.</p>
+        <ul class="biz-features">
+          <li>1 anúncio ativo</li>
+          <li>Até 5 fotos por carro</li>
+          <li>Chat liberado após match</li>
+          <li>Métricas básicas</li>
+        </ul>
+      </div>
+
+      <div class="biz-card featured reveal">
+        <div class="biz-tag">Tier 2 · Vendedor</div>
+        <h3>Premium</h3>
+        <div class="biz-price">R$ 29,90<span class="sm">/anúncio</span></div>
+        <p class="desc">Pague só pelo que anuncia. Sem mensalidade, sem fidelidade.</p>
+        <ul class="biz-features">
+          <li>Anúncio destacado por 30 dias</li>
+          <li>Fotos ilimitadas + vídeo</li>
+          <li>Boost no algoritmo (5x mais views)</li>
+          <li>Selo "Verificado"</li>
+          <li>Métricas avançadas</li>
+          <li>Renovação opcional após 30 dias</li>
+        </ul>
+      </div>
+
+      <div class="biz-card reveal">
+        <div class="biz-tag">Tier 3 · Lojas</div>
+        <h3>Empresarial</h3>
+        <div class="biz-price">Sob<span class="sm"> consulta</span></div>
+        <p class="desc">Concessionárias e revendedores. API, multi-anúncios, dashboard.</p>
+        <ul class="biz-features">
+          <li>Anúncios ilimitados</li>
+          <li>Dashboard de equipe</li>
+          <li>Integração via API</li>
+          <li>Lead scoring automático</li>
+          <li>Relatórios mensais</li>
+          <li>Account manager dedicado</li>
+        </ul>
+      </div>
     </div>
-    <div class="foot-col">
-      <h4>Suporte</h4>
-      <ul>
-        <li><a href="#">Central de ajuda</a></li>
-        <li><a href="#">Contato</a></li>
-        <li><a href="#">Termos de uso</a></li>
-        <li><a href="#">Privacidade</a></li>
-      </ul>
+
+    <div style="margin-top:60px; padding:32px; background:var(--bg-card); border:1px solid var(--border); border-radius:18px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;" class="reveal">
+      <div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 1</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Boost pago avulso</div>
+        <div style="color:var(--text-muted); font-size:13px;">R$ 14,90 pra destacar 1 anúncio por 7 dias.</div>
+      </div>
+      <div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 2</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Parcerias</div>
+        <div style="color:var(--text-muted); font-size:13px;">Seguro auto, financiamento, vistoria veicular — comissão por lead.</div>
+      </div>
+      <div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 3</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Taxa de transação</div>
+        <div style="color:var(--text-muted); font-size:13px;">Opcional — 0,5% se a transação fechar via plataforma com escrow.</div>
+      </div>
     </div>
-    <div class="foot-bottom">
-      <span>© 2026 CarMatch. Todos os direitos reservados.</span>
-      <span>Feito em São Paulo, Brasil 🇧🇷</span>
+  </div>
+</section>
+
+<!-- FEEDBACK CTA -->
+<section class="feedback" id="feedback">
+  <div class="feedback-inner">
+    <h2>E aí, mano?<br><span class="italic">o que tu acha?</span></h2>
+    <p>Quero saber o que tu pensa antes de levar isso pra frente. Honesto, sem economizar crítica.</p>
+
+    <div class="questions">
+      <h3>Perguntas pra te guiar</h3>
+      <ol>
+        <li>O conceito de <strong>"Tinder pra carros"</strong> faz sentido pra ti? Tu usaria?</li>
+        <li>Qual é o <strong>maior problema</strong> que tu vê — algo que eu não considerei?</li>
+        <li>O <strong>modelo de monetização</strong> tá realista? R$ 29,90 por anúncio é muito ou pouco?</li>
+        <li>Identidade visual: tá <strong>bonita</strong> ou genérica demais?</li>
+        <li>Qual <strong>concorrente</strong> tu acha que seria a maior ameaça (OLX, Webmotors, iCarros)?</li>
+        <li>Se tu fosse investidor, <strong>colocaria dinheiro</strong>? Por quê?</li>
+      </ol>
     </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>CarMatch · conceito v1 · 2026</div>
+    <div>Feito por Thomas · feedback wanted 🙏</div>
   </div>
 </footer>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Flow steps interaction
+  const flowSteps = document.querySelectorAll('.flow-step');
+  const flowMock = document.getElementById('flow-mock');
+
+  const mockData = {
+    1: {
+      title: 'Boas-vindas',
+      sub: 'Conectamos você ao comprador certo',
+      content: `<div style="display:flex; align-items:center; justify-content:center; padding:32px 0 24px;">
+        <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="welcomeGlow2" cx="0.5" cy="0.5">
+              <stop offset="0" stop-color="#FF3B30" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="welcomeRed2" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#FF5A50"/>
+              <stop offset="1" stop-color="#C42820"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="140" cy="90" rx="130" ry="70" fill="url(#welcomeGlow2)"/>
+          <path d="M 60 75 Q 140 15 220 75" stroke="#FF3B30" stroke-width="1.5"
+                stroke-dasharray="4 5" fill="none" opacity="0.55">
+            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite"/>
+          </path>
+          <g transform="translate(60, 90)">
+            <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+            <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
+            <circle cy="-7" r="9" fill="#888"/>
+            <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
+            <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
+                  font-size="9" fill="#888" letter-spacing="1.5">VENDEDOR</text>
+          </g>
+          <g transform="translate(220, 90)">
+            <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
+            <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
+            <circle cy="-7" r="9" fill="#888"/>
+            <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
+            <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
+                  font-size="9" fill="#888" letter-spacing="1.5">COMPRADOR</text>
+          </g>
+          <g transform="translate(140, 90)">
+            <circle r="32" fill="url(#welcomeRed2)">
+              <animate attributeName="r" values="30;33;30" dur="1.6s" repeatCount="indefinite"/>
+            </circle>
+            <circle r="40" fill="none" stroke="#FF3B30" stroke-width="1" opacity="0.3">
+              <animate attributeName="r" values="32;48;32" dur="1.6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite"/>
+            </circle>
+            <path d="M0 8 C-13 -5 -13 -16 -6 -16 C-2 -16 0 -13 0 -10 C0 -13 2 -16 6 -16 C13 -16 13 -5 0 8 Z"
+                  fill="#ffffff" transform="scale(0.85)"/>
+          </g>
+          <g transform="translate(140, 145)">
+            <rect x="-22" y="-9" width="44" height="18" rx="9" fill="#FF3B30"/>
+            <text y="3" text-anchor="middle" font-family="'Geist Mono', monospace"
+                  font-size="9" font-weight="600" fill="#fff" letter-spacing="1">MATCH</text>
+          </g>
+          <g transform="translate(140, 178)" opacity="0.5">
+            <path d="M-32 0 Q-28 -10 -18 -12 L18 -12 Q28 -10 32 0 L32 5 Q32 8 29 8 L23 8 Q22 4 18 4 Q14 4 13 8 L-13 8 Q-14 4 -18 4 Q-22 4 -23 8 L-29 8 Q-32 8 -32 5 Z"
+                  fill="#555"/>
+            <circle cx="-18" cy="6" r="3" fill="#222"/>
+            <circle cx="18" cy="6" r="3" fill="#222"/>
+          </g>
+        </svg>
+      </div>`,
+      btn: 'Começar'
+    },
+    2: {
+      title: 'Criar conta',
+      sub: 'É rápido e fácil!',
+      content: `
+        <div class="mock-input"><span class="label">Nome completo</span><span class="val">Thomas Crosara</span></div>
+        <div class="mock-input"><span class="label">Email</span><span class="val">thomas@email.com</span></div>
+        <div class="mock-input"><span class="label">Telefone</span><span class="val">(11) 99999-9999</span></div>
+        <div class="mock-input"><span class="label">Senha</span><span class="val">••••••••</span></div>
+      `,
+      btn: 'Criar conta'
+    },
+    3: {
+      title: 'Como você quer continuar?',
+      sub: 'Selecione o tipo de perfil',
+      content: `
+        <div class="mock-input" style="border-color:var(--red); background:rgba(255,59,48,0.06);"><span class="label" style="color:var(--red)">🚗 SELECIONADO</span><span class="val">Quero vender meu carro</span></div>
+        <div class="mock-input"><span class="label">Opção 2</span><span class="val">Quero comprar um carro</span></div>
+        <div class="mock-input"><span class="label">Opção 3</span><span class="val">Os dois</span></div>
+      `,
+      btn: 'Continuar'
+    },
+    4: {
+      title: 'Informações do carro',
+      sub: 'Preencha corretamente para encontrarmos o match ideal',
+      content: `
+        <div class="mock-input"><span class="label">Marca</span><span class="val">Jeep</span></div>
+        <div class="mock-input"><span class="label">Modelo</span><span class="val">Compass</span></div>
+        <div class="mock-input"><span class="label">Versão</span><span class="val">Limited</span></div>
+        <div class="mock-input"><span class="label">Ano</span><span class="val">2021</span></div>
+        <div class="mock-input"><span class="label">KM</span><span class="val">32.000 km</span></div>
+      `,
+      btn: 'Continuar'
+    },
+    5: {
+      title: 'Fotos do seu carro',
+      sub: 'Fotos de qualidade aumentam suas chances de venda',
+      content: `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
+          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
+          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
+          <div style="aspect-ratio:1; background:rgba(255,59,48,0.1); border:1px dashed var(--red); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--red);">+</div>
+        </div>
+      `,
+      btn: 'Continuar'
+    },
+    6: {
+      title: 'Confira seu anúncio',
+      sub: 'Tudo certo? Publique agora!',
+      content: `
+        <div style="background:linear-gradient(135deg,#2a2a2a,#1a1a1a); height:120px; border-radius:10px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:32px;">🚙</div>
+        <div class="mock-input"><span class="label">Modelo</span><span class="val">Jeep Compass Limited 2021</span></div>
+        <div class="mock-input"><span class="label">Preço</span><span class="val" style="color:var(--red); font-weight:700;">R$ 129.900</span></div>
+        <div class="mock-input"><span class="label">KM · Câmbio</span><span class="val">32.000 km · Automático</span></div>
+      `,
+      btn: 'Publicar anúncio'
+    },
+    7: {
+      title: 'Anúncio publicado!',
+      sub: 'Agora é só esperar os interessados',
+      content: `<div style="display:flex; flex-direction:column; gap:24px; align-items:center; padding:32px 0;">
+        <div style="width:80px; height:80px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:36px; box-shadow:0 0 40px var(--red-glow);">✓</div>
+        <div style="text-align:center; color:var(--text-muted); font-size:13px;">Seu anúncio está visível para milhares de compradores</div>
+      </div>`,
+      btn: 'Ir para meus anúncios'
+    }
+  };
+
+  flowSteps.forEach(step => {
+    step.addEventListener('click', () => {
+      flowSteps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      const id = step.dataset.step;
+      const data = mockData[id];
+      flowMock.innerHTML = `
+        <h5>${data.title}</h5>
+        <div class="sub">${data.sub}</div>
+        ${data.content}
+        <div class="mock-btn">${data.btn}</div>
+      `;
+    });
+  });
+
+  // Subtle parallax on hero phone
+  const phone = document.querySelector('.phone');
+  document.addEventListener('mousemove', (e) => {
+    if (!phone) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 8;
+    const y = (e.clientY / window.innerHeight - 0.5) * 8;
+    phone.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
+  });
+</script>
 
 </body>
 </html>
