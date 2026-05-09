@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CarMatch — Onde o carro encontra o comprador certo</title>
+<title>CarMatch — Plataforma de repasse para concessionárias</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -328,110 +328,96 @@
     font-size: 13px;
   }
 
-  /* Swipe card stack */
-  .card-stack {
-    position: relative;
-    flex: 1;
-    margin: 8px 0;
-  }
-
-  .car-card {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    overflow: hidden;
-    background: linear-gradient(180deg, #1f1f1f 0%, #0a0a0a 100%);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  }
-  .car-card.back-2 {
-    transform: scale(0.94) translateY(-12px);
-    opacity: 0.5;
-  }
-  .car-card.back-1 {
-    transform: scale(0.97) translateY(-6px);
-    opacity: 0.75;
-  }
-
-  .car-img {
-    height: 60%;
-    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .car-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, var(--red-glow), transparent 60%);
-    opacity: 0.6;
-  }
-
-  /* SVG car shape */
-  .car-svg {
-    width: 80%;
-    height: auto;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-    z-index: 1;
-  }
-
-  .car-info {
-    padding: 16px;
-    color: #fff;
-  }
-  .car-name {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 2px;
-  }
-  .car-price {
-    color: var(--red);
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  .car-meta {
-    display: flex;
-    gap: 8px;
+  /* Dashboard match list */
+  .match-section-label {
+    font-family: 'Geist Mono', monospace;
     font-size: 11px;
     color: var(--text-muted);
-    font-family: 'Geist Mono', monospace;
-  }
-  .car-meta span {
-    background: rgba(255,255,255,0.06);
-    padding: 3px 8px;
-    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding: 0 4px;
   }
 
-  .swipe-actions {
+  .match-list {
+    flex: 1;
     display: flex;
-    justify-content: center;
-    gap: 24px;
-    padding: 12px 0 24px;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
   }
-  .swipe-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
+
+  .match-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    border: 2px solid;
+    gap: 10px;
+    padding: 10px 12px;
     background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .match-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .match-dot.red { background: var(--red); box-shadow: 0 0 6px rgba(255,59,48,0.6); }
+  .match-dot.orange { background: var(--orange); box-shadow: 0 0 6px rgba(255,149,0,0.6); }
+  .match-dot.green { background: var(--green); box-shadow: 0 0 6px rgba(52,199,89,0.6); }
+
+  .match-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .match-car {
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .match-loja {
+    color: var(--text-muted);
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .score-badge {
+    background: var(--red-soft);
+    color: var(--red);
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 4px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: auto;
+  }
+  .tab-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 18px;
+    opacity: 0.4;
     cursor: pointer;
   }
-  .swipe-btn.dislike {
-    border-color: var(--text-muted);
-    color: var(--text-muted);
-  }
-  .swipe-btn.like {
-    border-color: var(--red);
-    color: var(--red);
-    box-shadow: 0 0 20px var(--red-glow);
+  .tab-item.active { opacity: 1; color: var(--red); }
+  .tab-item span {
+    font-size: 9px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.04em;
   }
 
   /* Floating decorative elements */
@@ -462,8 +448,7 @@
     50% { transform: translateY(-10px); }
   }
 
-  .float-card .heart {
-    color: var(--red);
+  .float-card .icon {
     margin-right: 6px;
   }
   .float-card .small {
@@ -636,7 +621,7 @@
     .problem-grid { grid-template-columns: 1fr; gap: 40px; }
   }
 
-  /* ============ SOLUTION (Tinder Metaphor) ============ */
+  /* ============ SOLUTION ============ */
   .solution-intro {
     text-align: center;
     max-width: 800px;
@@ -919,7 +904,6 @@
     font-size: 13px;
   }
 
-  /* Specific screen mocks */
   .mock-list-item {
     display: flex;
     gap: 12px;
@@ -928,6 +912,7 @@
     border-radius: 10px;
     margin-bottom: 8px;
     border: 1px solid var(--border);
+    align-items: flex-start;
   }
   .avatar {
     width: 36px; height: 36px;
@@ -962,130 +947,117 @@
     font-family: 'Geist Mono', monospace;
     margin-top: 4px;
   }
+  .mock-tag.novo { background: rgba(255, 59, 48, 0.15); color: var(--red); }
+  .mock-tag.negociacao { background: rgba(255, 149, 0, 0.15); color: var(--orange); }
+  .mock-tag.visto { background: rgba(255, 255, 255, 0.06); color: var(--text-muted); }
   .mock-tag.high { background: rgba(255, 59, 48, 0.15); color: var(--red); }
   .mock-tag.med { background: rgba(255, 149, 0, 0.15); color: var(--orange); }
   .mock-tag.low { background: rgba(52, 199, 89, 0.15); color: var(--green); }
 
-  .chart-mock {
-    height: 80px;
-    margin: 16px 0;
-    background: linear-gradient(180deg, var(--red-soft), transparent);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
+  /* Dashboard stat cards */
+  .dash-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
   }
-  .chart-line {
-    position: absolute;
-    inset: 0;
+  .dash-stat {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+  }
+  .dash-stat .ds-val {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .dash-stat .ds-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    font-family: 'Geist Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .dash-stat .ds-icon { font-size: 14px; margin-bottom: 4px; display: block; }
+
+  /* Notification items */
+  .notif-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-alt);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .notif-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--red-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .notif-body { flex: 1; min-width: 0; }
+  .notif-title {
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .notif-sub {
+    color: var(--text-muted);
+    font-size: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .notif-time {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-family: 'Geist Mono', monospace;
+    flex-shrink: 0;
   }
 
-  .stat-mini {
+  /* Score list for Matches screen */
+  .score-row {
     display: flex;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 8px;
   }
-  .stat-mini:last-child { border-bottom: 0; }
-  .stat-mini .v {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
+  .score-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
+  .score-info { flex: 1; min-width: 0; }
+  .score-car { font-weight: 600; font-size: 12px; }
+  .score-pct {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .score-pct.high { background: rgba(255,59,48,0.15); color: var(--red); }
+  .score-pct.med { background: rgba(255,149,0,0.15); color: var(--orange); }
+  .score-pct.low { background: rgba(52,199,89,0.15); color: var(--green); }
 
   @media (max-width: 968px) {
     .screen-grid { grid-template-columns: 1fr; }
-  }
-
-  /* ============ BRAND IDENTITY ============ */
-  .brand {
-    padding: 120px 0;
-  }
-  .brand-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-top: 60px;
-  }
-
-  .brand-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 36px;
-  }
-  .brand-card h3 {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-  }
-
-  .colors-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-  }
-  .color-chip {
-    aspect-ratio: 1;
-    border-radius: 12px;
-    position: relative;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: flex-end;
-    padding: 8px;
-  }
-  .color-chip .hex {
-    font-family: 'Geist Mono', monospace;
-    font-size: 9px;
-    color: rgba(255,255,255,0.7);
-    background: rgba(0,0,0,0.4);
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(6px);
-  }
-  .color-chip.dark .hex { color: rgba(0,0,0,0.7); background: rgba(255,255,255,0.6); }
-
-  .typo-display {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 64px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 12px;
-    letter-spacing: -0.04em;
-  }
-  .typo-meta {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .typo-sample {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .typo-weights {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-  }
-  .weight {
-    padding: 6px 12px;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    font-size: 12px;
-    font-family: 'Geist Mono', monospace;
-  }
-
-  @media (max-width: 768px) {
-    .brand-grid { grid-template-columns: 1fr; }
   }
 
   /* ============ BUSINESS MODEL ============ */
@@ -1222,50 +1194,40 @@
     margin-bottom: 40px;
   }
 
-  .questions {
-    text-align: left;
+  .cta-form {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 40px;
     margin-top: 40px;
+    text-align: left;
   }
-  .questions h3 {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--red);
-    margin-bottom: 24px;
-  }
-  .questions ol {
-    list-style: none;
-    counter-reset: q;
+
+  .cta-form-row {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 12px;
+    align-items: flex-end;
   }
-  .questions ol li {
-    counter-increment: q;
-    padding-left: 40px;
-    position: relative;
-    color: var(--text-muted);
-    font-size: 15px;
-    line-height: 1.55;
+
+  .cta-form-field {
+    flex: 1;
   }
-  .questions ol li::before {
-    content: counter(q, decimal-leading-zero);
-    position: absolute;
-    left: 0;
-    top: 0;
+
+  .cta-form-field .mock-input {
+    margin-bottom: 0;
+  }
+
+  .cta-note {
+    color: var(--text-dim);
+    font-size: 12px;
     font-family: 'Geist Mono', monospace;
-    color: var(--red);
-    font-size: 13px;
-    font-weight: 600;
+    margin-top: 16px;
+    text-align: center;
+    letter-spacing: 0.02em;
   }
-  .questions ol li strong {
-    color: var(--text);
-    font-weight: 600;
+
+  @media (max-width: 600px) {
+    .cta-form-row { flex-direction: column; }
   }
 
   /* ============ FOOTER ============ */
@@ -1274,17 +1236,20 @@
     padding: 40px 0;
     color: var(--text-dim);
     font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
   }
   footer .container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
+    align-items: center;
   }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--text-muted); }
 
   /* Reveal animations on scroll */
   .reveal {
@@ -1295,6 +1260,53 @@
   .reveal.in {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* Match animation boxes for step 4 */
+  .match-anim-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .anim-loja {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    text-align: center;
+  }
+  .anim-loja .loja-label {
+    color: var(--text-muted);
+    font-size: 10px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .anim-loja .loja-name {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+  }
+  .anim-bolt {
+    font-size: 28px;
+    color: var(--red);
+    animation: pulse 1.5s infinite;
+  }
+  .anim-status {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: 'Geist Mono', monospace;
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+  }
+  .anim-status span {
+    display: inline-block;
+    animation: pulse 1s infinite;
   }
 </style>
 </head>
@@ -1307,10 +1319,10 @@
       <a href="#problema">Problema</a>
       <a href="#solucao">Solução</a>
       <a href="#como">Como funciona</a>
-      <a href="#telas">Telas</a>
-      <a href="#modelo">Modelo</a>
+      <a href="#app">App</a>
+      <a href="#planos">Planos</a>
     </div>
-    <div class="nav-pill">conceito · v1</div>
+    <div class="nav-pill">beta · v2</div>
   </div>
 </nav>
 
@@ -1322,20 +1334,19 @@
       <div>
         <div class="hero-tag">
           <span class="dot"></span>
-          Tinder para venda de carros
+          Plataforma de repasse para concessionárias
         </div>
         <h1 class="hero-title">
-          Onde o carro <span class="italic">encontra</span> o <span class="accent">comprador certo.</span>
+          Sua loja não pode perder um <span class="italic">repasse</span>.
         </h1>
         <p class="hero-sub">
-          Conectamos vendedores e compradores de forma inteligente. Sem anúncios genéricos, sem perda de tempo, sem desconhecidos perguntando "tá na garagem?".
+          CarMatch conecta concessionárias com inteligência. Seu estoque encontra quem busca. Match automático, score em tempo real.
         </p>
         <div class="hero-cta">
-          <a href="#solucao" class="btn btn-primary">
-            Ver como funciona
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          <a href="#planos" class="btn btn-primary">
+            Começar grátis →
           </a>
-          <a href="#feedback" class="btn btn-ghost">Dar feedback</a>
+          <a href="#como" class="btn btn-ghost">Ver como funciona</a>
         </div>
       </div>
 
@@ -1343,13 +1354,13 @@
       <div class="phone-stage">
 
         <div class="float-card match">
-          <div><span class="heart">♥</span> Match!</div>
-          <div class="small">Carlos curtiu seu carro</div>
+          <div><span class="icon">⚡</span> 3 novos matches!</div>
+          <div class="small">detectados agora</div>
         </div>
 
         <div class="float-card message">
-          <div>💬 Nova mensagem</div>
-          <div class="small">"Tem interesse em troca?"</div>
+          <div><span class="icon">🏢</span> Inter-loja</div>
+          <div class="small">Repasse disponível</div>
         </div>
 
         <div class="phone">
@@ -1365,44 +1376,40 @@
                 <div class="bell">🔔</div>
               </div>
 
-              <div class="card-stack">
-                <div class="car-card back-2"></div>
-                <div class="car-card back-1"></div>
-                <div class="car-card">
-                  <div class="car-img">
-                    <svg class="car-svg" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
-                      <text x="120" y="72" text-anchor="middle"
-                            font-family="'Bricolage Grotesque', sans-serif"
-                            font-weight="800"
-                            font-size="76"
-                            fill="#ffffff"
-                            letter-spacing="-3">Jeep</text>
-                      <g transform="translate(120, 88)" opacity="0.85">
-                        <rect x="-32" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="-22" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="-12" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="-2" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="8" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="18" y="0" width="3" height="6" fill="#ffffff"/>
-                        <rect x="28" y="0" width="3" height="6" fill="#ffffff"/>
-                      </g>
-                    </svg>
+              <div class="match-section-label">⚡ Matches</div>
+
+              <div class="match-list">
+                <div class="match-row">
+                  <div class="match-dot red"></div>
+                  <div class="match-info">
+                    <div class="match-car">Honda HR-V 2022</div>
+                    <div class="match-loja">Loja Premium SP</div>
                   </div>
-                  <div class="car-info">
-                    <div class="car-name">Jeep Compass</div>
-                    <div class="car-price">R$ 129.900</div>
-                    <div class="car-meta">
-                      <span>2021</span>
-                      <span>32.000 km</span>
-                      <span>Aut.</span>
-                    </div>
+                  <div class="score-badge">94%</div>
+                </div>
+                <div class="match-row">
+                  <div class="match-dot orange"></div>
+                  <div class="match-info">
+                    <div class="match-car">Toyota Corolla 2021</div>
+                    <div class="match-loja">AutoMax Motors</div>
                   </div>
+                  <div class="score-badge">87%</div>
+                </div>
+                <div class="match-row">
+                  <div class="match-dot green"></div>
+                  <div class="match-info">
+                    <div class="match-car">Jeep Compass 2023</div>
+                    <div class="match-loja">Garagem Sul</div>
+                  </div>
+                  <div class="score-badge">72%</div>
                 </div>
               </div>
 
-              <div class="swipe-actions">
-                <div class="swipe-btn dislike">✕</div>
-                <div class="swipe-btn like">♥</div>
+              <div class="tab-bar">
+                <div class="tab-item active">🏠<span>Início</span></div>
+                <div class="tab-item">🚗<span>Estoque</span></div>
+                <div class="tab-item">⚡<span>Matches</span></div>
+                <div class="tab-item">👤<span>Perfil</span></div>
               </div>
             </div>
           </div>
@@ -1417,58 +1424,58 @@
   <div class="container">
     <div class="reveal">
       <div class="section-tag">01 — O Problema</div>
-      <h2 class="section-title">Vender carro hoje é uma <span class="italic">dor de cabeça</span>.</h2>
-      <p class="section-sub">Os classificados atuais foram desenhados pra atrair tráfego, não pra fechar negócio. O resultado: muito ruído, pouco match.</p>
+      <h2 class="section-title">O repasse ainda acontece por <span class="italic">grupo de WhatsApp</span>.</h2>
+      <p class="section-sub">Sem sistema, sem rastreamento, sem histórico. Negócio na mão de quem respondeu mais rápido.</p>
     </div>
 
     <div class="problem-grid">
       <ul class="pain-list reveal">
         <li class="pain-item">
-          <div class="pain-icon">📞</div>
+          <div class="pain-icon">📱</div>
           <div class="pain-text">
-            <h4>Curiosos sem fim</h4>
-            <p>"Tá disponível?" "Aceita quanto à vista?" "Topa trocar por moto?". 10 perguntas pra cada negócio real.</p>
+            <h4>Grupos caóticos</h4>
+            <p>30+ mensagens pra achar 1 carro. Ninguém sabe o que foi vendido, o que ainda está disponível.</p>
           </div>
         </li>
         <li class="pain-item">
-          <div class="pain-icon">⏰</div>
+          <div class="pain-icon">👻</div>
           <div class="pain-text">
-            <h4>Tempo desperdiçado</h4>
-            <p>Marca visita. Não aparece. Marca de novo. Aparece mas não tinha pesquisado nada. Repete.</p>
+            <h4>Oportunidades invisíveis</h4>
+            <p>Você tem o carro que a loja vizinha procura. Mas ninguém sabe disso.</p>
           </div>
         </li>
         <li class="pain-item">
-          <div class="pain-icon">🔒</div>
+          <div class="pain-icon">📋</div>
           <div class="pain-text">
-            <h4>Insegurança</h4>
-            <p>Estranhos no WhatsApp, encontros em lugares aleatórios, golpes de "depósito antecipado".</p>
+            <h4>Processo manual</h4>
+            <p>Planilha, ligação, mensagem, outra planilha. Nenhuma integração, nenhum histórico.</p>
           </div>
         </li>
         <li class="pain-item">
-          <div class="pain-icon">🎯</div>
+          <div class="pain-icon">💸</div>
           <div class="pain-text">
-            <h4>Match ruim</h4>
-            <p>Anúncio genérico atrai público errado. Vendedor de SUV familiar recebendo lead de quem queria hatch esportivo.</p>
+            <h4>Comissão não rastreada</h4>
+            <p>Quem fechou o repasse? Quanto ganhou? Ninguém tem certeza.</p>
           </div>
         </li>
       </ul>
 
       <div class="stats-card reveal">
         <div class="stat-row">
-          <div class="stat-label">Tempo médio pra vender carro</div>
-          <div class="stat-value">62<span class="small"> dias</span></div>
+          <div class="stat-label">Repassados ocorrem via grupos informais</div>
+          <div class="stat-value">85<span class="small">%</span></div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">Contatos sem intenção de compra</div>
-          <div class="stat-value">73<span class="small">%</span></div>
+          <div class="stat-label">Volume estimado de repasse entre lojas/ano</div>
+          <div class="stat-value">R$<span class="small"> 28bi</span></div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">Visitas que não viram negócio</div>
-          <div class="stat-value">8 <span class="small">de cada 10</span></div>
+          <div class="stat-label">Tempo médio gasto em grupos de WhatsApp por dia</div>
+          <div class="stat-value">3<span class="small">h+</span></div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">Vendedores insatisfeitos com plataformas atuais</div>
-          <div class="stat-value">61<span class="small">%</span></div>
+          <div class="stat-label">Gerentes que já perderam negócio por falta de sistema</div>
+          <div class="stat-value">67<span class="small">%</span></div>
         </div>
       </div>
     </div>
@@ -1480,28 +1487,28 @@
   <div class="container">
     <div class="solution-intro reveal">
       <div class="section-tag">02 — A Solução</div>
-      <h2 class="section-title">E se vender carro fosse como dar <span class="red">match</span>?</h2>
-      <p class="section-sub">CarMatch usa swipe, perfil e algoritmo pra conectar quem quer vender com quem realmente quer comprar. Simples assim.</p>
+      <h2 class="section-title">Motor de match <span class="red">automático</span> entre lojas.</h2>
+      <p class="section-sub">Cadastre estoque. Registre o que busca. O CarMatch conecta em segundos.</p>
     </div>
 
     <div class="swipe-demo">
       <div class="swipe-step reveal">
         <div class="step-num">PASSO 01</div>
-        <div class="step-icon">📸</div>
-        <div class="step-title">Cadastra o carro</div>
-        <p class="step-desc">Fotos, modelo, ano, KM, preço. 5 minutos. O perfil do carro é o "card" que vai ser visto.</p>
+        <div class="step-icon">🏪</div>
+        <div class="step-title">Cadastra o estoque</div>
+        <p class="step-desc">Marca, modelo, ano, KM, preço. Veículos disponíveis na sua loja em minutos.</p>
       </div>
       <div class="swipe-step reveal">
         <div class="step-num">PASSO 02</div>
-        <div class="step-icon">🔥</div>
-        <div class="step-title">Compradores dão swipe</div>
-        <p class="step-desc">Quem busca dá like no que combina com o filtro dele. Sem like, sem contato. Filtro automático de curiosos.</p>
+        <div class="step-icon">🔍</div>
+        <div class="step-title">Registra o que busca</div>
+        <p class="step-desc">Seu cliente quer um SUV? Cadastre a intenção. O sistema busca em toda a rede.</p>
       </div>
       <div class="swipe-step reveal">
         <div class="step-num">PASSO 03</div>
-        <div class="step-icon">💬</div>
-        <div class="step-title">Match → conversa</div>
-        <p class="step-desc">Quando vendedor aceita o interesse, o chat libera. Conversa só com gente qualificada.</p>
+        <div class="step-icon">⚡</div>
+        <div class="step-title">Match automático</div>
+        <p class="step-desc">Algoritmo calcula score de 0–100 em cada par veículo × intenção. Só mostra o que importa.</p>
       </div>
     </div>
   </div>
@@ -1518,23 +1525,23 @@
     <div class="pillars-grid">
       <div class="pillar reveal">
         <div class="pillar-ico">⚡</div>
-        <h3>Rápido</h3>
-        <p>Conexões que aceleram o negócio. Match direto, sem rodeios.</p>
+        <h3>Automático</h3>
+        <p>Matches acontecem em background. Você abre o app e os resultados já estão lá.</p>
       </div>
       <div class="pillar reveal">
         <div class="pillar-ico">◎</div>
-        <h3>Inteligente</h3>
-        <p>Algoritmo que aprende perfil e mostra só o que importa.</p>
+        <h3>Preciso</h3>
+        <p>Score de 0 a 100 por critério: marca, modelo, preço, ano, KM, câmbio, combustível.</p>
       </div>
       <div class="pillar reveal">
-        <div class="pillar-ico">🛡</div>
-        <h3>Confiável</h3>
-        <p>Verificação de perfil, transparência em cada etapa.</p>
+        <div class="pillar-ico">🏢</div>
+        <h3>Inter-lojas</h3>
+        <p>Toda a rede de repasse organizada em um lugar. Sem grupo, sem planilha.</p>
       </div>
       <div class="pillar reveal">
-        <div class="pillar-ico">👥</div>
-        <h3>Humano</h3>
-        <p>Tecnologia que aproxima pessoas — não que cria distância.</p>
+        <div class="pillar-ico">📊</div>
+        <h3>Rastreável</h3>
+        <p>Quem cadastrou, quem fechou, quantos matches. Visibilidade total para o gestor.</p>
       </div>
     </div>
   </div>
@@ -1544,9 +1551,9 @@
 <section id="como">
   <div class="container">
     <div class="reveal">
-      <div class="section-tag">04 — Fluxo</div>
-      <h2 class="section-title">Do cadastro à <span class="red">venda fechada.</span></h2>
-      <p class="section-sub">7 passos. Cada um pensado pra reduzir atrito e aumentar conversão.</p>
+      <div class="section-tag">04 — Como funciona</div>
+      <h2 class="section-title">Do cadastro ao <span class="red">repasse fechado.</span></h2>
+      <p class="section-sub">5 passos. Cada um pensado para reduzir atrito entre lojas.</p>
     </div>
 
     <div class="flow-grid">
@@ -1554,272 +1561,196 @@
         <div class="flow-step active" data-step="1">
           <div class="flow-num">1</div>
           <div>
-            <h4>Boas-vindas</h4>
-            <p>Tela de entrada simples, com o conceito claro.</p>
+            <h4>Cadastra a loja</h4>
+            <p>CNPJ, razão social, cidade. Verificação automática.</p>
           </div>
         </div>
         <div class="flow-step" data-step="2">
           <div class="flow-num">2</div>
           <div>
-            <h4>Criar conta</h4>
-            <p>Email, telefone ou login social. 30 segundos.</p>
+            <h4>Adiciona o estoque</h4>
+            <p>Veículos disponíveis para venda ou repasse.</p>
           </div>
         </div>
         <div class="flow-step" data-step="3">
           <div class="flow-num">3</div>
           <div>
-            <h4>Tipo de perfil</h4>
-            <p>Vendedor, comprador, ou os dois. Define a experiência.</p>
+            <h4>Registra as buscas</h4>
+            <p>O que seu cliente quer. Marca, faixa de preço, ano, KM máximo.</p>
           </div>
         </div>
         <div class="flow-step" data-step="4">
           <div class="flow-num">4</div>
           <div>
-            <h4>Dados do carro</h4>
-            <p>Marca, modelo, versão, ano, KM. Auto-completa quando possível.</p>
+            <h4>Match automático</h4>
+            <p>Algoritmo compara cada veículo com cada intenção da rede.</p>
           </div>
         </div>
         <div class="flow-step" data-step="5">
           <div class="flow-num">5</div>
           <div>
-            <h4>Fotos</h4>
-            <p>Mínimo de 4. Dicas de enquadramento integradas.</p>
-          </div>
-        </div>
-        <div class="flow-step" data-step="6">
-          <div class="flow-num">6</div>
-          <div>
-            <h4>Confirmação</h4>
-            <p>Preview do anúncio antes de publicar.</p>
-          </div>
-        </div>
-        <div class="flow-step" data-step="7">
-          <div class="flow-num">7</div>
-          <div>
-            <h4>Publicado!</h4>
-            <p>Anúncio no ar. Notificação a cada interesse.</p>
+            <h4>Negocia no app</h4>
+            <p>Score alto? Contato direto com a loja parceira. Histórico registrado.</p>
           </div>
         </div>
       </div>
 
       <div class="flow-visual reveal">
         <div class="flow-mock" id="flow-mock">
-          <h5>Boas-vindas</h5>
-          <div class="sub">Conectamos você ao comprador certo</div>
-          <div style="display:flex; align-items:center; justify-content:center; padding:32px 0 24px;">
-            <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <radialGradient id="welcomeGlow" cx="0.5" cy="0.5">
-                  <stop offset="0" stop-color="#FF3B30" stop-opacity="0.45"/>
-                  <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="welcomeRed" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#FF5A50"/>
-                  <stop offset="1" stop-color="#C42820"/>
-                </linearGradient>
-              </defs>
-
-              <!-- Background glow -->
-              <ellipse cx="140" cy="90" rx="130" ry="70" fill="url(#welcomeGlow)"/>
-
-              <!-- Animated connection arc -->
-              <path d="M 60 75 Q 140 15 220 75" stroke="#FF3B30" stroke-width="1.5"
-                    stroke-dasharray="4 5" fill="none" opacity="0.55">
-                <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite"/>
-              </path>
-
-              <!-- Left avatar (Vendedor) -->
-              <g transform="translate(60, 90)">
-                <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
-                <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
-                <circle cy="-7" r="9" fill="#888"/>
-                <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
-                <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
-                      font-size="9" fill="#888" letter-spacing="1.5">VENDEDOR</text>
-              </g>
-
-              <!-- Right avatar (Comprador) -->
-              <g transform="translate(220, 90)">
-                <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
-                <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
-                <circle cy="-7" r="9" fill="#888"/>
-                <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
-                <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
-                      font-size="9" fill="#888" letter-spacing="1.5">COMPRADOR</text>
-              </g>
-
-              <!-- Center match badge with heart -->
-              <g transform="translate(140, 90)">
-                <circle r="32" fill="url(#welcomeRed)">
-                  <animate attributeName="r" values="30;33;30" dur="1.6s" repeatCount="indefinite"/>
-                </circle>
-                <circle r="40" fill="none" stroke="#FF3B30" stroke-width="1" opacity="0.3">
-                  <animate attributeName="r" values="32;48;32" dur="1.6s" repeatCount="indefinite"/>
-                  <animate attributeName="opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite"/>
-                </circle>
-                <path d="M0 8 C-13 -5 -13 -16 -6 -16 C-2 -16 0 -13 0 -10 C0 -13 2 -16 6 -16 C13 -16 13 -5 0 8 Z"
-                      fill="#ffffff" transform="scale(0.85)"/>
-              </g>
-
-              <!-- Small "Match!" tag below center -->
-              <g transform="translate(140, 145)">
-                <rect x="-22" y="-9" width="44" height="18" rx="9" fill="#FF3B30"/>
-                <text y="3" text-anchor="middle" font-family="'Geist Mono', monospace"
-                      font-size="9" font-weight="600" fill="#fff" letter-spacing="1">MATCH</text>
-              </g>
-
-              <!-- Subtle car silhouette at bottom -->
-              <g transform="translate(140, 178)" opacity="0.5">
-                <path d="M-32 0 Q-28 -10 -18 -12 L18 -12 Q28 -10 32 0 L32 5 Q32 8 29 8 L23 8 Q22 4 18 4 Q14 4 13 8 L-13 8 Q-14 4 -18 4 Q-22 4 -23 8 L-29 8 Q-32 8 -32 5 Z"
-                      fill="#555"/>
-                <circle cx="-18" cy="6" r="3" fill="#222"/>
-                <circle cx="18" cy="6" r="3" fill="#222"/>
-              </g>
-            </svg>
-          </div>
-          <div class="mock-btn">Começar</div>
+          <h5>Cadastra a loja</h5>
+          <div class="sub">CNPJ, razão social, cidade. Verificação automática.</div>
+          <div class="mock-input"><span class="label">CNPJ</span><span class="val">12.345.678/0001-99</span></div>
+          <div class="mock-input"><span class="label">Nome da Loja</span><span class="val">Loja Premium SP</span></div>
+          <div class="mock-input"><span class="label">Cidade</span><span class="val">São Paulo, SP</span></div>
+          <div class="mock-btn">Cadastrar Loja</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SCREENS -->
-<section class="screens" id="telas">
+<!-- THE APP -->
+<section class="screens" id="app">
   <div class="container">
     <div class="reveal">
-      <div class="section-tag">05 — Telas Principais</div>
+      <div class="section-tag">05 — O App</div>
       <h2 class="section-title">Como o app é por <span class="italic">dentro.</span></h2>
     </div>
 
     <div class="screen-grid">
+      <!-- Screen 1: Dashboard -->
       <div class="screen reveal">
         <div class="screen-mock">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-            <strong style="font-family:'Bricolage Grotesque'; font-size:18px;">Matches</strong>
-            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">12</span>
+            <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Dashboard</strong>
+            <span style="background:var(--red-soft); color:var(--red); padding:2px 8px; border-radius:100px; font-size:10px; font-family:'Geist Mono';">ao vivo</span>
           </div>
-          <div class="mock-list-item">
-            <div class="avatar">CS</div>
-            <div class="info">
-              <div class="name">Carlos Silva</div>
-              <div class="desc">Honda Civic 2020</div>
-              <span class="mock-tag high">interesse alto</span>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <span class="ds-icon">🚗</span>
+              <div class="ds-val">12</div>
+              <div class="ds-label">Estoque</div>
+            </div>
+            <div class="dash-stat">
+              <span class="ds-icon">🔍</span>
+              <div class="ds-val">5</div>
+              <div class="ds-label">Buscando</div>
+            </div>
+            <div class="dash-stat">
+              <span class="ds-icon">⚡</span>
+              <div class="ds-val" style="color:var(--red);">8</div>
+              <div class="ds-label">Matches</div>
             </div>
           </div>
+          <div style="font-family:'Geist Mono'; font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Matches recentes</div>
           <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#FF9500,#995900);">AL</div>
             <div class="info">
-              <div class="name">Amanda Lima</div>
-              <div class="desc">Toyota Corolla 2019</div>
-              <span class="mock-tag high">interesse alto</span>
+              <div class="name">Honda HR-V 2022</div>
+              <div class="desc">Loja Premium SP</div>
             </div>
+            <span class="mock-tag novo">94%</span>
           </div>
           <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#007AFF,#003D80);">BS</div>
             <div class="info">
-              <div class="name">Bruno Santos</div>
-              <div class="desc">Jeep Compass 2021</div>
-              <span class="mock-tag med">interesse médio</span>
+              <div class="name">Toyota Corolla 2021</div>
+              <div class="desc">AutoMax Motors</div>
             </div>
+            <span class="mock-tag negociacao">87%</span>
           </div>
-          <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#34C759,#1F7D36);">JC</div>
-            <div class="info">
-              <div class="name">Juliana Costa</div>
-              <div class="desc">Fiat Toro 2020</div>
-              <span class="mock-tag med">interesse médio</span>
+        </div>
+        <h4>Dashboard</h4>
+        <p>Visão geral da loja. Estoque, buscas ativas e matches — tudo na tela inicial.</p>
+      </div>
+
+      <!-- Screen 2: Matches -->
+      <div class="screen reveal">
+        <div class="screen-mock">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Matches</strong>
+            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">4 novos</span>
+          </div>
+          <div class="score-row">
+            <div class="score-dot" style="background:var(--red);"></div>
+            <div class="score-info">
+              <div class="score-car">Honda HR-V 2022</div>
+              <span class="mock-tag novo">novo</span>
             </div>
+            <span class="score-pct high">94%</span>
+          </div>
+          <div class="score-row">
+            <div class="score-dot" style="background:var(--red);"></div>
+            <div class="score-info">
+              <div class="score-car">Toyota Corolla 2021</div>
+              <span class="mock-tag novo">novo</span>
+            </div>
+            <span class="score-pct high">87%</span>
+          </div>
+          <div class="score-row">
+            <div class="score-dot" style="background:var(--orange);"></div>
+            <div class="score-info">
+              <div class="score-car">Jeep Compass 2023</div>
+              <span class="mock-tag negociacao">em negociação</span>
+            </div>
+            <span class="score-pct med">72%</span>
+          </div>
+          <div class="score-row">
+            <div class="score-dot" style="background:var(--text-dim);"></div>
+            <div class="score-info">
+              <div class="score-car">VW T-Cross 2020</div>
+              <span class="mock-tag visto">visto</span>
+            </div>
+            <span class="score-pct low">61%</span>
           </div>
         </div>
         <h4>Matches</h4>
-        <p>Lista de pessoas interessadas no seu carro, ranqueadas por nível de interesse.</p>
+        <p>Lista de matches ranqueados por score. Filtros por status, loja e pontuação mínima.</p>
       </div>
 
-      <div class="screen reveal">
-        <div class="screen-mock">
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
-            <div>
-              <div style="font-size:11px; color:var(--text-muted); font-family:'Geist Mono';">SEU ANÚNCIO</div>
-              <strong style="font-family:'Bricolage Grotesque'; font-size:18px; display:block; margin-top:4px;">Jeep Compass Limited</strong>
-              <div style="color:var(--red); font-weight:700; margin-top:2px;">R$ 129.900</div>
-            </div>
-            <span style="background:rgba(52,199,89,0.15); color:var(--green); padding:4px 10px; border-radius:100px; font-size:10px; font-family:'Geist Mono';">ATIVO</span>
-          </div>
-          <div class="chart-mock">
-            <svg class="chart-line" viewBox="0 0 200 80" preserveAspectRatio="none">
-              <path d="M 0 60 Q 30 55 50 50 T 100 35 T 150 25 T 200 10" fill="none" stroke="#FF3B30" stroke-width="2"/>
-              <path d="M 0 60 Q 30 55 50 50 T 100 35 T 150 25 T 200 10 L 200 80 L 0 80 Z" fill="url(#chartg)" opacity="0.3"/>
-              <defs>
-                <linearGradient id="chartg" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0" stop-color="#FF3B30"/>
-                  <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          <div class="stat-mini"><span>Visualizações (7d)</span><span class="v">1.248</span></div>
-          <div class="stat-mini"><span>Interessados</span><span class="v">32</span></div>
-          <div class="stat-mini"><span>Matches</span><span class="v">12</span></div>
-          <div class="mock-btn" style="margin-top:16px;">Impulsionar anúncio</div>
-        </div>
-        <h4>Resumo do anúncio</h4>
-        <p>Métricas em tempo real. Vendedor sabe exatamente como o carro está performando.</p>
-      </div>
-
+      <!-- Screen 3: Notificações -->
       <div class="screen reveal">
         <div class="screen-mock">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-            <strong style="font-family:'Bricolage Grotesque'; font-size:18px;">Mensagens</strong>
-            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">3 novas</span>
+            <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Notificações</strong>
           </div>
-          <div class="mock-list-item">
-            <div class="avatar">CS</div>
-            <div class="info">
-              <div class="name">Carlos Silva</div>
-              <div class="desc">Tenho interesse no seu carro!</div>
+          <div class="notif-item">
+            <div class="notif-icon">⚡</div>
+            <div class="notif-body">
+              <div class="notif-title">3 novos matches encontrados!</div>
+              <div class="notif-sub">Honda HR-V, Toyota Corolla...</div>
             </div>
-            <div style="font-size:10px; color:var(--text-muted);">14:30</div>
+            <div class="notif-time">agora</div>
           </div>
-          <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#FF9500,#995900);">AL</div>
-            <div class="info">
-              <div class="name">Amanda Lima</div>
-              <div class="desc">Ainda disponível?</div>
+          <div class="notif-item">
+            <div class="notif-icon">🏢</div>
+            <div class="notif-body">
+              <div class="notif-title">Repasse inter-loja</div>
+              <div class="notif-sub">AutoMax Motors — score 94%</div>
             </div>
-            <div style="font-size:10px; color:var(--text-muted);">ontem</div>
+            <div class="notif-time">5 min</div>
           </div>
-          <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#007AFF,#003D80);">BS</div>
-            <div class="info">
-              <div class="name">Bruno Santos</div>
-              <div class="desc">Podemos marcar pra ver?</div>
+          <div class="notif-item">
+            <div class="notif-icon" style="background:rgba(52,199,89,0.15);">✓</div>
+            <div class="notif-body">
+              <div class="notif-title">Match atualizado</div>
+              <div class="notif-sub">Jeep Compass — Em negociação</div>
             </div>
-            <div style="font-size:10px; color:var(--text-muted);">ontem</div>
-          </div>
-          <div class="mock-list-item">
-            <div class="avatar" style="background:linear-gradient(135deg,#34C759,#1F7D36);">JC</div>
-            <div class="info">
-              <div class="name">Juliana Costa</div>
-              <div class="desc">Qual é o valor mínimo?</div>
-            </div>
-            <div style="font-size:10px; color:var(--text-muted);">ter</div>
+            <div class="notif-time">ontem</div>
           </div>
         </div>
-        <h4>Conversas</h4>
-        <p>Chat só desbloqueia depois do match. Conversa só com quem demonstrou interesse real.</p>
+        <h4>Notificações</h4>
+        <p>Alertas em tempo real. Novos matches, atualizações de status e repassados disponíveis.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BUSINESS MODEL -->
-<section class="biz" id="modelo">
+<!-- PLANS -->
+<section class="biz" id="planos">
   <div class="container">
     <div class="reveal">
-      <div class="section-tag">06 — Modelo de Negócio</div>
-      <h2 class="section-title">Como o CarMatch <span class="red">ganha dinheiro.</span></h2>
-      <p class="section-sub">Hipótese inicial — vai precisar testar com mercado. Estrutura tipo Tinder: free pra todo mundo, premium pra quem quer mais visibilidade ou ferramentas.</p>
+      <div class="section-tag">06 — Planos</div>
+      <h2 class="section-title">Simples, transparente, <span class="red">sem surpresa.</span></h2>
+      <p class="section-sub">Assinatura mensal. Cancele quando quiser. CNPJ obrigatório.</p>
     </div>
 
     <div class="biz-grid">
@@ -1827,90 +1758,96 @@
         <div class="biz-tag">Tier 1</div>
         <h3>Grátis</h3>
         <div class="biz-price">R$ 0<span class="sm">/mês</span></div>
-        <p class="desc">Anúncio básico, swipe ilimitado, chat com matches.</p>
+        <p class="desc">Para conhecer a plataforma.</p>
         <ul class="biz-features">
-          <li>1 anúncio ativo</li>
-          <li>Até 5 fotos por carro</li>
-          <li>Chat liberado após match</li>
-          <li>Métricas básicas</li>
+          <li>1 usuário</li>
+          <li>Até 10 veículos</li>
+          <li>Matches internos</li>
+          <li>Suporte por email</li>
         </ul>
       </div>
 
       <div class="biz-card featured reveal">
-        <div class="biz-tag">Tier 2 · Vendedor</div>
-        <h3>Premium</h3>
-        <div class="biz-price">R$ 29,90<span class="sm">/anúncio</span></div>
-        <p class="desc">Pague só pelo que anuncia. Sem mensalidade, sem fidelidade.</p>
+        <div class="biz-tag">Tier 2 · Mais popular</div>
+        <h3>Pro</h3>
+        <div class="biz-price">R$ 199<span class="sm">/mês</span></div>
+        <p class="desc">Para lojas que levam repasse a sério.</p>
         <ul class="biz-features">
-          <li>Anúncio destacado por 30 dias</li>
-          <li>Fotos ilimitadas + vídeo</li>
-          <li>Boost no algoritmo (5x mais views)</li>
-          <li>Selo "Verificado"</li>
-          <li>Métricas avançadas</li>
-          <li>Renovação opcional após 30 dias</li>
+          <li>Até 3 usuários</li>
+          <li>Veículos ilimitados</li>
+          <li>Rede inter-lojas</li>
+          <li>Relatórios mensais</li>
+          <li>Suporte prioritário</li>
+          <li>Score detalhado por critério</li>
         </ul>
       </div>
 
       <div class="biz-card reveal">
-        <div class="biz-tag">Tier 3 · Lojas</div>
-        <h3>Empresarial</h3>
-        <div class="biz-price">Sob<span class="sm"> consulta</span></div>
-        <p class="desc">Concessionárias e revendedores. API, multi-anúncios, dashboard.</p>
+        <div class="biz-tag">Tier 3 · Grupo de lojas</div>
+        <h3>Enterprise</h3>
+        <div class="biz-price">R$ 599<span class="sm">/mês</span></div>
+        <p class="desc">Para grupos e redes de concessionárias.</p>
         <ul class="biz-features">
-          <li>Anúncios ilimitados</li>
-          <li>Dashboard de equipe</li>
-          <li>Integração via API</li>
-          <li>Lead scoring automático</li>
-          <li>Relatórios mensais</li>
+          <li>Usuários ilimitados</li>
+          <li>Multi-loja</li>
+          <li>API de integração</li>
           <li>Account manager dedicado</li>
+          <li>Relatórios personalizados</li>
+          <li>SLA garantido</li>
         </ul>
       </div>
     </div>
 
     <div style="margin-top:60px; padding:32px; background:var(--bg-card); border:1px solid var(--border); border-radius:18px; display:grid; grid-template-columns:repeat(3, 1fr); gap:32px;" class="reveal">
       <div>
-        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 1</div>
-        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Boost pago avulso</div>
-        <div style="color:var(--text-muted); font-size:13px;">R$ 14,90 pra destacar 1 anúncio por 7 dias.</div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Rastreamento de comissão</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Saiba quem fechou</div>
+        <div style="color:var(--text-muted); font-size:13px;">Saiba exatamente quem fechou cada repasse na sua equipe.</div>
       </div>
       <div>
-        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 2</div>
-        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Parcerias</div>
-        <div style="color:var(--text-muted); font-size:13px;">Seguro auto, financiamento, vistoria veicular — comissão por lead.</div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Rede verificada</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Sem conta laranja</div>
+        <div style="color:var(--text-muted); font-size:13px;">Lojas com CNPJ validado. Sem conta laranja, sem golpe.</div>
       </div>
       <div>
-        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Receita extra 3</div>
-        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Taxa de transação</div>
-        <div style="color:var(--text-muted); font-size:13px;">Opcional — 0,5% se a transação fechar via plataforma com escrow.</div>
+        <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Histórico completo</div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Tudo registrado</div>
+        <div style="color:var(--text-muted); font-size:13px;">Todo repasse registrado. Auditável, exportável, rastreável.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEEDBACK CTA -->
-<section class="feedback" id="feedback">
+<!-- CTA -->
+<section class="feedback" id="cta">
   <div class="feedback-inner">
-    <h2>E aí, mano?<br><span class="italic">o que tu acha?</span></h2>
-    <p>Quero saber o que tu pensa antes de levar isso pra frente. Honesto, sem economizar crítica.</p>
+    <h2>Sua concessionária merece mais que <span class="italic">WhatsApp</span>.</h2>
+    <p>Junte-se às primeiras lojas que vão usar o CarMatch. Acesso antecipado gratuito.</p>
 
-    <div class="questions">
-      <h3>Perguntas pra te guiar</h3>
-      <ol>
-        <li>O conceito de <strong>"Tinder pra carros"</strong> faz sentido pra ti? Tu usaria?</li>
-        <li>Qual é o <strong>maior problema</strong> que tu vê — algo que eu não considerei?</li>
-        <li>O <strong>modelo de monetização</strong> tá realista? R$ 29,90 por anúncio é muito ou pouco?</li>
-        <li>Identidade visual: tá <strong>bonita</strong> ou genérica demais?</li>
-        <li>Qual <strong>concorrente</strong> tu acha que seria a maior ameaça (OLX, Webmotors, iCarros)?</li>
-        <li>Se tu fosse investidor, <strong>colocaria dinheiro</strong>? Por quê?</li>
-      </ol>
+    <div class="cta-form">
+      <div class="cta-form-row">
+        <div class="cta-form-field">
+          <div class="mock-input">
+            <span class="label">Email da loja</span>
+            <span class="val" style="color:var(--text-dim);">gerente@suaconcessionaria.com.br</span>
+          </div>
+        </div>
+        <div class="mock-btn" style="white-space:nowrap; cursor:pointer;">Quero acesso antecipado →</div>
+      </div>
+      <div class="cta-note">Sem cartão de crédito. CNPJ verificado na ativação.</div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <div>CarMatch · conceito v1 · 2026</div>
-    <div>Feito com ♥ · feedback wanted 🙏</div>
+    <div>CarMatch · Thothi · 2026</div>
+    <div>support@thothi.com.br</div>
+    <div>
+      <a href="privacidade.html">Política de Privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="termos.html">Termos de Uso</a>
+    </div>
   </div>
 </footer>
 
@@ -1933,132 +1870,73 @@
 
   const mockData = {
     1: {
-      title: 'Boas-vindas',
-      sub: 'Conectamos você ao comprador certo',
-      content: `<div style="display:flex; align-items:center; justify-content:center; padding:32px 0 24px;">
-        <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="welcomeGlow2" cx="0.5" cy="0.5">
-              <stop offset="0" stop-color="#FF3B30" stop-opacity="0.45"/>
-              <stop offset="1" stop-color="#FF3B30" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="welcomeRed2" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0" stop-color="#FF5A50"/>
-              <stop offset="1" stop-color="#C42820"/>
-            </linearGradient>
-          </defs>
-          <ellipse cx="140" cy="90" rx="130" ry="70" fill="url(#welcomeGlow2)"/>
-          <path d="M 60 75 Q 140 15 220 75" stroke="#FF3B30" stroke-width="1.5"
-                stroke-dasharray="4 5" fill="none" opacity="0.55">
-            <animate attributeName="stroke-dashoffset" values="0;-18" dur="1.8s" repeatCount="indefinite"/>
-          </path>
-          <g transform="translate(60, 90)">
-            <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
-            <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
-            <circle cy="-7" r="9" fill="#888"/>
-            <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
-            <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
-                  font-size="9" fill="#888" letter-spacing="1.5">VENDEDOR</text>
-          </g>
-          <g transform="translate(220, 90)">
-            <circle r="32" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="2"/>
-            <circle r="32" fill="none" stroke="#FF3B30" stroke-width="1.5" opacity="0.4"/>
-            <circle cy="-7" r="9" fill="#888"/>
-            <path d="M-14 12 Q-14 0 0 0 Q14 0 14 12 L14 18 L-14 18 Z" fill="#888"/>
-            <text y="55" text-anchor="middle" font-family="'Geist Mono', monospace"
-                  font-size="9" fill="#888" letter-spacing="1.5">COMPRADOR</text>
-          </g>
-          <g transform="translate(140, 90)">
-            <circle r="32" fill="url(#welcomeRed2)">
-              <animate attributeName="r" values="30;33;30" dur="1.6s" repeatCount="indefinite"/>
-            </circle>
-            <circle r="40" fill="none" stroke="#FF3B30" stroke-width="1" opacity="0.3">
-              <animate attributeName="r" values="32;48;32" dur="1.6s" repeatCount="indefinite"/>
-              <animate attributeName="opacity" values="0.5;0;0.5" dur="1.6s" repeatCount="indefinite"/>
-            </circle>
-            <path d="M0 8 C-13 -5 -13 -16 -6 -16 C-2 -16 0 -13 0 -10 C0 -13 2 -16 6 -16 C13 -16 13 -5 0 8 Z"
-                  fill="#ffffff" transform="scale(0.85)"/>
-          </g>
-          <g transform="translate(140, 145)">
-            <rect x="-22" y="-9" width="44" height="18" rx="9" fill="#FF3B30"/>
-            <text y="3" text-anchor="middle" font-family="'Geist Mono', monospace"
-                  font-size="9" font-weight="600" fill="#fff" letter-spacing="1">MATCH</text>
-          </g>
-          <g transform="translate(140, 178)" opacity="0.5">
-            <path d="M-32 0 Q-28 -10 -18 -12 L18 -12 Q28 -10 32 0 L32 5 Q32 8 29 8 L23 8 Q22 4 18 4 Q14 4 13 8 L-13 8 Q-14 4 -18 4 Q-22 4 -23 8 L-29 8 Q-32 8 -32 5 Z"
-                  fill="#555"/>
-            <circle cx="-18" cy="6" r="3" fill="#222"/>
-            <circle cx="18" cy="6" r="3" fill="#222"/>
-          </g>
-        </svg>
-      </div>`,
-      btn: 'Começar'
+      title: 'Cadastra a loja',
+      sub: 'CNPJ, razão social, cidade. Verificação automática.',
+      content: `
+        <div class="mock-input"><span class="label">CNPJ</span><span class="val">12.345.678/0001-99</span></div>
+        <div class="mock-input"><span class="label">Nome da Loja</span><span class="val">Loja Premium SP</span></div>
+        <div class="mock-input"><span class="label">Cidade</span><span class="val">São Paulo, SP</span></div>
+      `,
+      btn: 'Cadastrar Loja'
     },
     2: {
-      title: 'Criar conta',
-      sub: 'É rápido e fácil!',
+      title: 'Adiciona o estoque',
+      sub: 'Veículos disponíveis para venda ou repasse.',
       content: `
-        <div class="mock-input"><span class="label">Nome completo</span><span class="val">Rafael Mendes</span></div>
-        <div class="mock-input"><span class="label">Email</span><span class="val">rafael@email.com</span></div>
-        <div class="mock-input"><span class="label">Telefone</span><span class="val">(11) 99999-9999</span></div>
-        <div class="mock-input"><span class="label">Senha</span><span class="val">••••••••</span></div>
+        <div class="mock-input"><span class="label">Marca</span><span class="val">Honda</span></div>
+        <div class="mock-input"><span class="label">Modelo</span><span class="val">HR-V EXL</span></div>
+        <div class="mock-input"><span class="label">Ano</span><span class="val">2022</span></div>
+        <div class="mock-input"><span class="label">KM</span><span class="val">28.500 km</span></div>
+        <div class="mock-input"><span class="label">Preço</span><span class="val">R$ 118.900</span></div>
       `,
-      btn: 'Criar conta'
+      btn: 'Salvar Veículo'
     },
     3: {
-      title: 'Como você quer continuar?',
-      sub: 'Selecione o tipo de perfil',
+      title: 'Registra as buscas',
+      sub: 'O que seu cliente quer. Marca, faixa de preço, ano, KM.',
       content: `
-        <div class="mock-input" style="border-color:var(--red); background:rgba(255,59,48,0.06);"><span class="label" style="color:var(--red)">🚗 SELECIONADO</span><span class="val">Quero vender meu carro</span></div>
-        <div class="mock-input"><span class="label">Opção 2</span><span class="val">Quero comprar um carro</span></div>
-        <div class="mock-input"><span class="label">Opção 3</span><span class="val">Os dois</span></div>
+        <div class="mock-input"><span class="label">O que busca (Marca)</span><span class="val">Honda / Toyota</span></div>
+        <div class="mock-input"><span class="label">Faixa de preço</span><span class="val">R$ 80k – R$ 130k</span></div>
+        <div class="mock-input"><span class="label">Ano mínimo</span><span class="val">2020</span></div>
+        <div class="mock-input"><span class="label">Ano máximo</span><span class="val">2024</span></div>
       `,
-      btn: 'Continuar'
+      btn: 'Salvar Busca'
     },
     4: {
-      title: 'Informações do carro',
-      sub: 'Preencha corretamente para encontrarmos o match ideal',
+      title: 'Match automático',
+      sub: 'Algoritmo compara cada veículo com cada intenção da rede.',
       content: `
-        <div class="mock-input"><span class="label">Marca</span><span class="val">Jeep</span></div>
-        <div class="mock-input"><span class="label">Modelo</span><span class="val">Compass</span></div>
-        <div class="mock-input"><span class="label">Versão</span><span class="val">Limited</span></div>
-        <div class="mock-input"><span class="label">Ano</span><span class="val">2021</span></div>
-        <div class="mock-input"><span class="label">KM</span><span class="val">32.000 km</span></div>
+        <div class="match-anim-box">
+          <div class="anim-loja">
+            <div class="loja-label">Estoque A</div>
+            <div class="loja-name">HR-V 2022</div>
+          </div>
+          <div class="anim-bolt">⚡</div>
+          <div class="anim-loja">
+            <div class="loja-label">Intenção B</div>
+            <div class="loja-name">SUV 2020+</div>
+          </div>
+        </div>
+        <div class="anim-status"><span>●</span> Calculando matches...</div>
       `,
-      btn: 'Continuar'
+      btn: 'Ver resultados'
     },
     5: {
-      title: 'Fotos do seu carro',
-      sub: 'Fotos de qualidade aumentam suas chances de venda',
+      title: 'Negocia no app',
+      sub: 'Score alto? Contato direto com a loja parceira.',
       content: `
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
-          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
-          <div style="aspect-ratio:1; background:linear-gradient(135deg,#2a2a2a,#1a1a1a); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:24px;">📸</div>
-          <div style="aspect-ratio:1; background:rgba(255,59,48,0.1); border:1px dashed var(--red); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--red);">+</div>
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <div>
+            <div style="font-family:'Geist Mono'; font-size:10px; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.06em;">Match</div>
+            <div style="font-family:'Bricolage Grotesque'; font-size:18px; font-weight:600;">Honda HR-V 2022</div>
+            <div style="color:var(--text-muted); font-size:12px; margin-top:2px;">Loja Premium SP</div>
+          </div>
+          <div style="background:var(--red); color:#fff; font-family:'Bricolage Grotesque'; font-size:28px; font-weight:700; padding:8px 14px; border-radius:12px;">94%</div>
         </div>
+        <div class="mock-input"><span class="label">KM · Ano · Câmbio</span><span class="val">28.500 km · 2022 · Aut.</span></div>
+        <div class="mock-input"><span class="label">Preço</span><span class="val" style="color:var(--red); font-weight:700;">R$ 118.900</span></div>
       `,
-      btn: 'Continuar'
-    },
-    6: {
-      title: 'Confira seu anúncio',
-      sub: 'Tudo certo? Publique agora!',
-      content: `
-        <div style="background:linear-gradient(135deg,#2a2a2a,#1a1a1a); height:120px; border-radius:10px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:32px;">🚙</div>
-        <div class="mock-input"><span class="label">Modelo</span><span class="val">Jeep Compass Limited 2021</span></div>
-        <div class="mock-input"><span class="label">Preço</span><span class="val" style="color:var(--red); font-weight:700;">R$ 129.900</span></div>
-        <div class="mock-input"><span class="label">KM · Câmbio</span><span class="val">32.000 km · Automático</span></div>
-      `,
-      btn: 'Publicar anúncio'
-    },
-    7: {
-      title: 'Anúncio publicado!',
-      sub: 'Agora é só esperar os interessados',
-      content: `<div style="display:flex; flex-direction:column; gap:24px; align-items:center; padding:32px 0;">
-        <div style="width:80px; height:80px; background:var(--red); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:36px; box-shadow:0 0 40px var(--red-glow);">✓</div>
-        <div style="text-align:center; color:var(--text-muted); font-size:13px;">Seu anúncio está visível para milhares de compradores</div>
-      </div>`,
-      btn: 'Ir para meus anúncios'
+      btn: 'Ver detalhes'
     }
   };
 

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termos de Uso — CarMatch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --bg-alt: #111111;
+    --bg-card: #161616;
+    --red: #FF3B30;
+    --red-soft: rgba(255, 59, 48, 0.12);
+    --red-glow: rgba(255, 59, 48, 0.35);
+    --text: #F4F4F4;
+    --text-muted: #8E8E93;
+    --text-dim: #5A5A5C;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --green: #34C759;
+    --orange: #FF9500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--red); color: #fff; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .logo span { color: var(--red); }
+  .nav-back {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  /* ============ PAGE HEADER ============ */
+  .page-header {
+    padding: 140px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-tag {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .page-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+  .page-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .page-meta {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-family: 'Geist Mono', monospace;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  /* ============ LEGAL CONTENT ============ */
+  .legal-body {
+    padding: 60px 0 80px;
+  }
+
+  .legal-section {
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .legal-section:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .legal-section h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .legal-section h2 .sec-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    background: var(--red-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .legal-section p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-section p:last-child { margin-bottom: 0; }
+
+  .legal-section ul, .legal-section ol {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.75;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal-section ul li, .legal-section ol li {
+    padding-left: 24px;
+    position: relative;
+  }
+  .legal-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .legal-section ol {
+    counter-reset: li;
+  }
+  .legal-section ol li {
+    counter-increment: li;
+  }
+  .legal-section ol li::before {
+    content: counter(li, lower-roman) '.';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    top: 2px;
+  }
+
+  .legal-section strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+  .info-card .ic-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .info-card .ic-val {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .info-card a {
+    color: var(--red);
+    text-decoration: none;
+  }
+  .info-card a:hover { text-decoration: underline; }
+
+  .highlight-box {
+    background: var(--red-soft);
+    border: 1px solid rgba(255, 59, 48, 0.2);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .highlight-box strong { color: var(--red); }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  footer .container {
+    max-width: 880px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Car<span>Match</span></a>
+    <a href="index.html" class="nav-back">← Voltar ao início</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title">Termos de Uso</h1>
+    <div class="page-meta">
+      <span>Vigência: maio de 2026</span>
+      <span>Exclusivo para pessoas jurídicas (B2B)</span>
+      <span>Responsável: Thothi Tecnologia</span>
+    </div>
+  </div>
+</div>
+
+<div class="legal-body">
+  <div class="container">
+
+    <!-- 1. Aceitação -->
+    <div class="legal-section">
+      <h2><span class="sec-num">01</span> Aceitação dos termos</h2>
+      <p>
+        Ao acessar, cadastrar-se ou utilizar o CarMatch — seja pelo aplicativo móvel, pela interface web ou pela API — você, em nome da pessoa jurídica que representa, declara ter lido, compreendido e concordado com estes Termos de Uso em sua totalidade.
+      </p>
+      <p>
+        Se você não concordar com qualquer disposição destes termos, não deve utilizar a plataforma. O uso continuado após atualizações publicadas com aviso de 30 dias implica a aceitação da versão vigente.
+      </p>
+      <div class="highlight-box">
+        <strong>Atenção:</strong> estes Termos de Uso regem uma relação comercial B2B. O responsável pelo cadastro assume, perante a Thothi, responsabilidade solidária pelo cumprimento destes termos por parte de todos os usuários vinculados à conta da loja.
+      </div>
+    </div>
+
+    <!-- 2. Elegibilidade -->
+    <div class="legal-section">
+      <h2><span class="sec-num">02</span> Elegibilidade</h2>
+      <p>O CarMatch é uma plataforma de uso <strong>exclusivo para pessoas jurídicas</strong>. Para cadastrar-se, a loja deve:</p>
+      <ul>
+        <li>Possuir CNPJ ativo junto à Receita Federal do Brasil.</li>
+        <li>Ter como atividade principal ou secundária o comércio varejista ou atacadista de veículos automotores.</li>
+        <li>Ser representada por pessoa física com poderes legais para firmar contratos em nome da empresa.</li>
+      </ul>
+      <p>
+        O Código de Defesa do Consumidor (Lei 8.078/1990) <strong>não se aplica</strong> às relações estabelecidas nesta plataforma, por se tratar de serviço contratado por pessoas jurídicas para uso em suas atividades empresariais (B2B).
+      </p>
+      <p>
+        A Thothi reserva-se o direito de verificar os dados cadastrados e recusar ou suspender cadastros que não atendam aos critérios de elegibilidade.
+      </p>
+    </div>
+
+    <!-- 3. Conta e responsabilidade -->
+    <div class="legal-section">
+      <h2><span class="sec-num">03</span> Conta e responsabilidade</h2>
+      <p>Cada CNPJ corresponde a uma única conta na plataforma. É vedado o registro de múltiplas contas para o mesmo CNPJ.</p>
+      <p>A loja cadastrada é integralmente responsável por:</p>
+      <ul>
+        <li>Manter as credenciais de acesso (email e senha) em sigilo e não compartilhá-las com pessoas não autorizadas.</li>
+        <li>Todos os dados inseridos na plataforma, incluindo informações de veículos, intenções de compra e dados de contato.</li>
+        <li>Todos os atos praticados por usuários vinculados à conta, inclusive em caso de acesso não autorizado por falha de guarda das credenciais.</li>
+        <li>Manter atualizados os dados cadastrais da loja, especialmente endereço de email e contato comercial.</li>
+      </ul>
+      <p>
+        Em caso de suspeita de acesso não autorizado, a loja deve notificar imediatamente a Thothi pelo email <strong>support@thothi.com.br</strong> para que as medidas de segurança cabíveis sejam adotadas.
+      </p>
+    </div>
+
+    <!-- 4. Descrição do serviço -->
+    <div class="legal-section">
+      <h2><span class="sec-num">04</span> Descrição do serviço</h2>
+      <p>
+        O CarMatch é uma plataforma de <strong>match automático entre estoques e intenções de compra</strong> de concessionárias, voltada para facilitar o repasse inter-dealer de veículos.
+      </p>
+      <p>Os principais recursos da plataforma incluem:</p>
+      <ul>
+        <li><strong>Cadastro de estoque:</strong> registro de veículos disponíveis para venda ou repasse, com atributos como marca, modelo, ano, quilometragem, preço, câmbio e combustível.</li>
+        <li><strong>Cadastro de intenções de compra:</strong> registro do perfil de veículo buscado pela loja ou por seus clientes, com critérios como marca, faixa de preço, ano mínimo e máximo, e quilometragem máxima.</li>
+        <li><strong>Algoritmo de pontuação (score):</strong> cálculo automático de compatibilidade (0–100) entre cada veículo cadastrado na rede e cada intenção de compra ativa, considerando múltiplos critérios.</li>
+        <li><strong>Notificações:</strong> alertas push e por email sobre novos matches, atualizações de status e oportunidades na rede.</li>
+        <li><strong>Histórico e rastreabilidade:</strong> registro de todos os matches gerados, status de negociação e ações realizadas na plataforma.</li>
+      </ul>
+      <p>
+        O CarMatch atua como facilitador tecnológico. Não é parte nas negociações entre lojas e não garante o fechamento de qualquer repasse.
+      </p>
+    </div>
+
+    <!-- 5. Planos e pagamento -->
+    <div class="legal-section">
+      <h2><span class="sec-num">05</span> Planos e pagamento</h2>
+      <p>
+        O CarMatch oferece planos de assinatura mensal. As condições vigentes estão descritas na página de Planos e podem ser alteradas com aviso prévio de 30 dias.
+      </p>
+      <ul>
+        <li><strong>Cobrança:</strong> realizada mensalmente em reais (R$), via gateway de pagamento integrado, no dia do vencimento do ciclo de faturamento da conta.</li>
+        <li><strong>Cancelamento:</strong> pode ser realizado a qualquer momento pelo painel da conta. O acesso ao plano pago é mantido até o fim do ciclo faturado. Não há reembolso proporcional de período não utilizado.</li>
+        <li><strong>Inadimplência:</strong> em caso de falha no pagamento, a conta será rebaixada automaticamente para o plano gratuito após 7 dias de carência. Os dados cadastrados são preservados por até 30 dias adicionais para regularização.</li>
+        <li><strong>Alteração de plano:</strong> upgrades são efetivados imediatamente, com cobrança proporcional do ciclo em curso. Downgrades entram em vigor no próximo ciclo de faturamento.</li>
+        <li><strong>Impostos:</strong> os preços exibidos são em reais e não incluem tributos que eventualmente sejam incidentes sobre a contratação, que serão de responsabilidade da loja contratante.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Dados cadastrados -->
+    <div class="legal-section">
+      <h2><span class="sec-num">06</span> Dados cadastrados pelo usuário</h2>
+      <p>
+        A loja é integralmente responsável pela veracidade, precisão e atualidade das informações inseridas na plataforma, incluindo dados de veículos, preços e intenções de compra.
+      </p>
+      <p>
+        É expressamente vedado inserir na plataforma:
+      </p>
+      <ul>
+        <li>Informações falsas, incompletas ou deliberadamente enganosas sobre veículos.</li>
+        <li>Dados de veículos com restrições judiciais, alienação fiduciária pendente ou situação irregular junto ao DETRAN, sem a devida indicação.</li>
+        <li>Informações de contato de terceiros sem o devido consentimento.</li>
+        <li>Qualquer conteúdo que viole direitos de propriedade intelectual ou privacidade de terceiros.</li>
+      </ul>
+      <p>
+        A Thothi não verifica ativamente a veracidade das informações cadastradas, mas reserva-se o direito de remover conteúdo e suspender contas em caso de denúncia fundamentada ou identificação de irregularidades.
+      </p>
+    </div>
+
+    <!-- 7. Propriedade intelectual -->
+    <div class="legal-section">
+      <h2><span class="sec-num">07</span> Propriedade intelectual</h2>
+      <p>
+        Todos os elementos da plataforma CarMatch — incluindo, sem limitação, software, algoritmos, interface, marca, logotipo, design e documentação — são de propriedade exclusiva da <strong>Thothi Tecnologia</strong> e estão protegidos pela legislação de propriedade intelectual aplicável.
+      </p>
+      <p>
+        O cadastro na plataforma confere à loja uma licença de uso não exclusiva, intransferível e revogável, para acessar e utilizar os recursos do plano contratado, exclusivamente para suas finalidades empresariais internas.
+      </p>
+      <p>
+        Os dados inseridos pela loja (informações de veículos, intenções de compra, dados cadastrais) permanecem de propriedade da loja. A Thothi recebe uma licença limitada para processar esses dados com a finalidade de operar o serviço de match, conforme descrito na Política de Privacidade.
+      </p>
+    </div>
+
+    <!-- 8. Proibições -->
+    <div class="legal-section">
+      <h2><span class="sec-num">08</span> Usos proibidos</h2>
+      <p>São expressamente proibidos, sujeitando a conta à suspensão imediata e a eventuais medidas legais:</p>
+      <ul>
+        <li><strong>Scraping e extração automatizada:</strong> utilizar robôs, crawlers ou qualquer meio automatizado para extrair dados da plataforma sem autorização expressa por escrito da Thothi.</li>
+        <li><strong>Uso indevido da API:</strong> realizar requisições em volume que prejudiquem a disponibilidade do serviço para outros usuários, ou utilizar a API para finalidades não previstas na documentação oficial.</li>
+        <li><strong>Cadastro de dados falsos:</strong> inserir veículos inexistentes, preços fictícios ou intenções de compra com o propósito de distorcer os resultados do algoritmo de match.</li>
+        <li><strong>Revenda do serviço:</strong> comercializar, sublicenciar ou revender o acesso à plataforma a terceiros sem autorização prévia e por escrito da Thothi.</li>
+        <li><strong>Engenharia reversa:</strong> tentar descompilar, desassemblar ou fazer engenharia reversa de qualquer componente da plataforma.</li>
+        <li><strong>Contato não solicitado:</strong> utilizar os dados de contato de lojas parceiras obtidos via plataforma para fins não relacionados ao repasse, como prospecção comercial de outros produtos ou serviços.</li>
+      </ul>
+    </div>
+
+    <!-- 9. Limitação de responsabilidade -->
+    <div class="legal-section">
+      <h2><span class="sec-num">09</span> Limitação de responsabilidade</h2>
+      <p>
+        O CarMatch é uma plataforma de facilitação tecnológica. A Thothi <strong>não é parte</strong> em nenhuma negociação, contrato de compra e venda ou repasse realizado entre as lojas que utilizam o serviço.
+      </p>
+      <p>
+        A Thothi não se responsabiliza por:
+      </p>
+      <ul>
+        <li>A veracidade das informações cadastradas pelas lojas na plataforma.</li>
+        <li>O fechamento, cancelamento ou inadimplemento de qualquer negócio intermediado pela plataforma.</li>
+        <li>Perdas e danos decorrentes de negociações frustradas, mesmo que originadas por um match da plataforma.</li>
+        <li>Indisponibilidade temporária do serviço por manutenção programada, falhas de infraestrutura de terceiros ou casos fortuitos e de força maior.</li>
+        <li>Decisões de negócio tomadas com base nas informações e scores gerados pelo algoritmo de match.</li>
+      </ul>
+      <p>
+        Em qualquer hipótese, a responsabilidade total da Thothi perante a loja fica limitada ao valor efetivamente pago pelo plano de assinatura nos 3 meses anteriores ao evento que originou a reclamação.
+      </p>
+    </div>
+
+    <!-- 10. Rescisão -->
+    <div class="legal-section">
+      <h2><span class="sec-num">10</span> Rescisão e suspensão</h2>
+      <p>
+        A loja pode cancelar sua conta a qualquer momento, por meio das configurações da própria conta ou por solicitação ao suporte. O cancelamento encerra o acesso aos recursos pagos no fim do ciclo vigente.
+      </p>
+      <p>
+        A Thothi poderá suspender ou encerrar unilateralmente o acesso de qualquer conta, com ou sem aviso prévio, nos seguintes casos:
+      </p>
+      <ul>
+        <li>Violação de qualquer disposição destes Termos de Uso.</li>
+        <li>Cadastro de informações falsas ou uso da plataforma para fins fraudulentos.</li>
+        <li>Inadimplência não regularizada no prazo de carência.</li>
+        <li>Uso da plataforma de forma que cause danos à Thothi, a outras lojas cadastradas ou a terceiros.</li>
+        <li>Decisão regulatória, ordem judicial ou determinação de autoridade competente.</li>
+      </ul>
+      <p>
+        Em caso de suspensão por violação dos termos, a Thothi não está obrigada a reembolsar valores pagos pelo período não utilizado.
+      </p>
+    </div>
+
+    <!-- 11. Alterações -->
+    <div class="legal-section">
+      <h2><span class="sec-num">11</span> Alterações nos termos</h2>
+      <p>
+        A Thothi reserva-se o direito de alterar estes Termos de Uso a qualquer momento. Alterações materiais serão comunicadas por email com antecedência mínima de <strong>30 dias</strong> antes de sua entrada em vigor.
+      </p>
+      <p>
+        Alterações não materiais — como correções ortográficas, ajustes de formatação ou esclarecimentos que não modifiquem direitos ou obrigações das partes — podem ser realizadas sem aviso prévio.
+      </p>
+      <p>
+        A data de vigência dos termos em vigor é sempre indicada no cabeçalho desta página. O uso continuado da plataforma após a data de vigência da nova versão implica sua aceitação integral.
+      </p>
+    </div>
+
+    <!-- 12. Legislação -->
+    <div class="legal-section">
+      <h2><span class="sec-num">12</span> Legislação aplicável e foro</h2>
+      <p>
+        Estes Termos de Uso são regidos exclusivamente pela <strong>legislação brasileira</strong>. Por tratar-se de relação B2B, o Código de Defesa do Consumidor (Lei 8.078/1990) não se aplica a eventuais disputas decorrentes deste instrumento.
+      </p>
+      <p>
+        As partes elegem o foro da comarca de <strong>São Paulo, SP</strong> para dirimir quaisquer controvérsias oriundas destes Termos de Uso, com renúncia expressa a qualquer outro foro, por mais privilegiado que seja, salvo disposição legal imperativa em contrário.
+      </p>
+      <p>Contato para questões jurídicas ou contratuais:</p>
+      <div class="info-card">
+        <div class="ic-label">Email</div>
+        <div class="ic-val"><a href="mailto:support@thothi.com.br">support@thothi.com.br</a></div>
+      </div>
+      <div class="info-card" style="margin-top:12px;">
+        <div class="ic-label">Empresa</div>
+        <div class="ic-val">Thothi Tecnologia · CNPJ a ser registrado · São Paulo, SP</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div>CarMatch · Thothi · 2026</div>
+    <div>support@thothi.com.br</div>
+    <div>
+      <a href="privacidade.html">Política de Privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="termos.html">Termos de Uso</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

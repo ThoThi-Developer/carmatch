@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — CarMatch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --bg-alt: #111111;
+    --bg-card: #161616;
+    --red: #FF3B30;
+    --red-soft: rgba(255, 59, 48, 0.12);
+    --red-glow: rgba(255, 59, 48, 0.35);
+    --text: #F4F4F4;
+    --text-muted: #8E8E93;
+    --text-dim: #5A5A5C;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --green: #34C759;
+    --orange: #FF9500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--red); color: #fff; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.7);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .logo span { color: var(--red); }
+  .nav-back {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  /* ============ PAGE HEADER ============ */
+  .page-header {
+    padding: 140px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .page-tag {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .page-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--red);
+  }
+  .page-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  .page-meta {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-family: 'Geist Mono', monospace;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  /* ============ LEGAL CONTENT ============ */
+  .legal-body {
+    padding: 60px 0 80px;
+  }
+
+  .legal-section {
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+  }
+  .legal-section:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .legal-section h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .legal-section h2 .sec-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--red);
+    background: var(--red-soft);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .legal-section p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-section p:last-child { margin-bottom: 0; }
+
+  .legal-section ul, .legal-section ol {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.75;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal-section ul li, .legal-section ol li {
+    padding-left: 24px;
+    position: relative;
+  }
+  .legal-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-weight: 700;
+  }
+  .legal-section ol {
+    counter-reset: li;
+  }
+  .legal-section ol li {
+    counter-increment: li;
+  }
+  .legal-section ol li::before {
+    content: counter(li, lower-roman) '.';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    top: 2px;
+  }
+
+  .legal-section strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 20px;
+  }
+  .info-card .ic-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .info-card .ic-val {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .info-card a {
+    color: var(--red);
+    text-decoration: none;
+  }
+  .info-card a:hover { text-decoration: underline; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 0;
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  footer .container {
+    max-width: 880px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Car<span>Match</span></a>
+    <a href="index.html" class="nav-back">← Voltar ao início</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <div class="page-tag">Legal</div>
+    <h1 class="page-title">Política de Privacidade</h1>
+    <div class="page-meta">
+      <span>Vigência: maio de 2026</span>
+      <span>Lei 13.709/2018 — LGPD</span>
+      <span>Responsável: Thothi Tecnologia</span>
+    </div>
+  </div>
+</div>
+
+<div class="legal-body">
+  <div class="container">
+
+    <!-- 1. Quem somos -->
+    <div class="legal-section">
+      <h2><span class="sec-num">01</span> Quem somos</h2>
+      <p>
+        O CarMatch é uma plataforma B2B desenvolvida e operada pela <strong>Thothi Tecnologia</strong> (razão social a ser registrada), voltada exclusivamente para pessoas jurídicas — concessionárias e revendedores de veículos com CNPJ ativo.
+      </p>
+      <p>
+        Nossa plataforma conecta concessionárias por meio de um algoritmo de match entre estoque disponível e intenções de compra cadastradas por outras lojas da rede, viabilizando o repasse inter-dealer de forma organizada, rastreável e eficiente.
+      </p>
+      <p>
+        Por tratar-se de serviço B2B, as relações são firmadas entre empresas. O Código de Defesa do Consumidor (CDC) não se aplica a este contexto. Os dados tratados são predominantemente dados de pessoas jurídicas e de representantes legais ou responsáveis técnicos das lojas cadastradas.
+      </p>
+    </div>
+
+    <!-- 2. Dados coletados -->
+    <div class="legal-section">
+      <h2><span class="sec-num">02</span> Dados coletados</h2>
+      <p>Coletamos apenas os dados estritamente necessários para a operação da plataforma:</p>
+      <ul>
+        <li><strong>Dados cadastrais pessoais:</strong> nome completo, endereço de email e telefone do responsável pela conta na loja.</li>
+        <li><strong>Dados da pessoa jurídica:</strong> CNPJ, razão social, nome fantasia, endereço comercial e cidade de operação.</li>
+        <li><strong>Dados de uso da plataforma:</strong> veículos cadastrados no estoque (marca, modelo, ano, quilometragem, preço, câmbio, combustível), intenções de compra registradas e matches gerados pelo algoritmo.</li>
+        <li><strong>Dados técnicos:</strong> token de dispositivo para envio de notificações push, endereço IP de acesso, timestamps de criação e atualização de registros, e logs de sessão para fins de segurança.</li>
+      </ul>
+      <p>Não coletamos dados sensíveis conforme definição do art. 5º, II da LGPD. Não coletamos dados de clientes finais das concessionárias.</p>
+    </div>
+
+    <!-- 3. Base legal -->
+    <div class="legal-section">
+      <h2><span class="sec-num">03</span> Base legal (LGPD art. 7)</h2>
+      <p>O tratamento dos dados pessoais coletados é fundamentado nas seguintes bases legais previstas no art. 7º da Lei 13.709/2018:</p>
+      <ul>
+        <li><strong>Execução de contrato</strong> (art. 7º, V): os dados são necessários para o cumprimento das obrigações contratuais assumidas ao aceitar os Termos de Uso, incluindo a operação do serviço de match, notificações e cobrança da assinatura.</li>
+        <li><strong>Legítimo interesse</strong> (art. 7º, IX): o uso de logs técnicos e dados de uso para melhoria contínua do algoritmo de match e segurança da plataforma, desde que não prevaleça sobre os direitos e liberdades fundamentais do titular.</li>
+        <li><strong>Cumprimento de obrigação legal</strong> (art. 7º, II): retenção de dados pelo período exigido por legislação fiscal e trabalhista aplicável.</li>
+      </ul>
+    </div>
+
+    <!-- 4. Finalidade -->
+    <div class="legal-section">
+      <h2><span class="sec-num">04</span> Finalidade do tratamento</h2>
+      <p>Os dados coletados são utilizados exclusivamente para as seguintes finalidades:</p>
+      <ul>
+        <li>Criação e gestão da conta da concessionária na plataforma.</li>
+        <li>Operação do algoritmo de match entre estoque e intenções de compra da rede.</li>
+        <li>Envio de notificações push e por email sobre novos matches, atualizações de status e alertas operacionais.</li>
+        <li>Processamento da assinatura mensal e controle de acesso por plano contratado.</li>
+        <li>Suporte técnico e atendimento ao cliente.</li>
+        <li>Análise agregada e anonimizada de uso para melhoria do produto.</li>
+      </ul>
+      <p>Não utilizamos dados pessoais para fins de publicidade comportamental, perfil psicográfico ou venda a terceiros.</p>
+    </div>
+
+    <!-- 5. Compartilhamento -->
+    <div class="legal-section">
+      <h2><span class="sec-num">05</span> Compartilhamento de dados</h2>
+      <p>
+        O CarMatch não vende, aluga nem cede dados pessoais a terceiros para fins comerciais. O compartilhamento é restrito ao estritamente necessário para a operação do serviço:
+      </p>
+      <ul>
+        <li><strong>Entre lojas na plataforma:</strong> quando ocorre um match, as lojas envolvidas visualizam apenas o nome da loja parceira, a cidade e o canal de contato comercial (email ou telefone da loja) cadastrado no perfil público. Dados pessoais do responsável pela conta não são expostos automaticamente.</li>
+        <li><strong>Provedores de infraestrutura:</strong> utilizamos a Supabase (PostgreSQL gerenciado) para armazenamento de dados. A Supabase atua como operadora de dados conforme LGPD, sob contrato de proteção de dados adequado.</li>
+        <li><strong>Processador de pagamentos:</strong> dados de cobrança são tratados diretamente pelo gateway de pagamento contratado, que opera sob suas próprias políticas de privacidade e conformidade PCI-DSS.</li>
+        <li><strong>Autoridades públicas:</strong> quando exigido por ordem judicial, regulatória ou legal devidamente fundamentada.</li>
+      </ul>
+    </div>
+
+    <!-- 6. Retenção -->
+    <div class="legal-section">
+      <h2><span class="sec-num">06</span> Retenção de dados</h2>
+      <p>
+        Os dados são mantidos pelo período necessário para a prestação do serviço contratado. Após o encerramento da conta:
+      </p>
+      <ul>
+        <li>Dados operacionais (estoque, matches, intenções) são excluídos em até 90 dias após o cancelamento definitivo, salvo se houver pendência contratual ou litigiosa em curso.</li>
+        <li>Dados cadastrais e registros financeiros são retidos por <strong>5 anos</strong> após o encerramento, em cumprimento às obrigações fiscais e contábeis previstas no Código Civil (art. 1.194) e legislação tributária aplicável.</li>
+        <li>Logs de segurança e acesso são mantidos por até 12 meses.</li>
+      </ul>
+    </div>
+
+    <!-- 7. Direitos do titular -->
+    <div class="legal-section">
+      <h2><span class="sec-num">07</span> Direitos do titular (LGPD art. 18)</h2>
+      <p>O titular dos dados pessoais, nos termos do art. 18 da LGPD, tem direito a:</p>
+      <ol>
+        <li>Confirmar a existência de tratamento de seus dados pessoais.</li>
+        <li>Acessar os dados que mantemos sobre si.</li>
+        <li>Corrigir dados incompletos, inexatos ou desatualizados.</li>
+        <li>Solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a LGPD.</li>
+        <li>Solicitar a portabilidade dos dados a outro fornecedor de serviço, mediante requisição expressa.</li>
+        <li>Revogar o consentimento, quando o tratamento for baseado nessa base legal.</li>
+        <li>Obter informação sobre as entidades com as quais compartilhamos dados.</li>
+        <li>Peticionar contra o controlador perante a Autoridade Nacional de Proteção de Dados (ANPD).</li>
+      </ol>
+      <p>Para exercer qualquer desses direitos, entre em contato por email:</p>
+      <div class="info-card">
+        <div class="ic-label">Contato para direitos LGPD</div>
+        <div class="ic-val"><a href="mailto:support@thothi.com.br">support@thothi.com.br</a> — prazo de resposta: até 15 dias úteis.</div>
+      </div>
+    </div>
+
+    <!-- 8. Segurança -->
+    <div class="legal-section">
+      <h2><span class="sec-num">08</span> Segurança dos dados</h2>
+      <p>Adotamos medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra acesso não autorizado, perda, alteração ou destruição:</p>
+      <ul>
+        <li><strong>Banco de dados:</strong> Supabase com PostgreSQL, Row Level Security (RLS) habilitado — cada loja acessa apenas seus próprios dados e os dados de match autorizados.</li>
+        <li><strong>Transmissão:</strong> todos os dados são transmitidos com criptografia TLS 1.3. Conexões sem HTTPS são rejeitadas.</li>
+        <li><strong>Autenticação:</strong> tokens de sessão com expiração automática. Suporte a autenticação de dois fatores (2FA) para contas administradoras.</li>
+        <li><strong>Acesso interno:</strong> princípio do menor privilégio — membros da equipe Thothi acessam apenas os dados necessários para suporte técnico e correção de incidentes.</li>
+      </ul>
+      <p>Em caso de incidente de segurança que resulte em risco ou dano relevante aos titulares, notificaremos a ANPD e os titulares afetados no prazo legal.</p>
+    </div>
+
+    <!-- 9. Cookies -->
+    <div class="legal-section">
+      <h2><span class="sec-num">09</span> Cookies e rastreamento</h2>
+      <p>
+        O CarMatch utiliza apenas <strong>cookies de sessão</strong> estritamente necessários para manter o estado de autenticação do usuário enquanto ele navega na plataforma. Esses cookies são apagados automaticamente ao encerrar a sessão.
+      </p>
+      <p>
+        <strong>Não utilizamos</strong> cookies de terceiros, pixels de rastreamento, scripts de análise comportamental (ex.: Google Analytics, Meta Pixel) ou qualquer tecnologia de identificação que persista entre sessões para fins publicitários ou de perfil.
+      </p>
+    </div>
+
+    <!-- 10. DPO / Contato -->
+    <div class="legal-section">
+      <h2><span class="sec-num">10</span> DPO e contato</h2>
+      <p>
+        Dúvidas sobre esta Política de Privacidade, solicitações de direitos ou notificações de incidentes devem ser enviadas ao nosso canal de proteção de dados:
+      </p>
+      <div class="info-card">
+        <div class="ic-label">Email</div>
+        <div class="ic-val"><a href="mailto:support@thothi.com.br">support@thothi.com.br</a></div>
+      </div>
+      <div class="info-card" style="margin-top:12px;">
+        <div class="ic-label">Empresa</div>
+        <div class="ic-val">Thothi Tecnologia · CNPJ a ser registrado · São Paulo, SP</div>
+      </div>
+    </div>
+
+    <!-- 11. Atualizações -->
+    <div class="legal-section">
+      <h2><span class="sec-num">11</span> Atualizações desta política</h2>
+      <p>
+        Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças na legislação, nas práticas de tratamento de dados ou nas funcionalidades da plataforma.
+      </p>
+      <p>
+        A data de vigência será sempre publicada no cabeçalho desta página. Em caso de alterações materiais que afetem os direitos dos titulares, comunicaremos por email com antecedência mínima de 15 dias. O uso continuado da plataforma após essa data implica a aceitação da versão atualizada.
+      </p>
+    </div>
+
+    <!-- 12. Jurisdição -->
+    <div class="legal-section">
+      <h2><span class="sec-num">12</span> Jurisdição e foro</h2>
+      <p>
+        Esta Política de Privacidade é regida pela legislação brasileira, em especial pela Lei Geral de Proteção de Dados (Lei 13.709/2018) e suas regulamentações posteriores editadas pela Autoridade Nacional de Proteção de Dados (ANPD).
+      </p>
+      <p>
+        Quaisquer litígios decorrentes desta política serão submetidos ao foro da comarca de <strong>São Paulo, SP</strong>, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div>CarMatch · Thothi · 2026</div>
+    <div>support@thothi.com.br</div>
+    <div>
+      <a href="privacidade.html">Política de Privacidade</a>
+      &nbsp;·&nbsp;
+      <a href="termos.html">Termos de Uso</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
