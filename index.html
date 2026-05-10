@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CarMatch — Negociações entre concessionárias com match automático</title>
+<meta name="description" content="CarMatch identifica automaticamente oportunidades de repasse entre lojas. Cadastre seu estoque e suas buscas — o sistema cruza a rede e avisa quando há match.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://carmatch.thothi.app/">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://carmatch.thothi.app/">
+<meta property="og:title"       content="CarMatch — Matches automáticos entre concessionárias">
+<meta property="og:description" content="Cada oportunidade que sua loja perde vai para o concorrente. CarMatch cruza seu estoque com as buscas de compradores e avisa em segundos.">
+<meta property="og:image"       content="https://carmatch.thothi.app/og-image.png">
+<meta property="og:locale"      content="pt_BR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="CarMatch — Matches automáticos entre concessionárias">
+<meta name="twitter:description" content="Cada oportunidade que sua loja perde vai para o concorrente. CarMatch cruza seu estoque com as buscas de compradores e avisa em segundos.">
+<meta name="twitter:image"       content="https://carmatch.thothi.app/og-image.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,7 +40,6 @@
     --border-strong: rgba(255, 255, 255, 0.18);
     --green: #34C759;
     --orange: #FF9500;
-    --yellow: #FFCC00;
     --blue: #007AFF;
   }
 
@@ -1828,18 +1845,49 @@
     <h2>Pronto para sair dos grupos e ter controle real sobre suas <span class="italic">negociações</span>?</h2>
     <p>Cadastre sua loja hoje. O CarMatch começa a identificar matches automaticamente assim que o primeiro veículo é registrado.</p>
 
-    <div class="cta-form">
+    <form class="cta-form" id="leadForm" novalidate>
       <div class="cta-form-row">
         <div class="cta-form-field">
-          <div class="mock-input">
-            <span class="label">Email da loja</span>
-            <span class="val" style="color:var(--text-dim);">gerente@suaconcessionaria.com.br</span>
-          </div>
+          <input
+            type="email"
+            id="leadEmail"
+            name="email"
+            placeholder="gerente@suaconcessionaria.com.br"
+            autocomplete="email"
+            required
+            style="
+              width:100%;
+              background:rgba(255,255,255,0.06);
+              border:1px solid rgba(255,255,255,0.18);
+              border-radius:10px;
+              padding:14px 18px;
+              color:var(--text);
+              font-family:'Manrope',sans-serif;
+              font-size:15px;
+              font-weight:500;
+              outline:none;
+              transition:border-color 0.15s;
+            "
+          >
         </div>
-        <div class="mock-btn" style="white-space:nowrap; cursor:pointer;">Cadastrar minha loja — gratuito →</div>
+        <button type="submit" id="leadBtn" style="
+          white-space:nowrap;
+          background:var(--red);
+          color:#fff;
+          border:none;
+          border-radius:10px;
+          padding:14px 24px;
+          font-family:'Manrope',sans-serif;
+          font-size:15px;
+          font-weight:700;
+          cursor:pointer;
+          transition:opacity 0.15s, transform 0.1s;
+          flex-shrink:0;
+        ">Cadastrar minha loja — gratuito →</button>
       </div>
+      <div id="leadMsg" style="display:none; margin-top:12px; font-size:13px; font-weight:600;"></div>
       <div class="cta-note">Sem cartão de crédito. CNPJ verificado na ativação. Comece a usar no mesmo dia.</div>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -1967,6 +2015,79 @@
     const y = (e.clientY / window.innerHeight - 0.5) * 8;
     phone.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
   });
+
+  // ── Lead capture form ──────────────────────────────────────────────
+  const SUPABASE_URL = 'https://saelhbdtbatnzdypktkr.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhZWxoYmR0YmF0bnpkeXBrdGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MDk1ODMsImV4cCI6MjA5MTQ4NTU4M30.Ckxoo40TCDpEdkx7NWte3bgs4bFCKrzjHxYFg8osB2I';
+
+  const leadForm = document.getElementById('leadForm');
+  const leadBtn  = document.getElementById('leadBtn');
+  const leadMsg  = document.getElementById('leadMsg');
+  const leadEmail = document.getElementById('leadEmail');
+
+  if (leadEmail) {
+    leadEmail.addEventListener('focus', () => {
+      leadEmail.style.borderColor = 'var(--red)';
+    });
+    leadEmail.addEventListener('blur', () => {
+      leadEmail.style.borderColor = 'rgba(255,255,255,0.18)';
+    });
+  }
+
+  if (leadForm) {
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = leadEmail.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showLeadMsg('Por favor, informe um email válido.', false);
+        return;
+      }
+
+      leadBtn.disabled = true;
+      leadBtn.style.opacity = '0.6';
+      leadBtn.textContent = 'Enviando…';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email, source: 'website_cta' })
+        });
+
+        if (res.ok || res.status === 409) {
+          // 409 = já cadastrado (unique constraint) — tratar como sucesso
+          leadForm.querySelector('.cta-form-row').style.display = 'none';
+          showLeadMsg('✓ Recebemos seu contato! Em breve nossa equipe entra em contato para ativar sua loja.', true);
+        } else {
+          const body = await res.text();
+          console.error('Lead error:', res.status, body);
+          showLeadMsg('Algo deu errado. Tente novamente ou escreva para support@thothi.com.br', false);
+          resetBtn();
+        }
+      } catch (err) {
+        console.error('Network error:', err);
+        showLeadMsg('Sem conexão. Verifique sua internet e tente novamente.', false);
+        resetBtn();
+      }
+    });
+  }
+
+  function showLeadMsg(text, success) {
+    leadMsg.textContent = text;
+    leadMsg.style.display = 'block';
+    leadMsg.style.color = success ? 'var(--green)' : '#FF6B6B';
+  }
+
+  function resetBtn() {
+    leadBtn.disabled = false;
+    leadBtn.style.opacity = '1';
+    leadBtn.textContent = 'Cadastrar minha loja — gratuito →';
+  }
 </script>
 
 </body>
