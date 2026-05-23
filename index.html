@@ -1508,7 +1508,7 @@
     <div class="solution-intro reveal">
       <div class="section-tag">02 — A Solução</div>
       <h2 class="section-title">Três cadastros. Matches automáticos. <span class="red">Nenhuma ligação desperdiçada.</span></h2>
-      <p class="section-sub">O CarMatch sabe o que você tem e o que você precisa — e compara com todas as lojas da rede em tempo real.</p>
+      <p class="section-sub">O CarMatch sabe o que você tem e o que você precisa — e compara com todas as lojas da rede automaticamente a cada novo cadastro.</p>
     </div>
 
     <div class="swipe-demo">
@@ -1555,8 +1555,8 @@
       </div>
       <div class="pillar reveal">
         <div class="pillar-ico">🤝</div>
-        <h3>Rede de negociações estruturada, com lojas verificadas por CNPJ</h3>
-        <p>Nenhuma conta anônima, nenhuma loja não identificada. Cada negociação inter-loja tem origem, histórico e contato rastreável.</p>
+        <h3>Rede de negociações estruturada, com lojas verificadas na Receita Federal</h3>
+        <p>O CNPJ de cada loja é validado na Receita Federal no momento do cadastro. Nenhuma conta anônima, nenhum CNPJ inativo. Cada negociação inter-loja tem origem, histórico e contato rastreável.</p>
       </div>
       <div class="pillar reveal">
         <div class="pillar-ico">📊</div>
@@ -1573,7 +1573,7 @@
     <div class="reveal">
       <div class="section-tag">04 — Como funciona</div>
       <h2 class="section-title">Do cadastro ao <span class="red">negócio fechado</span> em 5 etapas.</h2>
-      <p class="section-sub">Sem integração complexa. Sem treinamento longo. Sua loja opera no CarMatch no mesmo dia do cadastro.</p>
+      <p class="section-sub">Sem integração complexa. Sem treinamento longo. Importe seu estoque existente via CSV e opere no CarMatch no mesmo dia do cadastro.</p>
     </div>
 
     <div class="flow-grid">
@@ -1581,15 +1581,15 @@
         <div class="flow-step active" data-step="1">
           <div class="flow-num">1</div>
           <div>
-            <h4>Cadastro da loja verificado automaticamente</h4>
-            <p>CNPJ, razão social e cidade. A verificação acontece em segundos — sem burocracia, sem aprovação manual.</p>
+            <h4>Cadastro da loja verificado na Receita Federal</h4>
+            <p>CNPJ validado direto na Receita Federal em segundos. Lojas com CNPJ inativo ou irregular não têm acesso à rede — sem aprovação manual.</p>
           </div>
         </div>
         <div class="flow-step" data-step="2">
           <div class="flow-num">2</div>
           <div>
             <h4>Cadastro dos veículos disponíveis para negociação</h4>
-            <p>Modelo, ano, KM, câmbio, combustível e preço. Cada veículo entra imediatamente na rede.</p>
+            <p>Cadastre individualmente ou importe todo o seu estoque de uma vez via arquivo CSV. Cada veículo entra imediatamente no motor de comparação da rede.</p>
           </div>
         </div>
         <div class="flow-step" data-step="3">
@@ -1602,23 +1602,23 @@
         <div class="flow-step" data-step="4">
           <div class="flow-num">4</div>
           <div>
-            <h4>Match automático e contínuo</h4>
-            <p>A cada novo cadastro, o algoritmo reavalia toda a rede e atualiza os scores em tempo real.</p>
+            <h4>Match automático a cada novo cadastro</h4>
+            <p>A cada veículo ou intenção cadastrada, o algoritmo compara o item com toda a rede e gera os scores automaticamente — sem nenhuma ação manual.</p>
           </div>
         </div>
         <div class="flow-step" data-step="5">
           <div class="flow-num">5</div>
           <div>
             <h4>Negociação com histórico dentro da plataforma</h4>
-            <p>Matches com score elevado geram notificação imediata. O contato e o histórico ficam registrados — sem depender de memória ou capturas de tela.</p>
+            <p>Matches com score elevado geram notificação push imediata. Cada avanço de status, contato via WhatsApp e nota da equipe fica registrado com responsável e horário — sem depender de memória ou capturas de tela.</p>
           </div>
         </div>
       </div>
 
       <div class="flow-visual reveal">
         <div class="flow-mock" id="flow-mock">
-          <h5>Cadastro da loja verificado automaticamente</h5>
-          <div class="sub">CNPJ, razão social e cidade. Verificação em segundos — sem burocracia.</div>
+          <h5>Cadastro da loja verificado na Receita Federal</h5>
+          <div class="sub">CNPJ validado direto na Receita Federal — CNPJ inativo bloqueia o acesso.</div>
           <div class="mock-input"><span class="label">CNPJ</span><span class="val">12.345.678/0001-99</span></div>
           <div class="mock-input"><span class="label">Nome da Loja</span><span class="val">Loja Premium SP</span></div>
           <div class="mock-input"><span class="label">Cidade</span><span class="val">São Paulo, SP</span></div>
@@ -1813,6 +1813,7 @@
           <li>Veículos ilimitados</li>
           <li>Multi-loja com painel consolidado</li>
           <li>Account manager dedicado</li>
+          <li>Importação assistida do estoque inicial</li>
           <li>Relatórios mensais por loja</li>
           <li>Suporte prioritário — resposta em até 2h úteis</li>
           <li>SLA contratual com uptime garantido</li>
