@@ -16,7 +16,6 @@
 <meta property="og:image"       content="https://carmatch.thothi.app/og-image.png">
 <meta property="og:locale"      content="pt_BR">
 
-<!-- Twitter Card -->
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="CarMatch — Matches automáticos entre concessionárias">
 <meta name="twitter:description" content="Cada oportunidade que sua loja perde vai para o concorrente. CarMatch cruza seu estoque com as buscas de compradores e avisa em segundos.">
@@ -44,7 +43,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -60,7 +58,6 @@
 
   ::selection { background: var(--red); color: #fff; }
 
-  /* Grain overlay for texture */
   body::before {
     content: '';
     position: fixed;
@@ -71,414 +68,129 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 32px;
-  }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
 
   /* ============ NAV ============ */
   nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 18px 32px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     background: rgba(10, 10, 10, 0.7);
     border-bottom: 1px solid var(--border);
   }
-
-  .nav-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
+  .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; text-decoration: none; color: var(--text); }
   .logo span { color: var(--red); }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
-  .nav-links a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--text-muted); }
+  .nav-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
+  @media (max-width: 968px) { .nav-links { display: none; } }
 
-  .nav-pill {
-    background: var(--red-soft);
-    color: var(--red);
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+  /* ============ BUTTONS ============ */
+  .btn {
+    padding: 16px 28px; border-radius: 12px;
+    font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 15px;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid transparent; cursor: pointer; transition: all 0.25s;
   }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
+  .btn-primary {
+    background: var(--red); color: #fff;
+    box-shadow: 0 8px 30px rgba(255, 59, 48, 0.35);
   }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255, 59, 48, 0.5); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+  .btn-ghost:hover { background: var(--bg-card); border-color: var(--text-muted); }
 
   /* ============ HERO ============ */
-  .hero {
-    min-height: 100vh;
-    padding: 140px 0 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
+  .hero { min-height: 100vh; padding: 140px 0 80px; position: relative; overflow: hidden; }
   .hero-bg {
-    position: absolute;
-    top: 0;
-    right: -10%;
-    width: 80%;
-    height: 100%;
+    position: absolute; top: 0; right: -10%; width: 80%; height: 100%;
     background: radial-gradient(ellipse at center, var(--red-glow) 0%, transparent 60%);
-    pointer-events: none;
-    opacity: 0.5;
+    pointer-events: none; opacity: 0.5;
   }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 60px;
-    align-items: center;
-    position: relative;
-  }
-
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; position: relative; }
   .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    padding: 8px 14px;
-    border-radius: 100px;
-    font-family: 'Geist Mono', monospace;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-    animation: fadeUp 0.6s ease 0.1s both;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    padding: 8px 14px; border-radius: 100px;
+    font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--text-muted);
+    margin-bottom: 28px; animation: fadeUp 0.6s ease 0.1s both;
   }
   .hero-tag .dot {
-    width: 6px; height: 6px;
-    background: var(--red);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--red);
-    animation: pulse 2s infinite;
+    width: 6px; height: 6px; background: var(--red); border-radius: 50%;
+    box-shadow: 0 0 8px var(--red); animation: pulse 2s infinite;
   }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   h1.hero-title {
     font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(48px, 7vw, 96px);
-    font-weight: 700;
-    line-height: 0.98;
-    letter-spacing: -0.04em;
-    margin-bottom: 24px;
+    font-size: clamp(48px, 7vw, 96px); font-weight: 700;
+    line-height: 0.98; letter-spacing: -0.04em; margin-bottom: 24px;
     animation: fadeUp 0.8s ease 0.2s both;
   }
-  h1.hero-title .accent {
-    color: var(--red);
-  }
-  h1.hero-title .italic {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-  }
+  h1.hero-title .accent { color: var(--red); }
+  h1.hero-title .italic { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
 
   .hero-sub {
-    font-size: 19px;
-    color: var(--text-muted);
-    max-width: 520px;
-    margin-bottom: 40px;
-    line-height: 1.55;
-    animation: fadeUp 0.8s ease 0.35s both;
+    font-size: 19px; color: var(--text-muted); max-width: 520px;
+    margin-bottom: 40px; line-height: 1.55; animation: fadeUp 0.8s ease 0.35s both;
   }
+  .hero-cta { display: flex; gap: 14px; align-items: center; animation: fadeUp 0.8s ease 0.5s both; flex-wrap: wrap; }
+  .hero-cta-link {
+    font-size: 14px; color: var(--text-muted); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px; padding: 16px 4px;
+    transition: color 0.2s;
+  }
+  .hero-cta-link:hover { color: var(--text); }
 
-  .hero-cta {
-    display: flex;
-    gap: 14px;
-    animation: fadeUp 0.8s ease 0.5s both;
-  }
-
-  .btn {
-    padding: 16px 28px;
-    border-radius: 12px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    transition: all 0.25s;
-  }
-  .btn-primary {
-    background: var(--red);
-    color: #fff;
-    box-shadow: 0 8px 30px rgba(255, 59, 48, 0.35);
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(255, 59, 48, 0.5);
-  }
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border-strong);
-  }
-  .btn-ghost:hover {
-    background: var(--bg-card);
-    border-color: var(--text-muted);
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
   /* ============ PHONE MOCKUP ============ */
-  .phone-stage {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 600px;
-    animation: fadeUp 1s ease 0.4s both;
-  }
-
+  .phone-stage { position: relative; display: flex; justify-content: center; align-items: center; min-height: 600px; animation: fadeUp 1s ease 0.4s both; }
   .phone {
-    position: relative;
-    width: 300px;
-    height: 612px;
+    position: relative; width: 300px; height: 612px;
     background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
-    border-radius: 48px;
-    border: 2px solid #2a2a2a;
-    padding: 12px;
-    box-shadow:
-      0 50px 100px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+    border-radius: 48px; border: 2px solid #2a2a2a; padding: 12px;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
   }
-
-  .phone-screen {
-    width: 100%;
-    height: 100%;
-    background: #000;
-    border-radius: 36px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .notch {
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 28px;
-    background: #000;
-    border-radius: 100px;
-    z-index: 10;
-  }
-
-  .status-bar {
-    padding: 14px 24px 0;
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff;
-    font-family: 'Geist Mono', monospace;
-  }
-
-  .app-content {
-    padding: 50px 20px 20px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 4px 16px;
-  }
-  .app-logo {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-weight: 700;
-    font-size: 17px;
-    letter-spacing: -0.02em;
-  }
+  .phone-screen { width: 100%; height: 100%; background: #000; border-radius: 36px; overflow: hidden; position: relative; }
+  .notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #000; border-radius: 100px; z-index: 10; }
+  .status-bar { padding: 14px 24px 0; display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #fff; font-family: 'Geist Mono', monospace; }
+  .app-content { padding: 50px 20px 20px; height: 100%; display: flex; flex-direction: column; }
+  .app-header { display: flex; justify-content: space-between; align-items: center; padding: 4px 4px 16px; }
+  .app-logo { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
   .app-logo span { color: var(--red); }
-
-  .bell {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-  }
-
-  /* Dashboard match list */
-  .match-section-label {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-    padding: 0 4px;
-  }
-
-  .match-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow: hidden;
-  }
-
-  .match-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .match-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .bell { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .match-section-label { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; padding: 0 4px; }
+  .match-list { flex: 1; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+  .match-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.04); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
+  .match-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .match-dot.red { background: var(--red); box-shadow: 0 0 6px rgba(255,59,48,0.6); }
   .match-dot.orange { background: var(--orange); box-shadow: 0 0 6px rgba(255,149,0,0.6); }
   .match-dot.green { background: var(--green); box-shadow: 0 0 6px rgba(52,199,89,0.6); }
-
-  .match-info {
-    flex: 1;
-    min-width: 0;
-  }
-  .match-car {
-    font-weight: 600;
-    font-size: 12px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .match-loja {
-    color: var(--text-muted);
-    font-size: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .score-badge {
-    background: var(--red-soft);
-    color: var(--red);
-    font-family: 'Geist Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 7px;
-    border-radius: 6px;
-    flex-shrink: 0;
-  }
-
-  /* Tab bar */
-  .tab-bar {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0 4px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    margin-top: auto;
-  }
-  .tab-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    font-size: 18px;
-    opacity: 0.4;
-    cursor: pointer;
-  }
+  .match-info { flex: 1; min-width: 0; }
+  .match-car { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .match-loja { color: var(--text-muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .score-badge { background: var(--red-soft); color: var(--red); font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 600; padding: 3px 7px; border-radius: 6px; flex-shrink: 0; }
+  .tab-bar { display: flex; justify-content: space-around; padding: 10px 0 4px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: auto; }
+  .tab-item { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 18px; opacity: 0.4; }
   .tab-item.active { opacity: 1; color: var(--red); }
-  .tab-item span {
-    font-size: 9px;
-    font-family: 'Geist Mono', monospace;
-    letter-spacing: 0.04em;
-  }
+  .tab-item span { font-size: 9px; font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; }
 
-  /* Floating decorative elements */
   .float-card {
-    position: absolute;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 12px 16px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    font-size: 13px;
-    z-index: 5;
+    position: absolute; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 12px 16px;
+    backdrop-filter: blur(20px); box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    font-size: 13px; z-index: 5;
   }
-  .float-card.match {
-    top: 20%;
-    right: -40px;
-    animation: float 4s ease-in-out infinite;
-  }
-  .float-card.message {
-    bottom: 18%;
-    left: -50px;
-    animation: float 4s ease-in-out infinite 1.5s;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .float-card .icon {
-    margin-right: 6px;
-  }
-  .float-card .small {
-    color: var(--text-muted);
-    font-size: 11px;
-    margin-top: 2px;
-  }
+  .float-card.match { top: 20%; right: -40px; animation: float 4s ease-in-out infinite; }
+  .float-card.message { bottom: 18%; left: -50px; animation: float 4s ease-in-out infinite 1.5s; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .float-card .icon { margin-right: 6px; }
+  .float-card .small { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
 
   @media (max-width: 968px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     .phone-stage { min-height: 500px; }
     .phone { transform: scale(0.85); }
     .float-card.match { right: 0; }
@@ -486,483 +198,153 @@
   }
 
   /* ============ SECTIONS COMMON ============ */
-  section {
-    padding: 120px 0;
-    position: relative;
-  }
+  section { padding: 120px 0; position: relative; }
 
   .section-tag {
-    font-family: 'Geist Mono', monospace;
-    font-size: 12px;
-    color: var(--red);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--red);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
   }
-  .section-tag::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: var(--red);
-  }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--red); }
 
   .section-title {
     font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 28px;
-    max-width: 800px;
+    font-size: clamp(36px, 5vw, 64px); font-weight: 600;
+    line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 28px; max-width: 800px;
   }
-  .section-title .italic {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    font-weight: 400;
-  }
+  .section-title .italic { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
   .section-title .red { color: var(--red); }
+  .section-sub { font-size: 18px; color: var(--text-muted); max-width: 600px; line-height: 1.6; }
 
-  .section-sub {
-    font-size: 18px;
-    color: var(--text-muted);
-    max-width: 600px;
-    line-height: 1.6;
-  }
-
-  /* ============ THE PROBLEM ============ */
-  .problem {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .problem-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 60px;
-  }
-
-  .pain-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
+  /* ============ PROBLEM ============ */
+  .problem { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .pain-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
   .pain-item {
-    display: flex;
-    gap: 16px;
-    padding: 20px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    transition: all 0.3s;
+    display: flex; gap: 16px; padding: 20px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; transition: all 0.3s;
   }
-  .pain-item:hover {
-    border-color: var(--border-strong);
-    transform: translateX(4px);
-  }
-  .pain-icon {
-    width: 36px; height: 36px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    background: var(--red-soft);
-    color: var(--red);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .pain-text {
-    flex: 1;
-  }
-  .pain-text h4 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .pain-text p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-  }
+  .pain-item:hover { border-color: var(--border-strong); transform: translateX(4px); }
+  .pain-icon { width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .pain-text { flex: 1; }
+  .pain-text h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .pain-text p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
 
   .stats-card {
     background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
+    border: 1px solid var(--border); border-radius: 24px;
+    padding: 40px; position: relative; overflow: hidden;
   }
-  .stats-card::before {
-    content: '';
-    position: absolute;
-    top: -50%; right: -50%;
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, var(--red-glow), transparent 60%);
-    opacity: 0.3;
-  }
-
-  .stat-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-  }
+  .stats-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, var(--red-glow), transparent 60%); opacity: 0.3; }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--border); position: relative; }
   .stat-row:last-child { border-bottom: 0; }
+  .stat-label { font-size: 14px; color: var(--text-muted); }
+  .stat-value { font-family: 'Bricolage Grotesque', sans-serif; font-size: 38px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat-value .small { font-size: 16px; color: var(--text-muted); font-weight: 500; }
 
-  .stat-label {
-    font-size: 14px;
-    color: var(--text-muted);
-  }
-  .stat-value {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-  .stat-value .small {
-    font-size: 16px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  @media (max-width: 968px) {
-    .problem-grid { grid-template-columns: 1fr; gap: 40px; }
-  }
+  @media (max-width: 968px) { .problem-grid { grid-template-columns: 1fr; gap: 40px; } }
 
   /* ============ SOLUTION ============ */
-  .solution-intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 80px;
-  }
-  .solution-intro .section-title {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .solution-intro .section-tag {
-    justify-content: center;
-  }
+  .solution-intro { text-align: center; max-width: 800px; margin: 0 auto 80px; }
+  .solution-intro .section-title { margin-left: auto; margin-right: auto; }
+  .solution-intro .section-tag { justify-content: center; }
   .solution-intro .section-tag::before { display: none; }
-  .solution-intro .section-sub {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .swipe-demo {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-    margin-top: 40px;
-  }
-
+  .solution-intro .section-sub { margin-left: auto; margin-right: auto; }
+  .swipe-demo { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 40px; }
   .swipe-step {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 32px;
-    position: relative;
-    transition: all 0.3s;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px; position: relative; transition: all 0.3s;
   }
-  .swipe-step:hover {
-    border-color: var(--red);
-    transform: translateY(-4px);
-  }
-  .step-num {
-    font-family: 'Geist Mono', monospace;
-    color: var(--red);
-    font-size: 13px;
-    margin-bottom: 12px;
-  }
-  .step-icon {
-    font-size: 36px;
-    margin-bottom: 16px;
-  }
-  .step-title {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .step-desc {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  @media (max-width: 768px) {
-    .swipe-demo { grid-template-columns: 1fr; }
-  }
+  .swipe-step:hover { border-color: var(--red); transform: translateY(-4px); }
+  .step-num { font-family: 'Geist Mono', monospace; color: var(--red); font-size: 13px; margin-bottom: 12px; }
+  .step-icon { font-size: 36px; margin-bottom: 16px; }
+  .step-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .step-desc { color: var(--text-muted); font-size: 14px; line-height: 1.55; }
+  @media (max-width: 768px) { .swipe-demo { grid-template-columns: 1fr; } }
 
   /* ============ PILLARS ============ */
-  .pillars {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 60px;
-  }
+  .pillars { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 60px; }
   .pillar {
-    padding: 36px 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    text-align: center;
-    transition: all 0.3s;
+    padding: 36px 28px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 18px; text-align: center; transition: all 0.3s;
   }
-  .pillar:hover {
-    transform: translateY(-6px);
-    border-color: var(--red);
-  }
-  .pillar-ico {
-    width: 56px; height: 56px;
-    margin: 0 auto 20px;
-    background: var(--red-soft);
-    color: var(--red);
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-  }
-  .pillar h3 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .pillar p {
-    color: var(--text-muted);
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  @media (max-width: 768px) {
-    .pillars-grid { grid-template-columns: 1fr 1fr; }
-  }
+  .pillar:hover { transform: translateY(-6px); border-color: var(--red); }
+  .pillar-ico { width: 56px; height: 56px; margin: 0 auto 20px; background: var(--red-soft); color: var(--red); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .pillar h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .pillar p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+  @media (max-width: 768px) { .pillars-grid { grid-template-columns: 1fr 1fr; } }
 
   /* ============ HOW IT WORKS ============ */
-  .flow-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 80px;
-    margin-top: 60px;
-    align-items: start;
-  }
-
-  .flow-list {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .flow-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; margin-top: 60px; align-items: start; }
+  .flow-list { display: flex; flex-direction: column; gap: 4px; }
   .flow-step {
-    display: flex;
-    gap: 20px;
-    padding: 20px 24px;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: all 0.25s;
-    border: 1px solid transparent;
+    display: flex; gap: 20px; padding: 20px 24px; border-radius: 14px;
+    cursor: pointer; transition: all 0.25s; border: 1px solid transparent;
   }
-  .flow-step:hover, .flow-step.active {
-    background: var(--bg-card);
-    border-color: var(--border);
-  }
-  .flow-step.active {
-    border-color: var(--red);
-  }
+  .flow-step:hover, .flow-step.active { background: var(--bg-card); border-color: var(--border); }
+  .flow-step.active { border-color: var(--red); }
   .flow-num {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--bg-alt);
-    color: var(--text-muted);
-    border: 1px solid var(--border);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg-alt); color: var(--text-muted); border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Geist Mono', monospace;
-    font-size: 14px;
-    font-weight: 600;
-    flex-shrink: 0;
+    font-family: 'Geist Mono', monospace; font-size: 14px; font-weight: 600; flex-shrink: 0;
   }
-  .flow-step.active .flow-num {
-    background: var(--red);
-    color: #fff;
-    border-color: var(--red);
-  }
-  .flow-step h4 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .flow-step p {
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-
+  .flow-step.active .flow-num { background: var(--red); color: #fff; border-color: var(--red); }
+  .flow-step h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .flow-step p { color: var(--text-muted); font-size: 13px; }
   .flow-visual {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 48px;
-    min-height: 480px;
-    position: relative;
-    overflow: hidden;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 48px; min-height: 480px;
+    position: relative; overflow: hidden;
   }
-  .flow-visual::before {
-    content: '';
-    position: absolute;
-    top: -100px; right: -100px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, var(--red-glow), transparent 70%);
-    pointer-events: none;
-  }
+  .flow-visual::before { content: ''; position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: radial-gradient(circle, var(--red-glow), transparent 70%); pointer-events: none; }
   .flow-mock {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    position: relative;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; position: relative;
   }
-  .flow-mock h5 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .flow-mock .sub {
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-bottom: 24px;
-  }
+  .flow-mock h5 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .flow-mock .sub { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
   .mock-input {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-    font-size: 13px;
+    background: var(--bg-alt); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 13px;
   }
-  .mock-input .label {
-    color: var(--text-dim);
-    font-size: 11px;
-    font-family: 'Geist Mono', monospace;
-    margin-bottom: 4px;
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .mock-input .val {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .mock-btn {
-    background: var(--red);
-    color: #fff;
-    padding: 14px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 14px;
-    margin-top: 16px;
-  }
-
-  @media (max-width: 968px) {
-    .flow-grid { grid-template-columns: 1fr; gap: 32px; }
-  }
+  .mock-input .label { color: var(--text-dim); font-size: 11px; font-family: 'Geist Mono', monospace; margin-bottom: 4px; display: block; text-transform: uppercase; letter-spacing: 0.06em; }
+  .mock-input .val { color: var(--text); font-weight: 500; }
+  .mock-btn { background: var(--red); color: #fff; padding: 14px; border-radius: 10px; text-align: center; font-weight: 600; font-size: 14px; margin-top: 16px; }
+  @media (max-width: 968px) { .flow-grid { grid-template-columns: 1fr; gap: 32px; } }
 
   /* ============ SCREENS GALLERY ============ */
-  .screens {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-  }
-  .screen-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-  }
+  .screens { background: var(--bg-alt); border-top: 1px solid var(--border); }
+  .screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
   .screen {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 32px 24px;
-    transition: all 0.3s;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 32px 24px; transition: all 0.3s;
   }
-  .screen:hover {
-    transform: translateY(-4px);
-    border-color: var(--red);
-  }
+  .screen:hover { transform: translateY(-4px); border-color: var(--red); }
   .screen-mock {
-    background: var(--bg);
-    border-radius: 16px;
-    padding: 20px;
-    min-height: 380px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    font-size: 13px;
+    background: var(--bg); border-radius: 16px; padding: 20px; min-height: 380px;
+    border: 1px solid var(--border); margin-bottom: 20px; font-size: 13px;
   }
-  .screen h4 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-  .screen p {
-    color: var(--text-muted);
-    font-size: 13px;
-  }
-
+  .screen h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .screen p { color: var(--text-muted); font-size: 13px; }
   .mock-list-item {
-    display: flex;
-    gap: 12px;
-    padding: 12px;
-    background: var(--bg-alt);
-    border-radius: 10px;
-    margin-bottom: 8px;
-    border: 1px solid var(--border);
-    align-items: flex-start;
+    display: flex; gap: 12px; padding: 12px; background: var(--bg-alt);
+    border-radius: 10px; margin-bottom: 8px; border: 1px solid var(--border); align-items: flex-start;
   }
   .avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
+    width: 36px; height: 36px; border-radius: 50%;
     background: linear-gradient(135deg, var(--red), #8B1F1A);
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700;
-    font-size: 13px;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
   }
   .mock-list-item .info { flex: 1; min-width: 0; }
-  .mock-list-item .name {
-    font-weight: 600;
-    font-size: 13px;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .mock-list-item .desc {
-    color: var(--text-muted);
-    font-size: 11px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .mock-list-item .name { font-weight: 600; font-size: 13px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mock-list-item .desc { color: var(--text-muted); font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mock-tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-family: 'Geist Mono', monospace;
-    margin-top: 4px;
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+    font-size: 10px; font-family: 'Geist Mono', monospace; margin-top: 4px;
   }
   .mock-tag.novo { background: rgba(255, 59, 48, 0.15); color: var(--red); }
   .mock-tag.negociacao { background: rgba(255, 149, 0, 0.15); color: var(--orange); }
@@ -971,130 +353,347 @@
   .mock-tag.med { background: rgba(255, 149, 0, 0.15); color: var(--orange); }
   .mock-tag.low { background: rgba(52, 199, 89, 0.15); color: var(--green); }
 
-  /* Dashboard stat cards */
-  .dash-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .dash-stat {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-  }
-  .dash-stat .ds-val {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-  .dash-stat .ds-label {
-    font-size: 9px;
-    color: var(--text-muted);
-    font-family: 'Geist Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
+  .dash-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .dash-stat { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; }
+  .dash-stat .ds-val { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 700; line-height: 1; margin-bottom: 2px; }
+  .dash-stat .ds-label { font-size: 9px; color: var(--text-muted); font-family: 'Geist Mono', monospace; text-transform: uppercase; letter-spacing: 0.04em; }
   .dash-stat .ds-icon { font-size: 14px; margin-bottom: 4px; display: block; }
 
-  /* Notification items */
-  .notif-item {
-    display: flex;
-    gap: 10px;
-    padding: 10px 12px;
-    background: var(--bg-alt);
-    border-radius: 10px;
-    margin-bottom: 8px;
-    border: 1px solid var(--border);
-    align-items: flex-start;
-  }
-  .notif-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    background: var(--red-soft);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
+  .notif-item { display: flex; gap: 10px; padding: 10px 12px; background: var(--bg-alt); border-radius: 10px; margin-bottom: 8px; border: 1px solid var(--border); align-items: flex-start; }
+  .notif-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--red-soft); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
   .notif-body { flex: 1; min-width: 0; }
-  .notif-title {
-    font-weight: 600;
-    font-size: 12px;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .notif-sub {
-    color: var(--text-muted);
-    font-size: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .notif-time {
-    font-size: 10px;
-    color: var(--text-dim);
-    font-family: 'Geist Mono', monospace;
-    flex-shrink: 0;
-  }
+  .notif-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .notif-sub { color: var(--text-muted); font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .notif-time { font-size: 10px; color: var(--text-dim); font-family: 'Geist Mono', monospace; flex-shrink: 0; }
 
-  /* Score list for Matches screen */
-  .score-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 8px;
-  }
-  .score-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
+  .score-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; }
+  .score-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .score-info { flex: 1; min-width: 0; }
   .score-car { font-weight: 600; font-size: 12px; }
-  .score-pct {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 7px;
-    border-radius: 6px;
-    flex-shrink: 0;
-  }
+  .score-pct { font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 6px; flex-shrink: 0; }
   .score-pct.high { background: rgba(255,59,48,0.15); color: var(--red); }
   .score-pct.med { background: rgba(255,149,0,0.15); color: var(--orange); }
   .score-pct.low { background: rgba(52,199,89,0.15); color: var(--green); }
 
-  @media (max-width: 968px) {
-    .screen-grid { grid-template-columns: 1fr; }
+  @media (max-width: 968px) { .screen-grid { grid-template-columns: 1fr; } }
+
+  /* ============ LIVE DEMO (NEW) ============ */
+  .live-demo {
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .live-demo::before {
+    content: '';
+    position: absolute;
+    top: 30%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse at center, var(--red-glow), transparent 65%);
+    opacity: 0.25; pointer-events: none;
+  }
+  .demo-intro { text-align: center; max-width: 760px; margin: 0 auto 60px; }
+  .demo-intro .section-title { margin-left: auto; margin-right: auto; }
+  .demo-intro .section-tag { justify-content: center; }
+  .demo-intro .section-tag::before { display: none; }
+  .demo-intro .section-sub { margin-left: auto; margin-right: auto; }
+
+  .demo-stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 0;
+  }
+  .demo-phone {
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-radius: 40px;
+    border: 2px solid #2a2a2a;
+    padding: 10px;
+    height: 520px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .demo-phone-label {
+    position: absolute;
+    top: -32px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .demo-screen {
+    background: #000;
+    border-radius: 30px;
+    height: 100%;
+    overflow: hidden;
+    padding: 16px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .demo-screen-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .demo-screen-status {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: all 0.3s;
+  }
+  .status-idle { background: rgba(255,255,255,0.06); color: var(--text-muted); }
+  .status-active { background: rgba(255,149,0,0.15); color: var(--orange); }
+  .status-success { background: rgba(52,199,89,0.15); color: var(--green); }
+  .demo-screen-sub {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
   }
 
-  /* ============ BUSINESS MODEL ============ */
-  .biz {
-    background: var(--bg-alt);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+  .demo-row {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s, transform 0.4s;
   }
-  .biz-grid {
+  .demo-row.in { opacity: 1; transform: translateY(0); }
+  .demo-row .lbl {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .demo-row .val { font-size: 13px; font-weight: 600; color: var(--text); }
+
+  .demo-match-result {
+    margin-top: auto;
+    background: linear-gradient(135deg, rgba(255,59,48,0.15) 0%, rgba(255,59,48,0.04) 100%);
+    border: 1px solid rgba(255,59,48,0.3);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s, transform 0.4s cubic-bezier(.16,1,.3,1);
+  }
+  .demo-match-result.in { opacity: 1; transform: scale(1); }
+  .demo-match-result .name { font-size: 12px; font-weight: 600; }
+  .demo-match-result .sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .demo-match-result .pct {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--red);
+  }
+
+  .demo-connector {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted);
+    transition: all 0.4s;
+    position: relative;
+    z-index: 3;
+  }
+  .demo-connector.pulsing {
+    background: var(--red); color: #fff; border-color: var(--red);
+    box-shadow: 0 0 0 10px rgba(255,59,48,0.15), 0 20px 40px rgba(255,59,48,0.4);
+    transform: scale(1.1);
+  }
+  .demo-connector svg { width: 32px; height: 32px; }
+
+  .demo-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 48px;
+  }
+  .demo-control {
+    padding: 12px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .demo-control:hover { border-color: var(--red); }
+  .demo-control.primary {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(255,59,48,0.3);
+  }
+  .demo-control.primary:hover { box-shadow: 0 12px 32px rgba(255,59,48,0.45); transform: translateY(-1px); }
+
+  @media (max-width: 968px) {
+    .demo-stage { grid-template-columns: 1fr; gap: 56px; max-width: 360px; }
+    .demo-phone { height: 480px; }
+    .demo-connector { transform: rotate(90deg); margin: 0 auto; }
+    .demo-connector.pulsing { transform: rotate(90deg) scale(1.1); }
+  }
+
+  /* ============ FOUNDERS PROGRAM (NEW) ============ */
+  .founders { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .founders-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 60px;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    margin-top: 40px;
+    align-items: center;
   }
-  .biz-card {
-    padding: 36px;
+  .founders-benefits { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 12px; }
+  .founders-benefits li {
+    display: flex; gap: 16px;
+    padding: 18px 20px;
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    transition: all 0.3s;
+    border-radius: 14px;
+    transition: all 0.25s;
+  }
+  .founders-benefits li:hover { border-color: var(--red); transform: translateX(4px); }
+  .founders-benefits .ico {
+    width: 36px; height: 36px; flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--red-soft);
+    color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .founders-benefits .txt h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 600; margin-bottom: 3px; }
+  .founders-benefits .txt p { color: var(--text-muted); font-size: 13px; line-height: 1.5; }
+  .founders-benefits .txt p strong { color: var(--red); font-weight: 600; }
+
+  .founders-card {
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .founders-card::before {
+    content: ''; position: absolute;
+    top: -50%; right: -50%;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, var(--red-glow), transparent 60%);
+    opacity: 0.3;
+  }
+  .founders-counter {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .founders-counter .num {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .founders-counter .of {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-family: 'Geist Mono', monospace;
+  }
+  .founders-progress {
+    height: 6px;
+    background: var(--bg);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .founders-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), #FF6B60);
+    width: 0%;
+    transition: width 1.4s cubic-bezier(.16,1,.3,1);
+    box-shadow: 0 0 10px rgba(255,59,48,0.5);
+  }
+  .founders-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    position: relative;
+  }
+  .city-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; position: relative; }
+  .city-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s infinite;
+  }
+  .founders-card .cta-btn {
+    width: 100%;
+    text-align: center;
+    background: var(--red);
+    color: #fff;
+    padding: 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    box-shadow: 0 8px 24px rgba(255,59,48,0.3);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .founders-card .cta-btn:hover { box-shadow: 0 12px 32px rgba(255,59,48,0.45); transform: translateY(-1px); }
+
+  @media (max-width: 968px) { .founders-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  /* ============ BUSINESS MODEL ============ */
+  .biz { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .biz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
+  .biz-card {
+    padding: 36px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 20px; transition: all 0.3s;
   }
   .biz-card.featured {
     border-color: var(--red);
@@ -1103,240 +702,235 @@
   }
   .biz-card.featured::before {
     content: 'RECOMENDADO';
-    position: absolute;
-    top: -10px;
-    right: 24px;
-    background: var(--red);
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-family: 'Geist Mono', monospace;
-    letter-spacing: 0.06em;
+    position: absolute; top: -10px; right: 24px;
+    background: var(--red); color: #fff;
+    padding: 4px 12px; border-radius: 100px;
+    font-size: 10px; font-family: 'Geist Mono', monospace; letter-spacing: 0.06em;
   }
-  .biz-tag {
-    font-family: 'Geist Mono', monospace;
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
-  .biz-price {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    margin-bottom: 4px;
-  }
-  .biz-price .sm {
-    font-size: 16px;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-  .biz-card h3 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .biz-card .desc {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-bottom: 24px;
-    line-height: 1.5;
-  }
-  .biz-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .biz-features li {
-    font-size: 13px;
-    color: var(--text);
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .biz-features li::before {
-    content: '✓';
-    color: var(--red);
-    font-weight: 700;
-  }
+  .biz-tag { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .biz-price { font-family: 'Bricolage Grotesque', sans-serif; font-size: 42px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .biz-price .sm { font-size: 16px; color: var(--text-muted); font-weight: 500; }
+  .biz-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .biz-card .desc { color: var(--text-muted); font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+  .biz-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .biz-features li { font-size: 13px; color: var(--text); display: flex; gap: 10px; align-items: flex-start; }
+  .biz-features li::before { content: '✓'; color: var(--red); font-weight: 700; }
+  @media (max-width: 968px) { .biz-grid { grid-template-columns: 1fr; } }
 
-  @media (max-width: 968px) {
-    .biz-grid { grid-template-columns: 1fr; }
+  /* ============ ENTERPRISE SALES (NEW) ============ */
+  .enterprise {
+    background: var(--bg);
   }
-
-  /* ============ FEEDBACK CTA ============ */
-  .feedback {
-    padding: 140px 0;
-    text-align: center;
+  .enterprise-card {
+    margin-top: 40px;
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+    align-items: center;
     position: relative;
     overflow: hidden;
   }
-  .feedback::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 800px; height: 800px;
-    background: radial-gradient(circle, var(--red-glow), transparent 60%);
-    opacity: 0.3;
-    pointer-events: none;
+  .enterprise-card::before {
+    content: ''; position: absolute;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--red-glow), transparent 65%);
+    opacity: 0.3; pointer-events: none;
   }
-  .feedback-inner {
-    position: relative;
-    max-width: 720px;
-    margin: 0 auto;
+  .ent-features {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px; margin-top: 28px; position: relative;
   }
-  .feedback h2 {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(40px, 6vw, 72px);
-    font-weight: 600;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 24px;
+  .ent-feature {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 13px; color: var(--text-muted);
   }
-  .feedback h2 .italic {
-    font-family: 'Instrument Serif', serif;
-    font-style: italic;
-    color: var(--red);
-    font-weight: 400;
+  .ent-feature::before {
+    content: '✓'; color: var(--red); font-weight: 700; font-size: 14px; flex-shrink: 0;
   }
-  .feedback p {
-    color: var(--text-muted);
-    font-size: 18px;
-    margin-bottom: 40px;
-  }
-
-  .cta-form {
+  .ent-contact {
     background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 40px;
-    margin-top: 40px;
-    text-align: left;
-  }
-
-  .cta-form-row {
-    display: flex;
-    gap: 12px;
-    align-items: flex-end;
-  }
-
-  .cta-form-field {
-    flex: 1;
-  }
-
-  .cta-form-field .mock-input {
-    margin-bottom: 0;
-  }
-
-  .cta-note {
-    color: var(--text-dim);
-    font-size: 12px;
-    font-family: 'Geist Mono', monospace;
-    margin-top: 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    padding: 32px;
+    position: relative;
     text-align: center;
-    letter-spacing: 0.02em;
   }
-
-  @media (max-width: 600px) {
-    .cta-form-row { flex-direction: column; }
+  .ent-contact h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .ent-contact p { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; line-height: 1.5; }
+  .ent-contact .cta-btn {
+    display: block; width: 100%; text-align: center;
+    background: var(--red); color: #fff;
+    padding: 14px; border-radius: 12px; text-decoration: none;
+    font-weight: 600; font-size: 14px;
+    box-shadow: 0 8px 24px rgba(255,59,48,0.3);
+    transition: all 0.2s;
   }
-
-  /* ============ FOOTER ============ */
-  footer {
+  .ent-contact .cta-btn:hover { box-shadow: 0 12px 32px rgba(255,59,48,0.45); transform: translateY(-1px); }
+  .ent-contact .phone-link {
+    font-size: 13px; color: var(--text-muted);
+    margin-top: 14px;
+  }
+  .ent-contact .phone-link strong { color: var(--text); font-family: 'Geist Mono', monospace; }
+  .ent-stats {
+    display: flex; justify-content: space-around;
+    margin-top: 24px; padding-top: 20px;
     border-top: 1px solid var(--border);
-    padding: 40px 0;
-    color: var(--text-dim);
-    font-size: 13px;
   }
-  footer .container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
+  .ent-stats div { text-align: center; }
+  .ent-stats .num {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px; font-weight: 700;
+    display: block; margin-bottom: 2px;
   }
-  footer a {
-    color: var(--text-dim);
-    text-decoration: none;
+  .ent-stats .lab {
+    font-family: 'Geist Mono', monospace;
+    font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  @media (max-width: 968px) {
+    .enterprise-card { grid-template-columns: 1fr; padding: 36px; gap: 36px; }
+    .ent-features { grid-template-columns: 1fr; }
+  }
+
+  /* ============ FAQ (NEW) ============ */
+  .faq { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .faq-list { margin-top: 40px; max-width: 900px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 22px 0;
+  }
+  .faq-item summary {
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--text);
     transition: color 0.2s;
   }
+  .faq-item summary:hover { color: var(--red); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-toggle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .faq-item[open] .faq-toggle {
+    background: var(--red); color: #fff; border-color: var(--red);
+    transform: rotate(45deg);
+  }
+  .faq-item p {
+    margin-top: 14px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 800px;
+  }
+
+  /* ============ TRUST (NEW) ============ */
+  .trust { background: var(--bg); }
+  .trust-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 20px; margin-top: 60px;
+  }
+  .trust-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    transition: all 0.3s;
+  }
+  .trust-card:hover { border-color: var(--red); transform: translateY(-4px); }
+  .trust-ico {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--red-soft);
+    color: var(--red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+  .trust-card h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 17px; font-weight: 600; margin-bottom: 6px;
+  }
+  .trust-card p {
+    color: var(--text-muted); font-size: 13px; line-height: 1.55;
+  }
+  @media (max-width: 968px) { .trust-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .trust-grid { grid-template-columns: 1fr; } }
+
+  /* ============ FEEDBACK CTA ============ */
+  .feedback { padding: 140px 0; text-align: center; position: relative; overflow: hidden; }
+  .feedback::before {
+    content: ''; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); width: 800px; height: 800px;
+    background: radial-gradient(circle, var(--red-glow), transparent 60%);
+    opacity: 0.3; pointer-events: none;
+  }
+  .feedback-inner { position: relative; max-width: 720px; margin: 0 auto; }
+  .feedback h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(40px, 6vw, 72px); font-weight: 600;
+    line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px;
+  }
+  .feedback h2 .italic { font-family: 'Instrument Serif', serif; font-style: italic; color: var(--red); font-weight: 400; }
+  .feedback p { color: var(--text-muted); font-size: 18px; margin-bottom: 40px; }
+
+  .cta-form {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px; margin-top: 40px; text-align: left;
+  }
+  .cta-form-row { display: flex; gap: 12px; align-items: flex-end; }
+  .cta-form-field { flex: 1; }
+  .cta-form-field .mock-input { margin-bottom: 0; }
+  .cta-note {
+    color: var(--text-dim); font-size: 12px;
+    font-family: 'Geist Mono', monospace;
+    margin-top: 16px; text-align: center; letter-spacing: 0.02em;
+  }
+  @media (max-width: 600px) { .cta-form-row { flex-direction: column; } }
+
+  /* ============ FOOTER ============ */
+  footer { border-top: 1px solid var(--border); padding: 40px 0; color: var(--text-dim); font-size: 13px; }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; align-items: center; }
+  footer a { color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
   footer a:hover { color: var(--text-muted); }
 
-  /* Reveal animations on scroll */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.in {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Reveal animations */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
 
-  /* Match animation boxes for step 4 */
-  .match-anim-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 24px 0;
-  }
-  .anim-loja {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 14px 20px;
-    font-family: 'Geist Mono', monospace;
-    font-size: 12px;
-    text-align: center;
-  }
-  .anim-loja .loja-label {
-    color: var(--text-muted);
-    font-size: 10px;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .anim-loja .loja-name {
-    font-weight: 600;
-    color: var(--text);
-    font-size: 13px;
-  }
-  .anim-bolt {
-    font-size: 28px;
-    color: var(--red);
-    animation: pulse 1.5s infinite;
-  }
-  .anim-status {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 12px;
-    font-family: 'Geist Mono', monospace;
-    margin-top: 12px;
-    letter-spacing: 0.04em;
-  }
-  .anim-status span {
-    display: inline-block;
-    animation: pulse 1s infinite;
-  }
+  /* Match animation for step 4 of flow */
+  .match-anim-box { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 24px 0; }
+  .anim-loja { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px; padding: 14px 20px; font-family: 'Geist Mono', monospace; font-size: 12px; text-align: center; }
+  .anim-loja .loja-label { color: var(--text-muted); font-size: 10px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .anim-loja .loja-name { font-weight: 600; color: var(--text); font-size: 13px; }
+  .anim-bolt { font-size: 28px; color: var(--red); animation: pulse 1.5s infinite; }
+  .anim-status { text-align: center; color: var(--text-muted); font-size: 12px; font-family: 'Geist Mono', monospace; margin-top: 12px; letter-spacing: 0.04em; }
+  .anim-status span { display: inline-block; animation: pulse 1s infinite; }
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
-    <div class="logo">Car<span>Match</span></div>
+    <a href="#" class="logo">Car<span>Match</span></a>
     <div class="nav-links">
       <a href="#problema">A Oportunidade</a>
       <a href="#solucao">A Plataforma</a>
       <a href="#como">Como Funciona</a>
-      <a href="#app">Para Gestores</a>
+      <a href="#demo">Match ao Vivo</a>
+      <a href="#fundadores">Fundadores</a>
       <a href="#planos">Planos</a>
     </div>
     <a href="#planos" class="btn btn-primary" style="font-size:13px; padding:9px 18px; border-radius:8px;">Começar agora →</a>
@@ -1360,21 +954,16 @@
           CarMatch conecta quem quer comprar com quem quer vender — sem intermediário, sem leilão, sem grupo de WhatsApp. Cadastre o que você tem e o que você procura. O sistema cruza toda a rede e avisa em segundos.
         </p>
         <div class="hero-cta">
-          <a href="#planos" class="btn btn-primary">
-            Começar agora →
-          </a>
-          <a href="#como" style="font-size:14px; color:var(--text-muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; padding:16px 4px;">Ver demonstração em 90 segundos ↓</a>
+          <a href="#planos" class="btn btn-primary">Começar agora →</a>
+          <a href="#demo" class="hero-cta-link">Ver match acontecer ao vivo ↓</a>
         </div>
       </div>
 
-      <!-- Phone mockup -->
       <div class="phone-stage">
-
         <div class="float-card match">
-          <div><span class="icon">⚡</span> 3 novos matches identificados</div>
-          <div class="small">nos últimos 5 minutos</div>
+          <div><span class="icon">⚡</span> Match encontrado</div>
+          <div class="small">Score 94% — Loja Premium SP</div>
         </div>
-
         <div class="float-card message">
           <div><span class="icon">🚗</span> Inter-loja</div>
           <div class="small">Negócio disponível</div>
@@ -1383,18 +972,13 @@
         <div class="phone">
           <div class="phone-screen">
             <div class="notch"></div>
-            <div class="status-bar">
-              <span>9:41</span>
-              <span>●●●● 5G</span>
-            </div>
+            <div class="status-bar"><span>9:41</span><span>●●●● 5G</span></div>
             <div class="app-content">
               <div class="app-header">
                 <div class="app-logo">Car<span>Match</span></div>
                 <div class="bell">🔔</div>
               </div>
-
               <div class="match-section-label">⚡ Matches</div>
-
               <div class="match-list">
                 <div class="match-row">
                   <div class="match-dot red"></div>
@@ -1421,7 +1005,6 @@
                   <div class="score-badge">72%</div>
                 </div>
               </div>
-
               <div class="tab-bar">
                 <div class="tab-item active">🏠<span>Início</span></div>
                 <div class="tab-item">🚗<span>Estoque</span></div>
@@ -1479,23 +1062,19 @@
 
       <div class="stats-card reveal">
         <div class="stat-row">
-          <div class="stat-label">Negociações entre lojas ocorrem via grupos informais</div>
-          <div class="stat-value">85<span class="small">%</span></div>
+          <div class="stat-label">Lojas que dependem de grupos de WhatsApp para negociar estoque</div>
+          <div class="stat-value" style="font-size:clamp(22px,3vw,36px); line-height:1;">A maioria</div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">Volume de negociações entre lojas por ano (FENABRAVE, 2024)</div>
-          <div class="stat-value">R$<span class="small"> 28bi</span></div>
+          <div class="stat-label">Negociações fechadas sem nenhum histórico rastreável</div>
+          <div class="stat-value" style="font-size:clamp(22px,3vw,36px); line-height:1;">Quase todas</div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">Tempo médio de vendedor em grupos de mensagens por dia</div>
-          <div class="stat-value">3<span class="small">h+</span></div>
-        </div>
-        <div class="stat-row">
-          <div class="stat-label">Gestores que relatam ter perdido negócio por falta de rastreamento</div>
-          <div class="stat-value">67<span class="small">%</span></div>
+          <div class="stat-label">Vendedores que perderam comissão por falta de registro</div>
+          <div class="stat-value" style="font-size:clamp(22px,3vw,36px); line-height:1;">Você conhece um</div>
         </div>
         <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-family:'Geist Mono'; font-size:10px; color:var(--text-dim); letter-spacing:0.04em;">
-          Pesquisa CarMatch com 200+ gestores de concessionárias brasileiras — 2025
+          Um problema que todo gestor de concessionária reconhece — sem precisar de pesquisa para confirmar.
         </div>
       </div>
     </div>
@@ -1555,7 +1134,7 @@
       </div>
       <div class="pillar reveal">
         <div class="pillar-ico">🤝</div>
-        <h3>Rede de negociações estruturada, com lojas verificadas na Receita Federal</h3>
+        <h3>Rede com lojas verificadas na Receita Federal</h3>
         <p>O CNPJ de cada loja é validado na Receita Federal no momento do cadastro. Nenhuma conta anônima, nenhum CNPJ inativo. Cada negociação inter-loja tem origem, histórico e contato rastreável.</p>
       </div>
       <div class="pillar reveal">
@@ -1573,7 +1152,7 @@
     <div class="reveal">
       <div class="section-tag">04 — Como funciona</div>
       <h2 class="section-title">Do cadastro ao <span class="red">negócio fechado</span> em 5 etapas.</h2>
-      <p class="section-sub">Sem integração complexa. Sem treinamento longo. Importe seu estoque existente via CSV e opere no CarMatch no mesmo dia do cadastro.</p>
+      <p class="section-sub">Sem integração complexa. Sem treinamento longo. Importe seu estoque existente via CSV e opere no mesmo dia.</p>
     </div>
 
     <div class="flow-grid">
@@ -1589,7 +1168,7 @@
           <div class="flow-num">2</div>
           <div>
             <h4>Cadastro dos veículos disponíveis para negociação</h4>
-            <p>Cadastre individualmente ou importe todo o seu estoque de uma vez via arquivo CSV. Cada veículo entra imediatamente no motor de comparação da rede.</p>
+            <p>Cadastre individualmente ou importe via CSV. Cada veículo entra imediatamente no motor de comparação da rede.</p>
           </div>
         </div>
         <div class="flow-step" data-step="3">
@@ -1610,7 +1189,7 @@
           <div class="flow-num">5</div>
           <div>
             <h4>Negociação com histórico dentro da plataforma</h4>
-            <p>Matches com score elevado geram notificação push imediata. Cada avanço de status, contato via WhatsApp e nota da equipe fica registrado com responsável e horário — sem depender de memória ou capturas de tela.</p>
+            <p>Matches com score elevado geram notificação push imediata. Cada avanço de status, contato e nota da equipe fica registrado com responsável e horário.</p>
           </div>
         </div>
       </div>
@@ -1638,127 +1217,208 @@
     </div>
 
     <div class="screen-grid">
-      <!-- Screen 1: Dashboard -->
       <div class="screen reveal">
         <div class="screen-mock">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Dashboard</strong>
-            <span style="background:var(--red-soft); color:var(--red); padding:2px 8px; border-radius:100px; font-size:10px; font-family:'Geist Mono';">ao vivo</span>
+            <span style="background:var(--red-soft); color:var(--red); padding:2px 8px; border-radius:100px; font-size:10px; font-family:'Geist Mono';">hoje</span>
           </div>
           <div class="dash-stats">
-            <div class="dash-stat">
-              <span class="ds-icon">🚗</span>
-              <div class="ds-val">12</div>
-              <div class="ds-label">Estoque</div>
-            </div>
-            <div class="dash-stat">
-              <span class="ds-icon">🔍</span>
-              <div class="ds-val">5</div>
-              <div class="ds-label">Buscando</div>
-            </div>
-            <div class="dash-stat">
-              <span class="ds-icon">⚡</span>
-              <div class="ds-val" style="color:var(--red);">8</div>
-              <div class="ds-label">Matches</div>
-            </div>
+            <div class="dash-stat"><span class="ds-icon">🚗</span><div class="ds-val">12</div><div class="ds-label">Estoque</div></div>
+            <div class="dash-stat"><span class="ds-icon">🔍</span><div class="ds-val">5</div><div class="ds-label">Buscando</div></div>
+            <div class="dash-stat"><span class="ds-icon">⚡</span><div class="ds-val" style="color:var(--red);">8</div><div class="ds-label">Matches</div></div>
           </div>
           <div style="font-family:'Geist Mono'; font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Matches recentes</div>
-          <div class="mock-list-item">
-            <div class="info">
-              <div class="name">Honda HR-V 2022</div>
-              <div class="desc">Loja Premium SP</div>
-            </div>
-            <span class="mock-tag novo">94%</span>
-          </div>
-          <div class="mock-list-item">
-            <div class="info">
-              <div class="name">Toyota Corolla 2021</div>
-              <div class="desc">AutoMax Motors</div>
-            </div>
-            <span class="mock-tag negociacao">87%</span>
-          </div>
+          <div class="mock-list-item"><div class="info"><div class="name">Honda HR-V 2022</div><div class="desc">Loja Premium SP</div></div><span class="mock-tag novo">94%</span></div>
+          <div class="mock-list-item"><div class="info"><div class="name">Toyota Corolla 2021</div><div class="desc">AutoMax Motors</div></div><span class="mock-tag negociacao">87%</span></div>
         </div>
         <h4>Dashboard</h4>
-        <p>Situação completa da loja em tempo real. Quantos veículos estão cadastrados, quantas buscas ativas existem e quantos matches aguardam ação — na tela inicial, sem navegação adicional.</p>
+        <p>Situação completa da loja em tempo real. Veículos cadastrados, buscas ativas e matches aguardando ação — na tela inicial, sem navegação adicional.</p>
       </div>
 
-      <!-- Screen 2: Matches -->
       <div class="screen reveal">
         <div class="screen-mock">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Matches</strong>
             <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:100px; font-size:11px; font-family:'Geist Mono';">4 novos</span>
           </div>
-          <div class="score-row">
-            <div class="score-dot" style="background:var(--red);"></div>
-            <div class="score-info">
-              <div class="score-car">Honda HR-V 2022</div>
-              <span class="mock-tag novo">novo</span>
-            </div>
-            <span class="score-pct high">94%</span>
-          </div>
-          <div class="score-row">
-            <div class="score-dot" style="background:var(--red);"></div>
-            <div class="score-info">
-              <div class="score-car">Toyota Corolla 2021</div>
-              <span class="mock-tag novo">novo</span>
-            </div>
-            <span class="score-pct high">87%</span>
-          </div>
-          <div class="score-row">
-            <div class="score-dot" style="background:var(--orange);"></div>
-            <div class="score-info">
-              <div class="score-car">Jeep Compass 2023</div>
-              <span class="mock-tag negociacao">em negociação</span>
-            </div>
-            <span class="score-pct med">72%</span>
-          </div>
-          <div class="score-row">
-            <div class="score-dot" style="background:var(--text-dim);"></div>
-            <div class="score-info">
-              <div class="score-car">VW T-Cross 2020</div>
-              <span class="mock-tag visto">visto</span>
-            </div>
-            <span class="score-pct low">61%</span>
-          </div>
+          <div class="score-row"><div class="score-dot" style="background:var(--red);"></div><div class="score-info"><div class="score-car">Honda HR-V 2022</div><span class="mock-tag novo">novo</span></div><span class="score-pct high">94%</span></div>
+          <div class="score-row"><div class="score-dot" style="background:var(--red);"></div><div class="score-info"><div class="score-car">Toyota Corolla 2021</div><span class="mock-tag novo">novo</span></div><span class="score-pct high">87%</span></div>
+          <div class="score-row"><div class="score-dot" style="background:var(--orange);"></div><div class="score-info"><div class="score-car">Jeep Compass 2023</div><span class="mock-tag negociacao">em negociação</span></div><span class="score-pct med">72%</span></div>
+          <div class="score-row"><div class="score-dot" style="background:var(--text-dim);"></div><div class="score-info"><div class="score-car">VW T-Cross 2020</div><span class="mock-tag visto">visto</span></div><span class="score-pct low">61%</span></div>
         </div>
         <h4>Matches</h4>
         <p>Matches ordenados por relevância, não por data. Filtre por status, loja parceira ou score mínimo. O gestor vê primeiro o que tem maior probabilidade de fechar.</p>
       </div>
 
-      <!-- Screen 3: Notificações -->
       <div class="screen reveal">
         <div class="screen-mock">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
             <strong style="font-family:'Bricolage Grotesque'; font-size:16px;">Notificações</strong>
           </div>
-          <div class="notif-item">
-            <div class="notif-icon">⚡</div>
-            <div class="notif-body">
-              <div class="notif-title">3 novos matches encontrados!</div>
-              <div class="notif-sub">Honda HR-V, Toyota Corolla...</div>
-            </div>
-            <div class="notif-time">agora</div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-icon">🚗</div>
-            <div class="notif-body">
-              <div class="notif-title">Match inter-loja</div>
-              <div class="notif-sub">AutoMax Motors — score 94%</div>
-            </div>
-            <div class="notif-time">5 min</div>
-          </div>
-          <div class="notif-item">
-            <div class="notif-icon" style="background:rgba(52,199,89,0.15);">✓</div>
-            <div class="notif-body">
-              <div class="notif-title">Match atualizado</div>
-              <div class="notif-sub">Jeep Compass — Em negociação</div>
-            </div>
-            <div class="notif-time">ontem</div>
-          </div>
+          <div class="notif-item"><div class="notif-icon">⚡</div><div class="notif-body"><div class="notif-title">3 novos matches encontrados!</div><div class="notif-sub">Honda HR-V, Toyota Corolla...</div></div><div class="notif-time">agora</div></div>
+          <div class="notif-item"><div class="notif-icon">🚗</div><div class="notif-body"><div class="notif-title">Match inter-loja</div><div class="notif-sub">AutoMax Motors — score 94%</div></div><div class="notif-time">5 min</div></div>
+          <div class="notif-item"><div class="notif-icon" style="background:rgba(52,199,89,0.15);">✓</div><div class="notif-body"><div class="notif-title">Match atualizado</div><div class="notif-sub">Jeep Compass — Em negociação</div></div><div class="notif-time">ontem</div></div>
         </div>
         <h4>Notificações</h4>
         <p>Notificações para quem fecha negócio. Novos matches acima do seu limiar de score, atualizações de negociações ativas e alertas de conexões com veículo já disponível.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE DEMO (NEW) -->
+<section class="live-demo" id="demo">
+  <div class="container">
+    <div class="demo-intro reveal">
+      <div class="section-tag">06 — Match Simulado</div>
+      <h2 class="section-title">Veja um match acontecer <span class="italic">em segundos</span>.</h2>
+      <p class="section-sub">Duas lojas cadastram independentemente — um veículo de um lado, uma intenção de compra do outro. O CarMatch cruza as duas pontas e gera o match nos dois aplicativos em segundos.</p>
+    </div>
+
+    <div class="demo-stage reveal">
+      <div class="demo-phone">
+        <div class="demo-phone-label">Loja A · Vendedor</div>
+        <div class="demo-screen">
+          <div class="demo-screen-title">
+            Cadastro de Veículo
+            <span class="demo-screen-status status-idle" id="statusA">Aguardando</span>
+          </div>
+          <div class="demo-screen-sub">Honda · HR-V Touring</div>
+
+          <div class="demo-row" data-phone="a" data-step="1">
+            <div class="lbl">Modelo</div>
+            <div class="val">Honda HR-V Touring</div>
+          </div>
+          <div class="demo-row" data-phone="a" data-step="2">
+            <div class="lbl">Ano · Câmbio</div>
+            <div class="val">2022 · Automático</div>
+          </div>
+          <div class="demo-row" data-phone="a" data-step="3">
+            <div class="lbl">Quilometragem</div>
+            <div class="val">32.400 km</div>
+          </div>
+          <div class="demo-row" data-phone="a" data-step="4">
+            <div class="lbl">Preço</div>
+            <div class="val" style="color:var(--red);">R$ 142.900</div>
+          </div>
+
+          <div class="demo-match-result" data-match="a">
+            <div>
+              <div class="name">AutoMax Motors</div>
+              <div class="sub">Comprador encontrado em SP</div>
+            </div>
+            <div class="pct">94%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-connector" id="connector">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13 17 18 12 13 7"></polyline>
+          <polyline points="6 17 11 12 6 7"></polyline>
+        </svg>
+      </div>
+
+      <div class="demo-phone">
+        <div class="demo-phone-label">Loja B · Comprador</div>
+        <div class="demo-screen">
+          <div class="demo-screen-title">
+            Intenção de Compra
+            <span class="demo-screen-status status-idle" id="statusB">Aguardando</span>
+          </div>
+          <div class="demo-screen-sub">Cliente busca · SUV compacto</div>
+
+          <div class="demo-row" data-phone="b" data-step="1">
+            <div class="lbl">Modelo desejado</div>
+            <div class="val">Honda HR-V / Toyota Corolla Cross</div>
+          </div>
+          <div class="demo-row" data-phone="b" data-step="2">
+            <div class="lbl">Ano mínimo · Câmbio</div>
+            <div class="val">2021 · Automático</div>
+          </div>
+          <div class="demo-row" data-phone="b" data-step="3">
+            <div class="lbl">KM máximo</div>
+            <div class="val">50.000 km</div>
+          </div>
+          <div class="demo-row" data-phone="b" data-step="4">
+            <div class="lbl">Faixa de preço</div>
+            <div class="val" style="color:var(--red);">até R$ 150.000</div>
+          </div>
+
+          <div class="demo-match-result" data-match="b">
+            <div>
+              <div class="name">Loja Premium SP</div>
+              <div class="sub">Honda HR-V 2022 disponível</div>
+            </div>
+            <div class="pct">94%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-controls reveal">
+      <button class="demo-control primary" id="playDemo">▶ Simular Match</button>
+      <button class="demo-control" id="resetDemo">↻ Reiniciar</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDERS PROGRAM (NEW) -->
+<section class="founders" id="fundadores">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:800px; margin:0 auto;">
+      <div class="section-tag" style="justify-content:center;">07 — Programa Fundador</div>
+      <h2 class="section-title" style="margin:0 auto 28px;">As primeiras 50 lojas constroem a rede <span class="italic">com a gente</span>.</h2>
+      <p class="section-sub" style="margin:0 auto;">Sua loja entra antes da rede atingir massa crítica — e sai com vantagens permanentes. Sem desconto. O benefício é ficar travado na tabela de lançamento para sempre.</p>
+    </div>
+
+    <div class="founders-grid">
+      <ul class="founders-benefits reveal">
+        <li>
+          <div class="ico">🔒</div>
+          <div class="txt">
+            <h4>Tabela de lançamento travada</h4>
+            <p>Lojas fundadoras mantêm <strong>R$ 199 / R$ 599 / R$ 999</strong> mesmo após o reajuste para novos entrantes. Trava vitalícia enquanto a assinatura estiver ativa.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">🎯</div>
+          <div class="txt">
+            <h4>Canal direto com o time de produto</h4>
+            <p>Slack dedicado para sugerir funcionalidades. <strong>Você define o roadmap</strong> — as prioridades das próximas releases saem das demandas dos fundadores.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">⭐</div>
+          <div class="txt">
+            <h4>Selo Fundador permanente no perfil</h4>
+            <p>Sinal de credibilidade na rede. Lojas que entrarem depois identificam fundadores como referência — <strong>vantagem competitiva</strong> que novos parceiros não terão.</p>
+          </div>
+        </li>
+        <li>
+          <div class="ico">⚙️</div>
+          <div class="txt">
+            <h4>Onboarding e importação assistidos</h4>
+            <p>Nosso time configura sua conta, importa seu estoque via CSV e treina sua equipe <strong>sem custo adicional</strong>.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="founders-card reveal">
+        <div class="founders-counter">
+          <div>
+            <div class="num" id="founderCount">14</div>
+            <div style="font-size:13px; color:var(--text-muted); margin-top:6px; font-family:'Geist Mono';">lojas fundadoras ativas</div>
+          </div>
+          <div class="of">de 50</div>
+        </div>
+        <div class="founders-progress"><div class="founders-progress-bar" id="founderBar"></div></div>
+
+        <div class="founders-label">Vagas restantes</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:8px; font-family:'Geist Mono';">50 vagas totais · tabela travada para sempre</div>
+
+        <a href="#cta" class="cta-btn">Garantir vaga de fundador →</a>
       </div>
     </div>
   </div>
@@ -1768,7 +1428,7 @@
 <section class="biz" id="planos">
   <div class="container">
     <div class="reveal">
-      <div class="section-tag">06 — Planos</div>
+      <div class="section-tag">08 — Planos</div>
       <h2 class="section-title">Um investimento mensal menor do que uma <span class="red">oportunidade perdida.</span></h2>
       <p class="section-sub">Assinatura mensal, cancelamento a qualquer momento. CNPJ exigido para acesso à rede verificada.</p>
     </div>
@@ -1836,6 +1496,124 @@
         <div style="font-family:'Geist Mono'; font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Histórico completo</div>
         <div style="font-family:'Bricolage Grotesque'; font-size:20px; font-weight:600; margin-bottom:6px;">Cada negociação vira registro permanente</div>
         <div style="color:var(--text-muted); font-size:13px;">Data, partes envolvidas, veículo, score, status e contatos. Exportável para auditoria interna. Nenhuma negociação fica apenas na memória de um vendedor.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTERPRISE SALES MOTION (NEW) -->
+<section class="enterprise" id="grupos">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">09 — Para Grupos de Lojas</div>
+      <h2 class="section-title">Você opera múltiplas lojas? <span class="italic">Vamos conversar.</span></h2>
+      <p class="section-sub">Grupos com 3+ concessionárias têm necessidades específicas que merecem onboarding dedicado. Configuramos o CarMatch para a estrutura do seu grupo antes do go-live.</p>
+    </div>
+
+    <div class="enterprise-card reveal">
+      <div>
+        <div style="font-family:'Bricolage Grotesque'; font-size:24px; font-weight:600; margin-bottom:14px;">Plano Enterprise — R$ 999/mês</div>
+        <div style="color:var(--text-muted); font-size:15px; line-height:1.6;">Painel consolidado multi-loja, política de comissão entre lojas do grupo, importação assistida do estoque e suporte dedicado. Account manager conduz o onboarding e acompanha sua operação.</div>
+
+        <div class="ent-features">
+          <div class="ent-feature">Painel consolidado multi-loja</div>
+          <div class="ent-feature">Importação assistida do estoque</div>
+          <div class="ent-feature">Account Manager dedicado</div>
+          <div class="ent-feature">SLA contratual e uptime garantido</div>
+          <div class="ent-feature">Importação assistida do estoque</div>
+          <div class="ent-feature">Política de comissão configurável</div>
+        </div>
+      </div>
+
+      <div class="ent-contact">
+        <h4>Agende 30 minutos com o time</h4>
+        <p>Vamos entender sua operação e mostrar como o CarMatch se encaixa. Sem pitch, sem pressão.</p>
+        <a href="mailto:support@thothi.com.br?subject=Interesse%20Enterprise%20-%20CarMatch" class="cta-btn">📅 Agendar conversa</a>
+
+        <div class="ent-stats">
+          <div><span class="num">30min</span><span class="lab">Diagnóstico</span></div>
+          <div><span class="num">&lt; 2h</span><span class="lab">SLA suporte</span></div>
+          <div><span class="num">Supabase</span><span class="lab">Infraestrutura</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (NEW) -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">10 — Perguntas Frequentes</div>
+      <h2 class="section-title">Dúvidas comuns <span class="italic">antes de começar</span>.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>O que acontece se a rede ainda não tem muitas lojas na minha cidade?<span class="faq-toggle">+</span></summary>
+        <p>Justamente por isso existe o Programa Fundador. As primeiras lojas em cada cidade recebem tabela travada e ajudam a definir o roadmap. Enquanto a densidade local cresce, você já tem auditoria interna do seu estoque, rastreamento de comissão e relatórios — então o ROI não depende exclusivamente de matches inter-loja desde o dia um.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Como o CarMatch verifica que uma loja é legítima?<span class="faq-toggle">+</span></summary>
+        <p>O CNPJ informado no cadastro é consultado em tempo real na base da Receita Federal. CNPJs inativos, irregulares ou com atividade incompatível com o setor automotivo são bloqueados automaticamente. Nenhuma loja entra na rede sem essa validação.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Tenho um estoque grande. Preciso cadastrar tudo manualmente?<span class="faq-toggle">+</span></summary>
+        <p>Não. Use a importação via CSV: exporte seu estoque do sistema atual como planilha, salve como .csv e importe direto no app. O sistema detecta separadores e colunas automaticamente. No Enterprise, nosso time faz a importação por você sem custo adicional.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Como o CarMatch trata os dados do meu estoque e dos meus clientes?<span class="faq-toggle">+</span></summary>
+        <p>Plataforma LGPD compliant. Dados de estoque ficam visíveis apenas para lojas verificadas na rede. Dados de intenção de compra (informações do cliente) nunca são compartilhados com outras lojas — apenas o resultado do match. Dados em repouso e em trânsito são criptografados.</p>
+      </details>
+      <details class="faq-item">
+        <summary>O que é considerado um "match"? Como o score é calculado?<span class="faq-toggle">+</span></summary>
+        <p>Um match é gerado quando um veículo cadastrado em qualquer loja da rede satisfaz uma intenção de compra registrada em outra (ou na mesma) loja. O score de 0 a 100 é calculado a partir de sete critérios: marca, modelo, ano, quilometragem, preço, câmbio e combustível. Cada critério tem peso configurável no Pro e Enterprise.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Posso cancelar a qualquer momento?<span class="faq-toggle">+</span></summary>
+        <p>Sim. Assinaturas mensais podem ser canceladas a qualquer momento e seguem ativas até o final do ciclo pago. Lojas fundadoras mantêm a tabela travada caso voltem em até 12 meses após o cancelamento.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Quem cadastrou, negociou e fechou — como o sistema rastreia isso?<span class="faq-toggle">+</span></summary>
+        <p>Cada veículo, intenção e mudança de status fica registrado com o usuário responsável, data e hora. Isso elimina a discussão sobre comissão: o sistema mostra exatamente quem originou o lead, quem conduziu a negociação e quem fechou. Exportável para sua folha ou ERP.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Como funciona o suporte?<span class="faq-toggle">+</span></summary>
+        <p>Starter: suporte por e-mail. Pro: prioritário com resposta em até 4h úteis. Enterprise: account manager dedicado com resposta em até 2h úteis. Em todos os planos, a seção de Perguntas Frequentes e o tutorial do app estão disponíveis sem custo.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST (NEW) -->
+<section class="trust" id="seguranca">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">11 — Segurança & Conformidade</div>
+      <h2 class="section-title">Construído para o padrão de uma <span class="italic">operação séria</span>.</h2>
+      <p class="section-sub">Verificação de identidade, proteção de dados e auditoria não são opcionais. São base.</p>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-ico">🛡</div>
+        <h3>LGPD compliant</h3>
+        <p>Tratamento de dados pessoais em conformidade com a Lei Geral de Proteção de Dados. Dados de clientes nunca são compartilhados com outras lojas — apenas o resultado do match.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ico">🔒</div>
+        <h3>Criptografia ponta a ponta</h3>
+        <p>Dados em repouso (AES-256) e em trânsito (TLS 1.3). Backup automatizado com retenção configurável por contrato.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ico">✓</div>
+        <h3>CNPJ verificado na Receita</h3>
+        <p>Validação automática na Receita Federal no cadastro. CNPJ inativo ou em atividade incompatível é bloqueado.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-ico">📋</div>
+        <h3>Trilha de auditoria completa</h3>
+        <p>Todo cadastro, edição, match e mudança de status fica registrado com responsável e timestamp. Exportável para auditoria.</p>
       </div>
     </div>
   </div>
@@ -1915,7 +1693,6 @@
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   // Flow steps interaction
@@ -2009,7 +1786,7 @@
     });
   });
 
-  // Subtle parallax on hero phone
+  // Parallax on hero phone
   const phone = document.querySelector('.phone');
   document.addEventListener('mousemove', (e) => {
     if (!phone) return;
@@ -2018,7 +1795,94 @@
     phone.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg)`;
   });
 
-  // ── Lead capture form ──────────────────────────────────────────────
+  // ── Live demo animation ────────────────────────────────────────
+  const playBtn = document.getElementById('playDemo');
+  const resetDemoBtn = document.getElementById('resetDemo');
+  const connector = document.getElementById('connector');
+  const statusA = document.getElementById('statusA');
+  const statusB = document.getElementById('statusB');
+
+  function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function resetDemo() {
+    document.querySelectorAll('.demo-row').forEach(r => r.classList.remove('in'));
+    document.querySelectorAll('.demo-match-result').forEach(c => c.classList.remove('in'));
+    connector.classList.remove('pulsing');
+    statusA.textContent = 'Aguardando';
+    statusA.className = 'demo-screen-status status-idle';
+    statusB.textContent = 'Aguardando';
+    statusB.className = 'demo-screen-status status-idle';
+  }
+
+  let isPlaying = false;
+  async function playDemo() {
+    if (isPlaying) return;
+    isPlaying = true;
+    resetDemo();
+    await wait(300);
+
+    statusA.textContent = 'Cadastrando';
+    statusA.className = 'demo-screen-status status-active';
+    statusB.textContent = 'Cadastrando';
+    statusB.className = 'demo-screen-status status-active';
+
+    for (let s = 1; s <= 4; s++) {
+      document.querySelectorAll(`.demo-row[data-step="${s}"]`).forEach(r => r.classList.add('in'));
+      await wait(380);
+    }
+    await wait(300);
+
+    connector.classList.add('pulsing');
+    statusA.textContent = 'Cruzando rede';
+    statusB.textContent = 'Cruzando rede';
+    await wait(900);
+
+    document.querySelectorAll('.demo-match-result').forEach(c => c.classList.add('in'));
+    statusA.textContent = 'Match!';
+    statusA.className = 'demo-screen-status status-success';
+    statusB.textContent = 'Match!';
+    statusB.className = 'demo-screen-status status-success';
+
+    await wait(600);
+    connector.classList.remove('pulsing');
+    isPlaying = false;
+  }
+
+  playBtn.addEventListener('click', playDemo);
+  resetDemoBtn.addEventListener('click', resetDemo);
+
+  // Auto-play demo when it enters viewport (first time only)
+  let demoPlayed = false;
+  const demoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !demoPlayed) {
+        demoPlayed = true;
+        setTimeout(playDemo, 600);
+        demoObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  demoObserver.observe(document.querySelector('.demo-stage'));
+
+  // ── Founders progress bar ──────────────────────────────────────
+  const founderBar = document.getElementById('founderBar');
+  const founderCount = document.getElementById('founderCount');
+  const FOUNDER_CURRENT = 0;  // ← UPDATE THIS NUMBER AS YOU ONBOARD LOJAS
+  const FOUNDER_TOTAL = 50;
+  founderCount.textContent = FOUNDER_CURRENT;
+
+  const founderObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const pct = (FOUNDER_CURRENT / FOUNDER_TOTAL) * 100;
+        founderBar.style.width = pct + '%';
+        founderObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  founderObserver.observe(founderBar);
+
+  // ── Lead capture form ──────────────────────────────────────
   const SUPABASE_URL = 'https://saelhbdtbatnzdypktkr.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhZWxoYmR0YmF0bnpkeXBrdGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5MDk1ODMsImV4cCI6MjA5MTQ4NTU4M30.Ckxoo40TCDpEdkx7NWte3bgs4bFCKrzjHxYFg8osB2I';
 
@@ -2028,12 +1892,8 @@
   const leadEmail = document.getElementById('leadEmail');
 
   if (leadEmail) {
-    leadEmail.addEventListener('focus', () => {
-      leadEmail.style.borderColor = 'var(--red)';
-    });
-    leadEmail.addEventListener('blur', () => {
-      leadEmail.style.borderColor = 'rgba(255,255,255,0.18)';
-    });
+    leadEmail.addEventListener('focus', () => { leadEmail.style.borderColor = 'var(--red)'; });
+    leadEmail.addEventListener('blur', () => { leadEmail.style.borderColor = 'rgba(255,255,255,0.18)'; });
   }
 
   if (leadForm) {
@@ -2044,11 +1904,9 @@
         showLeadMsg('Por favor, informe um email válido.', false);
         return;
       }
-
       leadBtn.disabled = true;
       leadBtn.style.opacity = '0.6';
       leadBtn.textContent = 'Enviando…';
-
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
           method: 'POST',
@@ -2060,9 +1918,7 @@
           },
           body: JSON.stringify({ email, source: 'website_cta' })
         });
-
         if (res.ok || res.status === 409) {
-          // 409 = já cadastrado (unique constraint) — tratar como sucesso
           leadForm.querySelector('.cta-form-row').style.display = 'none';
           showLeadMsg('✓ Recebemos seu contato! Em breve nossa equipe entra em contato para ativar sua loja.', true);
         } else {
@@ -2084,7 +1940,6 @@
     leadMsg.style.display = 'block';
     leadMsg.style.color = success ? 'var(--green)' : '#FF6B6B';
   }
-
   function resetBtn() {
     leadBtn.disabled = false;
     leadBtn.style.opacity = '1';
