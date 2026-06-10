@@ -312,10 +312,11 @@
       <ul>
         <li><strong>Dados cadastrais pessoais:</strong> nome completo, endereço de email e telefone do responsável pela conta na loja.</li>
         <li><strong>Dados da pessoa jurídica:</strong> CNPJ, razão social, nome fantasia, endereço comercial e cidade de operação.</li>
-        <li><strong>Dados de uso da plataforma:</strong> veículos cadastrados no estoque (marca, modelo, ano, quilometragem, preço, câmbio, combustível), intenções de compra registradas e matches gerados pelo algoritmo.</li>
+        <li><strong>Dados de uso da plataforma:</strong> veículos cadastrados no estoque (marca, modelo, ano, quilometragem, preço, câmbio, combustível), fotos dos veículos enviadas pela loja, intenções de compra registradas e matches gerados pelo algoritmo.</li>
+        <li><strong>Dados de clientes da loja (opcionais):</strong> nome e contato (telefone/email) do cliente final vinculado a um veículo ou intenção de compra, quando informados pela loja. Esses dados são privados de cada loja: nunca são exibidos a outras lojas da rede nem utilizados pelo CarMatch para qualquer outra finalidade. A loja é responsável por obter o consentimento do seu cliente para esse registro (LGPD art. 7º).</li>
         <li><strong>Dados técnicos:</strong> token de dispositivo para envio de notificações push, endereço IP de acesso, timestamps de criação e atualização de registros, e logs de sessão para fins de segurança.</li>
       </ul>
-      <p>Não coletamos dados sensíveis conforme definição do art. 5º, II da LGPD. Não coletamos dados de clientes finais das concessionárias.</p>
+      <p>Não coletamos dados sensíveis conforme definição do art. 5º, II da LGPD.</p>
     </div>
 
     <!-- 3. Base legal -->
@@ -353,7 +354,7 @@
       <ul>
         <li><strong>Entre lojas na plataforma:</strong> quando ocorre um match, as lojas envolvidas visualizam apenas o nome da loja parceira, a cidade e o canal de contato comercial (email ou telefone da loja) cadastrado no perfil público. Dados pessoais do responsável pela conta não são expostos automaticamente.</li>
         <li><strong>Provedores de infraestrutura:</strong> utilizamos a Supabase (PostgreSQL gerenciado) para armazenamento de dados. A Supabase atua como operadora de dados conforme LGPD, sob contrato de proteção de dados adequado.</li>
-        <li><strong>Processador de pagamentos:</strong> dados de cobrança são tratados diretamente pelo gateway de pagamento contratado, que opera sob suas próprias políticas de privacidade e conformidade PCI-DSS.</li>
+        <li><strong>Processador de pagamentos:</strong> as assinaturas são contratadas e cobradas exclusivamente pela Apple, por meio de compra dentro do aplicativo (App Store). O CarMatch não coleta nem armazena dados de cartão de crédito; recebemos da Apple apenas a confirmação da assinatura ativa e o identificador da transação, necessários para liberar o plano contratado. O tratamento dos dados de pagamento é regido pela política de privacidade da Apple.</li>
         <li><strong>Autoridades públicas:</strong> quando exigido por ordem judicial, regulatória ou legal devidamente fundamentada.</li>
       </ul>
     </div>
