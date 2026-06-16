@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/dashboard", "destination": "https://carmatch-website.vercel.app/" },
+    { "source": "/dashboard/", "destination": "https://carmatch-website.vercel.app/" },
+    { "source": "/dashboard/:path*", "destination": "https://carmatch-website.vercel.app/:path*" }
+  ]
+}
