@@ -1408,15 +1408,15 @@
       <div class="founders-card reveal">
         <div class="founders-counter">
           <div>
-            <div class="num" id="founderCount">14</div>
+            <div class="num" id="founderCount">0</div>
             <div style="font-size:13px; color:var(--text-muted); margin-top:6px; font-family:'Geist Mono';">lojas fundadoras ativas</div>
           </div>
-          <div class="of">de 50</div>
+          <div class="of">de 10</div>
         </div>
         <div class="founders-progress"><div class="founders-progress-bar" id="founderBar"></div></div>
 
         <div class="founders-label">Vagas restantes</div>
-        <div style="font-size:13px; color:var(--text-muted); margin-top:8px; font-family:'Geist Mono';">50 vagas totais · tabela travada para sempre</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:8px; font-family:'Geist Mono';">10 vagas totais · tabela travada para sempre</div>
 
         <a href="#cta" class="cta-btn">Garantir vaga de fundador →</a>
       </div>
@@ -1856,7 +1856,7 @@
   const founderBar = document.getElementById('founderBar');
   const founderCount = document.getElementById('founderCount');
   const FOUNDER_CURRENT = 0;  // ← UPDATE THIS NUMBER AS YOU ONBOARD LOJAS
-  const FOUNDER_TOTAL = 50;
+  const FOUNDER_TOTAL = 10;
   founderCount.textContent = FOUNDER_CURRENT;
 
   const founderObserver = new IntersectionObserver((entries) => {
