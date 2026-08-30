@@ -1,15 +1,40 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "carmatch.thothi.app"
+        }
+      ],
+      "destination": "https://matchmotorsbr.com/",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "carmatch.thothi.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "carmatch.thothi.app"
+        }
+      ],
       "destination": "https://matchmotorsbr.com/:path*",
       "permanent": false
     }
   ],
   "rewrites": [
-    { "source": "/dashboard", "destination": "https://carmatch-website.vercel.app/" },
-    { "source": "/dashboard/", "destination": "https://carmatch-website.vercel.app/" },
-    { "source": "/dashboard/:path*", "destination": "https://carmatch-website.vercel.app/:path*" }
+    {
+      "source": "/dashboard",
+      "destination": "https://carmatch-website.vercel.app/"
+    },
+    {
+      "source": "/dashboard/",
+      "destination": "https://carmatch-website.vercel.app/"
+    },
+    {
+      "source": "/dashboard/:path*",
+      "destination": "https://carmatch-website.vercel.app/:path*"
+    }
   ]
 }
