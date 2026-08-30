@@ -144,7 +144,7 @@ h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
 .bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
 
 /* ---- Planos ---- */
-.plans{display:grid;grid-template-columns:1fr 1.25fr;gap:22px;margin-top:44px;align-items:start}
+.plans{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;margin-top:44px;align-items:start}
 .plan{border:1px solid var(--line);border-radius:20px;padding:30px;background:#FFFDFC}
 .plan.hi{border:2px solid var(--ink);position:relative}
 .plan .tag{position:absolute;top:-12px;left:30px;background:var(--ink);color:var(--paper);
@@ -511,24 +511,12 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
 <section id="planos">
   <div class="wrap">
     <p class="eyebrow">07 — Planos</p>
-    <h2>A rede é o produto. É ela que o Pro abre.</h2>
-    <p class="lead">Sem assinatura você usa o MatchMotors para o seu próprio pátio. Os
-      matches entre lojas — que é o motivo de tudo isto existir — vêm com o Pro.</p>
+    <h2>Um preço por vendedor, e a rede inteira junto.</h2>
+    <p class="lead">O MatchMotors é assinatura. O que muda é o tamanho da sua equipe —
+      e, acima de dez vendedores ou com mais de uma loja no grupo, a conversa vira
+      Corporate.</p>
 
     <div class="plans">
-      <div class="plan">
-        <h3>Sem plano</h3>
-        <div class="price">R$ 0<small> /mês</small></div>
-        <ul>
-          <li>Até 9 veículos no estoque</li>
-          <li>Até 20 intenções ativas</li>
-          <li>Você e mais 1 vendedor</li>
-          <li>Cadastro pela placa e tabela FIPE</li>
-          <li>Matches dentro da sua própria loja</li>
-          <li class="no">Sem matches com outras lojas</li>
-        </ul>
-      </div>
-
       <div class="plan hi">
         <span class="tag">A rede inteira</span>
         <h3>MatchMotors&nbsp;Pro</h3>
@@ -537,6 +525,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
         <ul>
           <li><strong>Matches com todas as lojas parceiras</strong></li>
           <li>Estoque e intenções sem limite</li>
+          <li>Cadastro pela placa e tabela FIPE</li>
           <li>Reserva, repasse e comissão registrada</li>
           <li>Importação por planilha</li>
           <li>Relatório mensal e ranking de vendedores</li>
@@ -560,6 +549,22 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
           </table>
         </div>
       </div>
+
+      <div class="plan">
+        <h3>Corporate</h3>
+        <div class="price" style="font-size:30px">Sob consulta</div>
+        <ul>
+          <li>Acima de 10 vendedores</li>
+          <li>Mais de uma loja no mesmo grupo</li>
+          <li>Tudo do Pro, sem teto de assentos</li>
+          <li>Condição fechada caso a caso</li>
+        </ul>
+        <p style="font-size:15px;color:rgba(20,17,16,.66);margin-top:20px;line-height:1.55">
+          Não é assinatura de loja de aplicativos: a gente conversa, entende o
+          tamanho do grupo e fecha a condição.</p>
+        <a class="btn btn-ghost" style="margin-top:18px;width:100%"
+           href="mailto:support@thothi.com.br?subject=MatchMotors%20Corporate">Falar com a gente</a>
+      </div>
     </div>
 
     <!-- Exigência da App Store (diretriz 3.1.2): título, duração, preço e
@@ -575,6 +580,8 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
       Ajustes do iPhone. O gerenciamento e o cancelamento são feitos na sua conta Apple, em
       Ajustes → seu nome → Assinaturas. O preço exato aparece dentro do app antes da
       confirmação.<br><br>
+      Sem assinatura ativa — antes de assinar ou depois de cancelar — o app continua
+      abrindo, limitado ao seu próprio pátio e sem matches com outras lojas.<br><br>
       <a href="/termos.html">Termos de Uso</a> · <a href="/privacidade.html">Política de Privacidade</a>
     </p>
 

@@ -58,8 +58,17 @@ Cada afirmação desta página foi conferida contra o código antes de entrar.
 Duas não sobreviveram e **não devem voltar**:
 
 - **“Criptografia ponta a ponta”** — não é o que a arquitetura faz.
-- **“Comece de graça”** como chamada — sem assinatura não há match entre lojas,
-  que é o produto. A página diz isso com todas as letras.
+- **Plano gratuito** — não existe. A oferta é **Pro** (assinatura, 3 a 10
+  vendedores) ou **Corporate** (sob consulta, acima disso ou com mais de uma
+  loja no grupo).
+
+  ⚠️ Eu já errei isto uma vez: montei um card “Sem plano · R$ 0/mês” a partir do
+  enum `starter` do app. Mas o próprio código diz que `starter` **não é mais
+  vendido** — é o estado “ainda não assinou / assinatura expirou”, e o rótulo
+  dele no app é “Sem plano” por isso. Estado degradado não é plano, e não vai
+  na tabela de preços. O que acontece sem assinatura ativa está no rodapé do
+  bloco de planos, em uma linha, porque o lojista precisa saber — não porque é
+  oferta.
 
 ### ⚠️ O `.storekit` NÃO é fonte para afirmação comercial
 
