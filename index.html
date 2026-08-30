@@ -144,9 +144,23 @@ h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
 .bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
 
 /* ---- Planos ---- */
-.plans{display:grid;grid-template-columns:1.25fr 1fr;gap:22px;margin-top:44px;align-items:start}
-.plan{border:1px solid var(--line);border-radius:20px;padding:30px;background:#FFFDFC}
-.plan.hi{border:2px solid var(--ink);position:relative}
+/* ⚠️ SIMETRIA: os dois cards têm o MESMO tamanho. Era `align-items:start`,
+   e o Pro — que carregava uma tabela de 8 preços de assento — ficava quase
+   o dobro do Corporativo. Grid em stretch resolve a altura; o
+   `margin-top:auto` do .plan-cta ancora os dois botões na mesma linha de
+   base, que é o que o olho lê como "mesmo tamanho".
+   Não reintroduzir a tabela: a faixa de preço vive na lista e no bloco
+   legal, que é onde a diretriz 3.1.2 da Apple exige que ela esteja. */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px;align-items:stretch}
+.plan{border:1px solid var(--line);border-radius:20px;padding:30px;background:#FFFDFC;
+      display:flex;flex-direction:column}
+.plan-cta{margin-top:auto;width:100%;padding-top:14px;padding-bottom:14px}
+.plan ul + .plan-cta,.plan p + .plan-cta{margin-top:auto}
+/* O destaque do Pro é um contorno INTERNO, não uma borda mais grossa:
+   borda de 2px contra 1px do Corporativo deixava as duas caixas com
+   modelos diferentes e os dois botões desalinhados em 1px. Mesmo aro,
+   mesmo peso visual, simetria exata. */
+.plan.hi{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);position:relative}
 .plan .tag{position:absolute;top:-12px;left:30px;background:var(--ink);color:var(--paper);
            font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
            padding:5px 11px;border-radius:99px}
@@ -170,11 +184,6 @@ h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
 .plan.corp li::before{border-left-color:#003399;border-bottom-color:#003399}
 .btn-azul{background:#003399;color:#FFF}
 .btn-azul:hover{background:#00256F}
-.seats{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
-.seats table{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
-.seats th,.seats td{padding:7px 0;text-align:left;border-bottom:1px solid var(--line)}
-.seats th{font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--steel);font-weight:700}
-.seats td:last-child,.seats th:last-child{text-align:right;font-weight:700}
 .legal{margin-top:26px;font-size:13.5px;line-height:1.62;color:rgba(20,17,16,.58);max-width:74ch}
 .legal a{color:var(--red-text);font-weight:600}
 
@@ -343,6 +352,16 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
   font-weight:700;letter-spacing:.02em;background:rgba(0,51,153,.1);color:#003399;
   opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease}
 .platefield.mm-done .chip{opacity:1;transform:none}
+
+/* Impressão e qualquer render fora da viewport (PDF, captura automática):
+   o revelar por view() mantém o estado inicial — opacidade 0 — enquanto o
+   elemento não "entrou". Num contexto sem rolagem real isso sai em branco.
+   Aqui a página é sempre o estado final. */
+@media print{
+  *,*::before,*::after{animation:none !important;transition:none !important;
+    opacity:1 !important;transform:none !important}
+  .platefield .caret{display:none}
+}
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
@@ -671,25 +690,12 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
           <li>Reserva, repasse e comissão registrada</li>
           <li>Importação por planilha</li>
           <li>Relatório mensal e ranking de vendedores</li>
-          <li>De 3 a 10 vendedores, +R$ 50 por vendedor</li>
+          <li>De 3 a 10 vendedores — <strong>+R$ 50/mês</strong> por vendedor, até R$ 949,90</li>
           <li>Cancele quando quiser, pela conta Apple</li>
         </ul>
 
-        <div class="seats">
-          <table>
-            <thead><tr><th>Vendedores</th><th>Por mês</th></tr></thead>
-            <tbody>
-              <tr><td>3</td><td>R$ 599,90</td></tr>
-              <tr><td>4</td><td>R$ 649,90</td></tr>
-              <tr><td>5</td><td>R$ 699,90</td></tr>
-              <tr><td>6</td><td>R$ 749,90</td></tr>
-              <tr><td>7</td><td>R$ 799,90</td></tr>
-              <tr><td>8</td><td>R$ 849,90</td></tr>
-              <tr><td>9</td><td>R$ 899,90</td></tr>
-              <tr><td>10</td><td>R$ 949,90</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <a class="btn btn-primary plan-cta" href="https://apps.apple.com/br/app/id6773832088"
+           target="_blank" rel="noopener">Começar os 7 dias grátis</a>
       </div>
 
       <div class="plan corp">
@@ -704,7 +710,8 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
         <p style="font-size:15px;color:rgba(20,17,16,.66);margin-top:20px;line-height:1.55">
           Não é assinatura de loja de aplicativos: a gente conversa, entende o
           tamanho do grupo e fecha a condição.</p>
-        <a class="btn btn-azul" style="margin-top:18px;width:100%"
+        <div style="height:18px"></div>
+        <a class="btn btn-azul plan-cta"
            href="mailto:contato@matchmotorsbr.com?subject=MatchMotors%20Corporativo">Falar com a gente</a>
       </div>
     </div>
@@ -727,7 +734,6 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
       <a href="/termos.html">Termos de Uso</a> · <a href="/privacidade.html">Política de Privacidade</a>
     </p>
 
-    <div style="margin-top:34px"><a class="btn btn-primary" href="https://apps.apple.com/br/app/id6773832088" target="_blank" rel="noopener">Baixar na App Store</a></div>
   </div>
 </section>
 
