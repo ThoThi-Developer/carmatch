@@ -55,9 +55,19 @@ python3 -m http.server 4321 --directory /Users/thomascrosara/Developer/carmatch-
 ## Nada aqui pode prometer o que o app não faz
 
 Cada afirmação desta página foi conferida contra o código antes de entrar.
-Três não sobreviveram à conferência e **não devem voltar**:
+Duas não sobreviveram e **não devem voltar**:
 
-- **“7 dias grátis”** — não existe oferta introdutória em nenhum dos 8 SKUs.
 - **“Criptografia ponta a ponta”** — não é o que a arquitetura faz.
 - **“Comece de graça”** como chamada — sem assinatura não há match entre lojas,
   que é o produto. A página diz isso com todas as letras.
+
+### ⚠️ O `.storekit` NÃO é fonte para afirmação comercial
+
+`Configuration.storekit` mostra `introductoryOffer: null` nos 8 SKUs. **Isso não
+significa que o trial não existe** — o arquivo é fixture de teste local e não
+espelha o App Store Connect. O trial de **7 dias existe** desde 21-jun-2026,
+confirmado por Thomas direto no ASC (“Free for the first week”).
+
+Este erro já foi cometido duas vezes (commit `b3d16ec` e de novo em 30-ago-2026,
+por mim). Para preço, trial e qualquer promessa comercial, **a fonte é o App
+Store Connect** — nunca o fixture.
