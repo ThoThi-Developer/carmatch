@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Política de Privacidade — CarMatch</title>
+<title>Política de Privacidade — MatchMotors</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0A0A0A;
-    --bg-alt: #111111;
-    --bg-card: #161616;
-    --red: #FF3B30;
-    --red-soft: rgba(255, 59, 48, 0.12);
-    --red-glow: rgba(255, 59, 48, 0.35);
-    --text: #F4F4F4;
-    --text-muted: #8E8E93;
-    --text-dim: #5A5A5C;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.18);
+    --bg: #0D0A09;
+    --bg-alt: #141110;
+    --bg-card: #191413;
+    --red: #C42019;
+    --red-soft: rgba(196, 32, 25, 0.14);
+    --red-glow: rgba(196, 32, 25, 0.35);
+    --text: #F1EDEA;
+    --text-muted: #9A928C;
+    --text-dim: #6E6560;
+    --border: rgba(241, 237, 234, 0.10);
+    --border-strong: rgba(241, 237, 234, 0.20);
     --green: #34C759;
     --orange: #FF9500;
   }
@@ -30,7 +31,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Archivo', system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
@@ -75,14 +76,20 @@
     align-items: center;
   }
   .logo {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-decoration: none;
     color: var(--text);
   }
-  .logo span { color: var(--red); }
+  /* Lockup da marca — mesma regra do site: uma palavra, skew de 9° no
+     conjunto, "Match" claro e "Motors" vermelho, nunca trocados. */
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .wm { display:inline-flex; transform:skewX(-9deg); font-weight:800;
+              font-stretch:104%; letter-spacing:-.032em; line-height:1; }
+  .logo .wm .a { color:#EDE7E4; }
+  .logo .wm .b { color:#C42019; }
   .nav-back {
     font-size: 14px;
     color: var(--text-muted);
@@ -117,7 +124,7 @@
     background: var(--red);
   }
   .page-title {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;
     line-height: 1.05;
@@ -149,7 +156,7 @@
   }
 
   .legal-section h2 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -271,7 +278,14 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">Car<span>Match</span></a>
+    <a href="/" class="logo" aria-label="MatchMotors">
+      <svg viewBox="0 0 200 130" width="42" aria-hidden="true" style="flex:0 0 auto">
+        <rect x="11" y="11" width="178" height="108" rx="20" fill="none" stroke="#DAD2CD" stroke-width="15"/>
+        <path d="M0 56 V0 H14 L31 26 L48 0 H62 V56 H48 V22 L31 46 L14 22 V56 Z" fill="#DAD2CD" transform="translate(35 37)"/>
+        <path d="M0 56 V0 H14 L31 26 L48 0 H62 V56 H48 V22 L31 46 L14 22 V56 Z" fill="#C42019" transform="translate(103 37)"/>
+      </svg>
+      <span class="wm"><span class="a">Match</span><span class="b">Motors</span></span>
+    </a>
     <a href="index.html" class="nav-back">← Voltar ao início</a>
   </div>
 </nav>
@@ -295,7 +309,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">01</span> Quem somos</h2>
       <p>
-        O CarMatch é uma plataforma B2B desenvolvida e operada pela <strong>ThoThi Technologies</strong> (razão social a ser registrada), voltada exclusivamente para pessoas jurídicas — concessionárias e revendedores de veículos com CNPJ ativo.
+        O MatchMotors é uma plataforma B2B desenvolvida e operada pela <strong>ThoThi Technologies</strong> (razão social a ser registrada), voltada exclusivamente para pessoas jurídicas — concessionárias e revendedores de veículos com CNPJ ativo.
       </p>
       <p>
         Nossa plataforma conecta concessionárias por meio de um algoritmo de match entre estoque disponível e intenções de compra cadastradas por outras lojas da rede, viabilizando o repasse inter-dealer de forma organizada, rastreável e eficiente.
@@ -313,7 +327,7 @@
         <li><strong>Dados cadastrais pessoais:</strong> nome completo, endereço de email e telefone do responsável pela conta na loja.</li>
         <li><strong>Dados da pessoa jurídica:</strong> CNPJ, razão social, nome fantasia, endereço comercial e cidade de operação.</li>
         <li><strong>Dados de uso da plataforma:</strong> veículos cadastrados no estoque (marca, modelo, ano, quilometragem, preço, câmbio, combustível), fotos dos veículos enviadas pela loja, intenções de compra registradas e matches gerados pelo algoritmo.</li>
-        <li><strong>Dados de clientes da loja (opcionais):</strong> nome e contato (telefone/email) do cliente final vinculado a um veículo ou intenção de compra, quando informados pela loja. Esses dados são privados de cada loja: nunca são exibidos a outras lojas da rede nem utilizados pelo CarMatch para qualquer outra finalidade. A loja é responsável por obter o consentimento do seu cliente para esse registro (LGPD art. 7º).</li>
+        <li><strong>Dados de clientes da loja (opcionais):</strong> nome e contato (telefone/email) do cliente final vinculado a um veículo ou intenção de compra, quando informados pela loja. Esses dados são privados de cada loja: nunca são exibidos a outras lojas da rede nem utilizados pelo MatchMotors para qualquer outra finalidade. A loja é responsável por obter o consentimento do seu cliente para esse registro (LGPD art. 7º).</li>
         <li><strong>Dados técnicos:</strong> token de dispositivo para envio de notificações push, endereço IP de acesso, timestamps de criação e atualização de registros, e logs de sessão para fins de segurança.</li>
       </ul>
       <p>Não coletamos dados sensíveis conforme definição do art. 5º, II da LGPD.</p>
@@ -349,12 +363,12 @@
     <div class="legal-section">
       <h2><span class="sec-num">05</span> Compartilhamento de dados</h2>
       <p>
-        O CarMatch não vende, aluga nem cede dados pessoais a terceiros para fins comerciais. O compartilhamento é restrito ao estritamente necessário para a operação do serviço:
+        O MatchMotors não vende, aluga nem cede dados pessoais a terceiros para fins comerciais. O compartilhamento é restrito ao estritamente necessário para a operação do serviço:
       </p>
       <ul>
         <li><strong>Entre lojas na plataforma:</strong> quando ocorre um match, as lojas envolvidas visualizam apenas o nome da loja parceira, a cidade e o canal de contato comercial (email ou telefone da loja) cadastrado no perfil público. Dados pessoais do responsável pela conta não são expostos automaticamente.</li>
         <li><strong>Provedores de infraestrutura:</strong> utilizamos a Supabase (PostgreSQL gerenciado) para armazenamento de dados. A Supabase atua como operadora de dados conforme LGPD, sob contrato de proteção de dados adequado.</li>
-        <li><strong>Processador de pagamentos:</strong> as assinaturas são contratadas e cobradas exclusivamente pela Apple, por meio de compra dentro do aplicativo (App Store). O CarMatch não coleta nem armazena dados de cartão de crédito; recebemos da Apple apenas a confirmação da assinatura ativa e o identificador da transação, necessários para liberar o plano contratado. O tratamento dos dados de pagamento é regido pela política de privacidade da Apple.</li>
+        <li><strong>Processador de pagamentos:</strong> as assinaturas são contratadas e cobradas exclusivamente pela Apple, por meio de compra dentro do aplicativo (App Store). O MatchMotors não coleta nem armazena dados de cartão de crédito; recebemos da Apple apenas a confirmação da assinatura ativa e o identificador da transação, necessários para liberar o plano contratado. O tratamento dos dados de pagamento é regido pela política de privacidade da Apple.</li>
         <li><strong>Autoridades públicas:</strong> quando exigido por ordem judicial, regulatória ou legal devidamente fundamentada.</li>
       </ul>
     </div>
@@ -410,7 +424,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">09</span> Cookies e rastreamento</h2>
       <p>
-        O CarMatch utiliza apenas <strong>cookies de sessão</strong> estritamente necessários para manter o estado de autenticação do usuário enquanto ele navega na plataforma. Esses cookies são apagados automaticamente ao encerrar a sessão.
+        O MatchMotors utiliza apenas <strong>cookies de sessão</strong> estritamente necessários para manter o estado de autenticação do usuário enquanto ele navega na plataforma. Esses cookies são apagados automaticamente ao encerrar a sessão.
       </p>
       <p>
         <strong>Não utilizamos</strong> cookies de terceiros, pixels de rastreamento, scripts de análise comportamental (ex.: Google Analytics, Meta Pixel) ou qualquer tecnologia de identificação que persista entre sessões para fins publicitários ou de perfil.
@@ -460,7 +474,7 @@
 
 <footer>
   <div class="container">
-    <div>CarMatch · ThoThi Technologies · 2026</div>
+    <div>MatchMotors · ThoThi Technologies · 2026</div>
     <div>support@thothi.com.br</div>
     <div>
       <a href="privacidade.html">Política de Privacidade</a>

@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Termos de Uso — CarMatch</title>
+<title>Termos de Uso — MatchMotors</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0A0A0A;
-    --bg-alt: #111111;
-    --bg-card: #161616;
-    --red: #FF3B30;
-    --red-soft: rgba(255, 59, 48, 0.12);
-    --red-glow: rgba(255, 59, 48, 0.35);
-    --text: #F4F4F4;
-    --text-muted: #8E8E93;
-    --text-dim: #5A5A5C;
-    --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.18);
+    --bg: #0D0A09;
+    --bg-alt: #141110;
+    --bg-card: #191413;
+    --red: #C42019;
+    --red-soft: rgba(196, 32, 25, 0.14);
+    --red-glow: rgba(196, 32, 25, 0.35);
+    --text: #F1EDEA;
+    --text-muted: #9A928C;
+    --text-dim: #6E6560;
+    --border: rgba(241, 237, 234, 0.10);
+    --border-strong: rgba(241, 237, 234, 0.20);
     --green: #34C759;
     --orange: #FF9500;
   }
@@ -30,7 +31,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Archivo', system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
@@ -75,14 +76,20 @@
     align-items: center;
   }
   .logo {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -0.02em;
     text-decoration: none;
     color: var(--text);
   }
-  .logo span { color: var(--red); }
+  /* Lockup da marca — mesma regra do site: uma palavra, skew de 9° no
+     conjunto, "Match" claro e "Motors" vermelho, nunca trocados. */
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo .wm { display:inline-flex; transform:skewX(-9deg); font-weight:800;
+              font-stretch:104%; letter-spacing:-.032em; line-height:1; }
+  .logo .wm .a { color:#EDE7E4; }
+  .logo .wm .b { color:#C42019; }
   .nav-back {
     font-size: 14px;
     color: var(--text-muted);
@@ -117,7 +124,7 @@
     background: var(--red);
   }
   .page-title {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;
     line-height: 1.05;
@@ -149,7 +156,7 @@
   }
 
   .legal-section h2 {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Archivo', sans-serif;
     font-size: 24px;
     font-weight: 600;
     letter-spacing: -0.02em;
@@ -283,7 +290,14 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo">Car<span>Match</span></a>
+    <a href="/" class="logo" aria-label="MatchMotors">
+      <svg viewBox="0 0 200 130" width="42" aria-hidden="true" style="flex:0 0 auto">
+        <rect x="11" y="11" width="178" height="108" rx="20" fill="none" stroke="#DAD2CD" stroke-width="15"/>
+        <path d="M0 56 V0 H14 L31 26 L48 0 H62 V56 H48 V22 L31 46 L14 22 V56 Z" fill="#DAD2CD" transform="translate(35 37)"/>
+        <path d="M0 56 V0 H14 L31 26 L48 0 H62 V56 H48 V22 L31 46 L14 22 V56 Z" fill="#C42019" transform="translate(103 37)"/>
+      </svg>
+      <span class="wm"><span class="a">Match</span><span class="b">Motors</span></span>
+    </a>
     <a href="index.html" class="nav-back">← Voltar ao início</a>
   </div>
 </nav>
@@ -307,7 +321,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">01</span> Aceitação dos termos</h2>
       <p>
-        Ao acessar, cadastrar-se ou utilizar o CarMatch — seja pelo aplicativo móvel, pela interface web ou pela API — você, em nome da pessoa jurídica que representa, declara ter lido, compreendido e concordado com estes Termos de Uso em sua totalidade.
+        Ao acessar, cadastrar-se ou utilizar o MatchMotors — seja pelo aplicativo móvel, pela interface web ou pela API — você, em nome da pessoa jurídica que representa, declara ter lido, compreendido e concordado com estes Termos de Uso em sua totalidade.
       </p>
       <p>
         Se você não concordar com qualquer disposição destes termos, não deve utilizar a plataforma. O uso continuado após atualizações publicadas com aviso de 30 dias implica a aceitação da versão vigente.
@@ -320,7 +334,7 @@
     <!-- 2. Elegibilidade -->
     <div class="legal-section">
       <h2><span class="sec-num">02</span> Elegibilidade</h2>
-      <p>O CarMatch é uma plataforma de uso <strong>exclusivo para pessoas jurídicas</strong>. Para cadastrar-se, a loja deve:</p>
+      <p>O MatchMotors é uma plataforma de uso <strong>exclusivo para pessoas jurídicas</strong>. Para cadastrar-se, a loja deve:</p>
       <ul>
         <li>Possuir CNPJ ativo junto à Receita Federal do Brasil.</li>
         <li>Ter como atividade principal ou secundária o comércio varejista ou atacadista de veículos automotores.</li>
@@ -354,7 +368,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">04</span> Descrição do serviço</h2>
       <p>
-        O CarMatch é uma plataforma de <strong>match automático entre estoques e intenções de compra</strong> de concessionárias, voltada para facilitar o repasse inter-dealer de veículos.
+        O MatchMotors é uma plataforma de <strong>match automático entre estoques e intenções de compra</strong> de concessionárias, voltada para facilitar o repasse inter-dealer de veículos.
       </p>
       <p>Os principais recursos da plataforma incluem:</p>
       <ul>
@@ -365,7 +379,7 @@
         <li><strong>Histórico e rastreabilidade:</strong> registro de todos os matches gerados, status de negociação e ações realizadas na plataforma.</li>
       </ul>
       <p>
-        O CarMatch atua como facilitador tecnológico. Não é parte nas negociações entre lojas e não garante o fechamento de qualquer repasse.
+        O MatchMotors atua como facilitador tecnológico. Não é parte nas negociações entre lojas e não garante o fechamento de qualquer repasse.
       </p>
     </div>
 
@@ -373,7 +387,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">05</span> Planos e pagamento</h2>
       <p>
-        O CarMatch oferece planos de assinatura mensal. As condições vigentes estão descritas na página de Planos e podem ser alteradas com aviso prévio de 30 dias.
+        O MatchMotors oferece planos de assinatura mensal. As condições vigentes estão descritas na página de Planos e podem ser alteradas com aviso prévio de 30 dias.
       </p>
       <ul>
         <li><strong>Cobrança:</strong> realizada mensalmente em reais (R$), via gateway de pagamento integrado, no dia do vencimento do ciclo de faturamento da conta.</li>
@@ -408,7 +422,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">07</span> Propriedade intelectual</h2>
       <p>
-        Todos os elementos da plataforma CarMatch — incluindo, sem limitação, software, algoritmos, interface, marca, logotipo, design e documentação — são de propriedade exclusiva da <strong>ThoThi Technologies</strong> e estão protegidos pela legislação de propriedade intelectual aplicável.
+        Todos os elementos da plataforma MatchMotors — incluindo, sem limitação, software, algoritmos, interface, marca, logotipo, design e documentação — são de propriedade exclusiva da <strong>ThoThi Technologies</strong> e estão protegidos pela legislação de propriedade intelectual aplicável.
       </p>
       <p>
         O cadastro na plataforma confere à loja uma licença de uso não exclusiva, intransferível e revogável, para acessar e utilizar os recursos do plano contratado, exclusivamente para suas finalidades empresariais internas.
@@ -436,7 +450,7 @@
     <div class="legal-section">
       <h2><span class="sec-num">09</span> Limitação de responsabilidade</h2>
       <p>
-        O CarMatch é uma plataforma de facilitação tecnológica. A ThoThi Technologies <strong>não é parte</strong> em nenhuma negociação, contrato de compra e venda ou repasse realizado entre as lojas que utilizam o serviço.
+        O MatchMotors é uma plataforma de facilitação tecnológica. A ThoThi Technologies <strong>não é parte</strong> em nenhuma negociação, contrato de compra e venda ou repasse realizado entre as lojas que utilizam o serviço.
       </p>
       <p>
         A ThoThi Technologies não se responsabiliza por:
@@ -513,7 +527,7 @@
 
 <footer>
   <div class="container">
-    <div>CarMatch · ThoThi Technologies · 2026</div>
+    <div>MatchMotors · ThoThi Technologies · 2026</div>
     <div>support@thothi.com.br</div>
     <div>
       <a href="privacidade.html">Política de Privacidade</a>
