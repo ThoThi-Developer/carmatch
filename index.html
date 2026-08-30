@@ -223,9 +223,138 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
   .hero .mark-big{width:150px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ============================================================
+   MOVIMENTO
+   ------------------------------------------------------------
+   Regras da casa:
+   · Só transform e opacity. Nada que force layout a 60fps.
+   · O REVELAR usa scroll-driven animation do CSS (view()), não
+     JS. Onde o navegador não suporta, o @supports não casa e o
+     conteúdo simplesmente aparece — nunca some. É por isso que
+     não existe estado "escondido" fora do @supports: página em
+     branco por causa de animação é o pior defeito possível.
+   · Tudo morre em prefers-reduced-motion. Sem exceção, incluindo
+     o scroll suave e o brilho do cromo.
+   · O tempo é de carro, não de brinquedo: 420–700ms, curva
+     desacelerando, deslocamento curto. Nada quica.
+   ============================================================ */
+
+@keyframes mm-rise{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+@keyframes mm-fade{from{opacity:0}to{opacity:1}}
+@keyframes mm-sheen{0%{transform:translateX(-120%) skewX(-18deg);opacity:0}
+                    12%{opacity:.55}
+                    60%{opacity:.35}
+                    100%{transform:translateX(220%) skewX(-18deg);opacity:0}}
+@keyframes mm-caret{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
+
+@media (prefers-reduced-motion: no-preference){
+
+  /* ---- Entrada do herói: a marca chega antes da frase ---- */
+  .hero .plateglow{animation:mm-rise .7s cubic-bezier(.16,.84,.34,1) both}
+  .hero .wm{animation:mm-rise .7s cubic-bezier(.16,.84,.34,1) .10s both}
+  .hero h1{animation:mm-rise .7s cubic-bezier(.16,.84,.34,1) .18s both}
+  .hero .sub{animation:mm-rise .7s cubic-bezier(.16,.84,.34,1) .26s both}
+  .hero .cta{animation:mm-rise .7s cubic-bezier(.16,.84,.34,1) .34s both}
+  .hero .fine{animation:mm-fade .9s ease .52s both}
+
+  /* ---- O cromo pega luz. Uma vez na entrada, e de vez em
+         quando depois — é reflexo, não pisca-pisca. ---- */
+  .plateglow::after{
+    content:"";position:absolute;inset:0;border-radius:24px;pointer-events:none;
+    background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.85) 50%,transparent 100%);
+    mix-blend-mode:overlay;
+    animation:mm-sheen 1.5s ease-in-out 1s 1 both, mm-sheen 1.5s ease-in-out 9s infinite;
+  }
+
+  /* ---- Revelar ao rolar (sem JS) ---- */
+  @supports (animation-timeline: view()){
+    .eyebrow, .wrap > h2, .lead,
+    .grid > *, .steps > .step, .plans > .plan,
+    .split > div, #faq details, footer .wrap > *{
+      animation:mm-rise .01s linear both;
+      animation-timeline:view();
+      animation-range:entry 2% cover 22%;
+    }
+    /* O herói já entrou pela animação de carga — não pode
+       re-animar quando o usuário rola de volta para o topo. */
+    .hero *{animation-timeline:auto}
+  }
+
+  /* ---- A resposta do FAQ desliza ---- */
+  #faq details[open] > p{animation:mm-rise .38s cubic-bezier(.16,.84,.34,1) both}
+
+  /* ---- A placa: o cursor pisca enquanto o campo é digitado ---- */
+  .platefield .caret{animation:mm-caret 1.05s steps(1,end) infinite}
+}
+
+/* ---- Estados de toque/hover: existem SEMPRE, inclusive em
+       reduced-motion (ali só a transição some, o estado fica) ---- */
+.card, .plan, .btn, .platefield, .nav .links a{transition:
+  transform .22s cubic-bezier(.16,.84,.34,1),
+  box-shadow .22s ease, background-color .18s ease,
+  border-color .18s ease, color .18s ease}
+
+@media (hover:hover){
+  .card:hover{transform:translateY(-3px);border-color:rgba(20,17,16,.2);
+              box-shadow:0 18px 34px -24px rgba(20,17,16,.55)}
+  .dark .card:hover, .on-dark .card:hover{border-color:rgba(241,237,234,.26);
+              box-shadow:0 18px 34px -22px rgba(0,0,0,.7)}
+  .btn:hover{transform:translateY(-1px)}
+  .plan:hover{transform:translateY(-2px)}
+}
+.btn:active{transform:translateY(0) scale(.985)}
+
+/* Sublinhado que cresce do centro, no vermelho de tipo */
+.nav .links a{position:relative}
+.nav .links a::after{content:"";position:absolute;left:50%;right:50%;bottom:-5px;height:2px;
+  background:var(--red-text);border-radius:2px;transition:left .22s ease,right .22s ease}
+.nav .links a:hover::after{left:0;right:0}
+
+/* O cabeçalho ganha peso quando a página sai do topo */
+header{transition:box-shadow .25s ease,border-color .25s ease}
+header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
+                border-bottom-color:rgba(20,17,16,.18)}
+
+/* Wrapper do símbolo do herói — existe só para o brilho ter onde morar.
+   Ele HERDA a caixa que era do .mark-big (196px, centrado): wrapper
+   inline-block aqui empurrava o símbolo para a mesma linha do wordmark,
+   porque .wm é inline-flex. Bloco, e o svg preenche. */
+.plateglow{position:relative;overflow:hidden;border-radius:24px}
+.hero .plateglow{display:block;width:196px;margin:0 auto 26px}
+.hero .plateglow .mark-big{width:100%;margin:0}
+
+/* A barra do peso cresce a partir do zero quando entra na tela.
+   ⚠️ O estado zerado (.mm-arm) só é aplicado no instante em que a animação
+   vai começar — nunca no carregamento. Antes era `.js .bar .t i{scaleX(0)}`
+   e, em qualquer situação onde o observer não dispara (aba aberta em
+   segundo plano, por exemplo), o visitante lia "Modelo 0 · Preço 0 · Ano 0".
+   Decoração que apaga conteúdo é defeito, não enfeite. */
+.bar .t i{transform-origin:left center;transition:transform .9s cubic-bezier(.16,.84,.34,1)}
+.bars.mm-arm .t i{transform:scaleX(0)}
+.bars.mm-arm.mm-on .t i{transform:scaleX(1)}
+
+/* O campo da placa enquanto é digitado */
+.platefield .caret{display:inline-block;width:2px;height:.95em;background:var(--red-text);
+  vertical-align:-.1em;margin-left:.06em;opacity:0}
+.js .platefield.mm-typing .caret{opacity:1}
+.platefield .chip{display:inline-flex;align-items:center;gap:6px;margin-left:12px;
+  padding:3px 9px;border-radius:99px;font-family:var(--font);font-size:11.5px;
+  font-weight:700;letter-spacing:.02em;background:rgba(0,51,153,.1);color:#003399;
+  opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease}
+.platefield.mm-done .chip{opacity:1;transform:none}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .bar .t i{transform:none}
+  .js .platefield .caret{display:none}
+  .platefield .chip{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js")</script>
 <!-- ============================================================
      Definições do símbolo. Geometria canônica do handoff da marca
      (viewBox 0 0 200 130 — proporção 1.538:1, NUNCA distorcer).
@@ -285,6 +414,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
 <!-- ======================= HERÓI ======================= -->
 <section class="hero on-dark">
   <div class="wrap">
+    <span class="plateglow">
     <svg class="mark-big" viewBox="0 0 200 130" role="img" aria-label="MatchMotors">
       <rect x="4" y="4" width="192" height="122" rx="24" fill="url(#cPlate)"/>
       <rect x="9" y="9" width="182" height="112" rx="20" fill="none" stroke="#FFFFFF" stroke-opacity=".5" stroke-width="2"/>
@@ -293,6 +423,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
       <g transform="translate(35 37)" fill="url(#cLetter)"><use href="#mmGlyph"/></g>
       <g transform="translate(103 37)" fill="url(#cRed)"><use href="#mmGlyph"/></g>
     </svg>
+    </span>
     <div class="wm on-dark" style="justify-content:center"><span class="a">Match</span><span class="b">Motors</span></div>
     <h1>O carro que a loja vizinha procura está parado no seu pátio.</h1>
     <p class="sub">O MatchMotors cruza o seu estoque com o que os clientes das lojas parceiras
@@ -389,7 +520,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
     <div>
       <div class="platefield" aria-hidden="true">
         <div class="tarja"></div>
-        <div class="corpo">ABC1D23</div>
+        <div class="corpo"><span class="chars">ABC1D23</span><span class="caret" aria-hidden="true"></span><span class="chip">identificado</span></div>
       </div>
       <p style="margin-top:18px;font-size:14.5px;color:rgba(20,17,16,.55);max-width:34ch">
         O campo da tela inicial do app. A tarja azul é a da placa Mercosul de verdade.</p>
@@ -682,5 +813,104 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
   </div>
 </footer>
 
+
+<script>
+/* ============================================================
+   MOVIMENTO — a parte que o CSS não faz sozinho.
+   Três coisas, e só: peso do cabeçalho, a placa sendo digitada
+   e as barras do score crescendo. O revelar ao rolar é CSS puro
+   (view()); não há observer para isso de propósito.
+
+   Nada aqui é obrigatório para ler a página: se este script não
+   rodar, o texto continua todo visível e a placa mostra ABC1D23
+   parada. É por isso que o estado inicial escondido mora sob a
+   classe .js, que só existe se o JS existir.
+   ============================================================ */
+(function () {
+  "use strict";
+  var calmo = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* ---- 1. O cabeçalho ganha sombra ao sair do topo ---- */
+  var cab = document.querySelector("header");
+  if (cab) {
+    var marcar = function () { cab.classList.toggle("mm-stuck", window.scrollY > 12); };
+    marcar();
+    addEventListener("scroll", marcar, { passive: true });
+  }
+
+  /* Sem IntersectionObserver (navegador antigo), tudo entra ligado. */
+  if (!("IntersectionObserver" in window)) {
+    /* sem observer: nada é zerado, os valores reais já estão no HTML */
+    document.querySelectorAll(".platefield").forEach(function (f) { f.classList.add("mm-done"); });
+    return;
+  }
+
+  var umaVez = function (alvo, aoEntrar) {
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        obs.unobserve(e.target);
+        aoEntrar(e.target);
+      });
+    }, { threshold: 0.45 });
+    obs.observe(alvo);
+  };
+
+  /* ---- 2. As barras do score crescem e o número conta ---- */
+  document.querySelectorAll(".bars").forEach(function (bars) {
+    var valores = [].map.call(bars.querySelectorAll(".v"), function (v) {
+      return parseInt(v.textContent, 10);
+    });
+    umaVez(bars, function () {
+      if (calmo.matches) { bars.classList.add("mm-arm", "mm-on"); return; }
+      // Zera e mede AQUI, não no carregamento: se este callback nunca
+      // rodar, os números verdadeiros continuam na tela.
+      bars.querySelectorAll(".v").forEach(function (v) { v.textContent = "0"; });
+      bars.classList.add("mm-arm");
+      void bars.offsetWidth;                          // reflow: o scaleX(0) precisa valer antes
+      bars.classList.add("mm-on");
+      var t0 = performance.now(), dur = 900;
+      var passo = function (agora) {
+        var k = Math.min(1, (agora - t0) / dur);
+        var e = 1 - Math.pow(1 - k, 3);                 // mesma desaceleração da barra
+        bars.querySelectorAll(".v").forEach(function (v, i) {
+          v.textContent = Math.round(valores[i] * e);
+        });
+        if (k < 1) requestAnimationFrame(passo);
+      };
+      requestAnimationFrame(passo);
+    });
+  });
+
+  /* ---- 3. A placa sendo digitada ----
+     Sete caracteres, que é o gesto que abre o app. O texto final
+     fica no HTML: se o script morrer no meio, sobra a placa
+     inteira, nunca um pedaço. */
+  document.querySelectorAll(".platefield").forEach(function (campo) {
+    var chars = campo.querySelector(".chars");
+    if (!chars) return;
+    var placa = chars.textContent.trim();
+    if (calmo.matches) { campo.classList.add("mm-done"); return; }
+
+    umaVez(campo, function () {
+      chars.textContent = "";
+      campo.classList.add("mm-typing");
+      var i = 0;
+      var bater = function () {
+        chars.textContent = placa.slice(0, ++i);
+        if (i < placa.length) {
+          setTimeout(bater, 105 + Math.random() * 55);   // digitação humana, não metrônomo
+        } else {
+          setTimeout(function () {
+            campo.classList.remove("mm-typing");
+            campo.classList.add("mm-done");
+          }, 420);
+        }
+      };
+      setTimeout(bater, 260);
+    });
+  });
+})();
+</script>
 </body>
 </html>
