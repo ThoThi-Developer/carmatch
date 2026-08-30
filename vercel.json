@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "carmatch.thothi.app" }],
+      "destination": "https://matchmotorsbr.com/:path*",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/dashboard", "destination": "https://carmatch-website.vercel.app/" },
     { "source": "/dashboard/", "destination": "https://carmatch-website.vercel.app/" },
