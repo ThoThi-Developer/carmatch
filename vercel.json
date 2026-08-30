@@ -9,7 +9,7 @@
         }
       ],
       "destination": "https://matchmotorsbr.com/",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/:path*",
@@ -20,7 +20,7 @@
         }
       ],
       "destination": "https://matchmotorsbr.com/:path*",
-      "permanent": false
+      "permanent": true
     }
   ],
   "rewrites": [
