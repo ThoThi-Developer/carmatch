@@ -72,7 +72,9 @@ Duas não sobreviveram e **não devem voltar**:
   bloco de planos, em uma linha, porque o lojista precisa saber — não porque é
   oferta.
 
-### ⚠️ O trial são 14 dias, e o número mora no ASC
+### ⚠️ O trial são 7 dias, e o número mora no ASC
+
+Conferido no App Store Connect em 30-ago-2026: **7 dias**.
 
 O **app não escreve esse número**: `PaywallSheet.freeTrialText` deriva do
 StoreKit em runtime, então ele acompanha o ASC sozinho. **Só o site escreve à
@@ -80,8 +82,10 @@ mão**, em 4 lugares (linha fina do herói, card do Pro, bloco legal e FAQ) —
 todos marcados com um comentário `<!-- TRIAL -->` no HTML. Mudou no ASC, mude
 nos quatro.
 
-Já saiu errado: o site antigo dizia **7 dias** em 4 lugares e eu carreguei esse
-número para cá sem conferir. São 14.
+Este número já foi de 7 para 14 e de volta para 7 no mesmo dia. Se ele for
+questionado de novo, a resposta não é editar: é **abrir o ASC**. Nenhuma outra
+fonte — nem o `.storekit`, nem o site antigo, nem mensagem de commit, nem eu —
+vale como confirmação.
 
 ### ⚠️ O `.storekit` NÃO é fonte para afirmação comercial
 
