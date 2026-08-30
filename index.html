@@ -132,7 +132,7 @@ h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
 .step .n{flex:0 0 30px;height:30px;border-radius:9px;display:grid;place-items:center;
          font-size:13.5px;font-weight:800;background:var(--ink);color:var(--paper)}
 .dark .step .n{background:var(--paper);color:var(--ink)}
-.step h4{font-size:16.5px;font-weight:700;margin-bottom:3px}
+.step h3{font-size:16.5px;font-weight:700;margin-bottom:3px;letter-spacing:0}
 .step p{font-size:15px;color:rgba(20,17,16,.64)}
 .dark .step p{color:rgba(241,237,234,.62)}
 
@@ -162,6 +162,14 @@ h2{font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.028em;
 .plan li.no{color:rgba(20,17,16,.42)}
 .plan li.no::before{border-color:rgba(20,17,16,.28);transform:none;border-left:0;
                     border-bottom:2.2px solid rgba(20,17,16,.28);top:12px;height:0}
+/* Azul do Mercosul — a MESMA tarja do campo de placa do app (#003399).
+   Não é azul de UI: é a cor do objeto, e por isso identifica o plano que
+   sai da loja de aplicativos e vira conversa. */
+.plan.corp{border-color:rgba(0,51,153,.34);background:rgba(0,51,153,.035)}
+.plan .price.azul{color:#003399}
+.plan.corp li::before{border-left-color:#003399;border-bottom-color:#003399}
+.btn-azul{background:#003399;color:#FFF}
+.btn-azul:hover{background:#00256F}
 .seats{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
 .seats table{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
 .seats th,.seats td{padding:7px 0;text-align:left;border-bottom:1px solid var(--line)}
@@ -294,7 +302,10 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
       <a class="btn btn-primary" href="https://apps.apple.com/br/app/id6773832088" target="_blank" rel="noopener">Baixar na App Store</a>
       <a class="btn btn-ghost" href="#como">Ver como funciona</a>
     </div>
-    <p class="fine">7 dias grátis · depois a partir de R$ 599,90/mês · cancele quando quiser<br>iPhone e iPad · feito no Brasil, para lojista brasileiro</p>
+    <!-- TRIAL: 14 dias. Este número vem do App Store Connect. O app NÃO o
+     escreve — deriva do StoreKit em runtime. Aqui é manual e aparece em
+     4 lugares (ver README). Mudou no ASC? mude nos 4. -->
+    <p class="fine">14 dias grátis · depois a partir de R$ 599,90/mês · cancele quando quiser<br>iPhone e iPad · feito no Brasil, para lojista brasileiro</p>
   </div>
 </section>
 
@@ -338,15 +349,15 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
       real de fechar.</p>
     <div class="steps">
       <div class="step"><div class="n">1</div><div>
-        <h4>Coloque o seu estoque</h4>
+        <h3>Coloque o seu estoque</h3>
         <p>Um carro por vez pela placa, ou o estoque inteiro por planilha. O app casa marca
           e modelo com a tabela FIPE na hora de importar.</p></div></div>
       <div class="step"><div class="n">2</div><div>
-        <h4>Registre o que o seu cliente quer</h4>
+        <h3>Registre o que o seu cliente quer</h3>
         <p>Comprar ou vender: o app trabalha os dois lados. Modelo, faixa de preço, ano,
           quilometragem, carroceria e o que é exigência de verdade.</p></div></div>
       <div class="step"><div class="n">3</div><div>
-        <h4>Receba só o que interessa</h4>
+        <h3>Receba só o que interessa</h3>
         <p>Cada cruzamento recebe uma nota de 0 a 100 e chega por notificação. Você abre o
           app e o trabalho já está feito e ordenado.</p></div></div>
     </div>
@@ -366,11 +377,11 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
         pergunta é só quanto vale.</p>
       <div class="steps" style="margin-top:28px">
         <div class="step"><div class="n">✓</div><div>
-          <h4>Placa Mercosul e placa antiga</h4>
+          <h3>Placa Mercosul e placa antiga</h3>
           <p>As duas grafias do mesmo carro são reconhecidas como o mesmo carro — não entra
             duas vezes no seu estoque.</p></div></div>
         <div class="step"><div class="n">✓</div><div>
-          <h4>Fora da tabela também entra</h4>
+          <h3>Fora da tabela também entra</h3>
           <p>Importado, blindado de preparadora, edição especial: dá para escrever marca e
             modelo à mão. Cadastrar e editar oferecem a mesma escolha.</p></div></div>
       </div>
@@ -514,14 +525,14 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
     <h2>Um preço por vendedor, e a rede inteira junto.</h2>
     <p class="lead">O MatchMotors é assinatura. O que muda é o tamanho da sua equipe —
       e, acima de dez vendedores ou com mais de uma loja no grupo, a conversa vira
-      Corporate.</p>
+      Corporativo.</p>
 
     <div class="plans">
       <div class="plan hi">
         <span class="tag">A rede inteira</span>
         <h3>MatchMotors&nbsp;Pro</h3>
         <div class="price">R$ 599,90<small> /mês · 3 vendedores</small></div>
-        <p style="font-size:14.5px;font-weight:600;color:var(--red-text);margin-top:-2px">7 dias grátis para começar</p>
+        <p style="font-size:14.5px;font-weight:600;color:var(--red-text);margin-top:-2px">14 dias grátis para começar</p>
         <ul>
           <li><strong>Matches com todas as lojas parceiras</strong></li>
           <li>Estoque e intenções sem limite</li>
@@ -550,9 +561,9 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
         </div>
       </div>
 
-      <div class="plan">
-        <h3>Corporate</h3>
-        <div class="price" style="font-size:30px">Sob consulta</div>
+      <div class="plan corp">
+        <h3>Corporativo</h3>
+        <div class="price azul" style="font-size:30px">Sob consulta</div>
         <ul>
           <li>Acima de 10 vendedores</li>
           <li>Mais de uma loja no mesmo grupo</li>
@@ -562,8 +573,8 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
         <p style="font-size:15px;color:rgba(20,17,16,.66);margin-top:20px;line-height:1.55">
           Não é assinatura de loja de aplicativos: a gente conversa, entende o
           tamanho do grupo e fecha a condição.</p>
-        <a class="btn btn-ghost" style="margin-top:18px;width:100%"
-           href="mailto:support@thothi.com.br?subject=MatchMotors%20Corporate">Falar com a gente</a>
+        <a class="btn btn-azul" style="margin-top:18px;width:100%"
+           href="mailto:support@thothi.com.br?subject=MatchMotors%20Corporativo">Falar com a gente</a>
       </div>
     </div>
 
@@ -572,7 +583,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
          Foi a falta disto que derrubou uma submissão nossa em agosto. -->
     <p class="legal">
       <strong>MatchMotors Pro</strong> é uma assinatura mensal com renovação automática,
-      com <strong>7 dias gratuitos</strong> no início. Ao fim do período gratuito a
+      com <strong>14 dias gratuitos</strong> no início. Ao fim do período gratuito a
       assinatura é cobrada automaticamente, a menos que seja cancelada antes disso. O
       valor depende do número de vendedores da loja e vai de R$ 599,90 a R$ 949,90 por mês,
       cobrados na sua conta Apple na confirmação da compra. A assinatura se renova ao fim de
@@ -612,7 +623,7 @@ footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20p
         <p>Importado, blindado de preparadora e edição especial podem ser escritos à mão.
           Tanto no cadastro quanto na edição você escolhe entre pegar da tabela ou digitar.</p></details>
       <details><summary>Tem período de teste?</summary>
-        <p>Tem: 7 dias grátis. Passado esse prazo a assinatura é cobrada automaticamente, a menos que você cancele antes — pela sua conta Apple.</p></details>
+        <p>Tem: 14 dias grátis. Passado esse prazo a assinatura é cobrada automaticamente, a menos que você cancele antes — pela sua conta Apple.</p></details>
       <details><summary>Posso cancelar quando quiser?</summary>
         <p>Pode. A assinatura é mensal e o cancelamento é feito na sua conta Apple, em
           Ajustes → seu nome → Assinaturas, com pelo menos 24 horas de antecedência do fim

@@ -59,8 +59,10 @@ Duas não sobreviveram e **não devem voltar**:
 
 - **“Criptografia ponta a ponta”** — não é o que a arquitetura faz.
 - **Plano gratuito** — não existe. A oferta é **Pro** (assinatura, 3 a 10
-  vendedores) ou **Corporate** (sob consulta, acima disso ou com mais de uma
-  loja no grupo).
+  vendedores) ou **Corporativo** (sob consulta, acima disso ou com mais de uma
+  loja no grupo). O Corporativo usa o **azul da placa Mercosul** (`#003399`, a
+  mesma tarja do campo de placa do app) — é o plano que sai da loja de
+  aplicativos e vira conversa.
 
   ⚠️ Eu já errei isto uma vez: montei um card “Sem plano · R$ 0/mês” a partir do
   enum `starter` do app. Mas o próprio código diz que `starter` **não é mais
@@ -69,6 +71,17 @@ Duas não sobreviveram e **não devem voltar**:
   na tabela de preços. O que acontece sem assinatura ativa está no rodapé do
   bloco de planos, em uma linha, porque o lojista precisa saber — não porque é
   oferta.
+
+### ⚠️ O trial são 14 dias, e o número mora no ASC
+
+O **app não escreve esse número**: `PaywallSheet.freeTrialText` deriva do
+StoreKit em runtime, então ele acompanha o ASC sozinho. **Só o site escreve à
+mão**, em 4 lugares (linha fina do herói, card do Pro, bloco legal e FAQ) —
+todos marcados com um comentário `<!-- TRIAL -->` no HTML. Mudou no ASC, mude
+nos quatro.
+
+Já saiu errado: o site antigo dizia **7 dias** em 4 lugares e eu carreguei esse
+número para cá sem conferir. São 14.
 
 ### ⚠️ O `.storekit` NÃO é fonte para afirmação comercial
 
