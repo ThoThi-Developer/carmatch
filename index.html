@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MatchMotors — repasse entre lojas, sem grupo de WhatsApp</title>
-<meta name="description" content="O MatchMotors cruza o estoque da sua loja com o que os clientes das lojas parceiras procuram, e avisa quando existe negócio. Cadastro pela placa, tabela FIPE, rede com CNPJ verificado.">
+<meta name="description" content="O MatchMotors cruza o estoque da sua loja com o que os clientes das outras lojas da rede procuram, e avisa quando existe negócio. Cadastro pela placa, tabela FIPE, rede com CNPJ verificado.">
 <meta name="theme-color" content="#0D0A09">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:title" content="MatchMotors">
@@ -445,7 +445,7 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
     </span>
     <div class="wm on-dark" style="justify-content:center"><span class="a">Match</span><span class="b">Motors</span></div>
     <h1>O carro que a loja vizinha procura está parado no seu pátio.</h1>
-    <p class="sub">O MatchMotors cruza o seu estoque com o que os clientes das lojas parceiras
+    <p class="sub">O MatchMotors cruza o seu estoque com o que os clientes das outras lojas da rede
       estão procurando — e avisa quando existe negócio. Sem grupo de WhatsApp, sem planilha
       circulando, sem descobrir tarde demais.</p>
     <div class="cta">
@@ -495,13 +495,14 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
     <p class="eyebrow">02 — Como funciona</p>
     <h2>Três cadastros. O resto o app faz sozinho.</h2>
     <p class="lead">Não existe busca manual. A cada carro ou intenção cadastrada, o motor
-      compara com o seu estoque e o das lojas conectadas à sua, e devolve o que tem chance
+      compara com o seu estoque e o de todas as lojas da rede, e devolve o que tem chance
       real de fechar.</p>
     <div class="steps">
       <div class="step"><div class="n">1</div><div>
         <h3>Coloque o seu estoque</h3>
         <p>Um carro por vez pela placa, ou o estoque inteiro por planilha. O app casa marca
-          e modelo com a tabela FIPE na hora de importar.</p></div></div>
+          e modelo com a tabela FIPE na hora de importar. Com o site da loja ligado ao
+          MatchMotors, o estoque passa a acompanhar o site sozinho.</p></div></div>
       <div class="step"><div class="n">2</div><div>
         <h3>Registre o que o seu cliente quer</h3>
         <p>Comprar ou vender: o app trabalha os dois lados. Modelo, faixa de preço, ano,
@@ -598,12 +599,13 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
         <p>A cada cadastro novo o motor recompara tudo e notifica. Ninguém precisa lembrar
           de procurar.</p></div>
       <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9.5h18M3 14.5h18M9 9.5v10M15 9.5v10"/></svg></div>
-        <h3>Estoque inteiro por planilha</h3>
-        <p>Importe o que você já tem. O app casa marca e modelo com a tabela FIPE e avisa
-          quando o mesmo carro entra duas vezes.</p></div>
+        <h3>Estoque que segue o seu site</h3>
+        <p>Com o site da loja ligado, carro novo entra, preço e fotos acompanham e anúncio
+          que sai tira o carro do ar. O que pede decisão fica para você. Sem site ligado,
+          o estoque inteiro entra por planilha.</p></div>
       <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5h4l3 3"/><path d="M21 9.5h-4l-3 3"/><path d="M10 12.5l1.3 1.3a1.9 1.9 0 0 0 2.7 0"/><path d="M7 9.5 9.5 7a2 2 0 0 1 2.8 0L14 8.7"/><path d="M17 9.5 14.5 7"/><path d="M5 9.5v6.5M19 9.5v6.5"/></svg></div>
         <h3>Reserva e repasse</h3>
-        <p>Reservar o carro da parceira, confirmar o repasse e registrar a comissão — com
+        <p>Reservar o carro de outra loja, confirmar o repasse e registrar a comissão — com
           quem fez e quando, para a conversa não virar palavra contra palavra.</p></div>
       <div class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/></svg></div>
         <h3>O que fazer agora</h3>
@@ -631,7 +633,8 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
     <h2>Loja de verdade, com CNPJ que a Receita reconhece.</h2>
     <p class="lead">Rede entre lojas só funciona se do outro lado tiver loja. Por isso a
       entrada é fechada nos dois sentidos: o CNPJ é conferido na hora do cadastro, e depois
-      disso cada loja ainda passa por uma aprovação nossa antes de ver qualquer estoque.</p>
+      disso cada loja ainda passa por uma aprovação nossa antes de ver qualquer estoque.
+      Passou por isso, vê a rede inteira: não existe convite entre lojas.</p>
     <div class="grid g2" style="margin-top:40px">
       <div class="card">
         <h3>CNPJ conferido no cadastro</h3>
@@ -642,11 +645,12 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
       <div class="card">
         <h3>Aprovação manual depois disso</h3>
         <p>CNPJ ativo não basta. Toda loja nova entra pendente e é liberada por nós. Enquanto
-          espera, ela já monta estoque e intenções — só não enxerga a rede.</p>
+          espera, ela já monta estoque e intenções — só não enxerga a rede. Aprovada, vê o
+          estoque de todas as lojas aprovadas e marca as favoritas dela.</p>
       </div>
       <div class="card">
         <h3>A placa dos outros fica protegida</h3>
-        <p>Nos carros das lojas parceiras a placa aparece mascarada; nos seus, inteira. Cada
+        <p>Nos carros das outras lojas a placa aparece mascarada; nos seus, inteira. Cada
           loja vê o que precisa para negociar, e nada além disso.</p>
       </div>
       <div class="card">
@@ -684,7 +688,7 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
         <div class="price">R$ 599,90<small> /mês · 3 vendedores</small></div>
         <p style="font-size:14.5px;font-weight:600;color:var(--red-text);margin-top:-2px">7 dias grátis para começar</p>
         <ul>
-          <li><strong>Matches com todas as lojas parceiras</strong></li>
+          <li><strong>Matches com todas as lojas da rede</strong></li>
           <li>Estoque e intenções sem limite</li>
           <li>Cadastro pela placa e tabela FIPE</li>
           <li>Reserva, repasse e comissão registrada</li>
@@ -750,8 +754,17 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
         <p>Só loja com CNPJ ativo, conferido contra os dados da Receita Federal no cadastro,
           e ainda aprovada manualmente por nós. Não existe conta anônima.</p></details>
       <details><summary>A outra loja vê os meus clientes?</summary>
-        <p>Não. Nome e telefone de cliente nunca saem da sua loja. O que a parceira vê é o
-          carro, e a placa dela aparece mascarada.</p></details>
+        <p>Não. Nome e telefone de cliente nunca saem da sua loja. O que a outra loja vê é o
+          carro, e a placa dele aparece mascarada.</p></details>
+      <details><summary>Preciso de convite para ver o estoque das outras lojas?</summary>
+        <p>Não. Toda loja aprovada vê o estoque de toda loja aprovada. Você escolhe as suas
+          favoritas e filtra por estado ou por loja — isso muda só o que você vê, não quem dá
+          match com quem.</p></details>
+      <details><summary>O estoque se atualiza sozinho?</summary>
+        <p>Nas lojas com o site ligado ao MatchMotors, sim: carro novo entra, preço e fotos
+          acompanham o site, e o anúncio que sai tira o carro do ar — ele continua no seu
+          estoque, marcado como fora do site. Estamos ligando loja a loja; sem site ligado,
+          o estoque entra pela placa ou por planilha.</p></details>
       <details><summary>Como funciona a nota do match?</summary>
         <p>Modelo vale 40, preço 35 e ano 25. Marca, carroceria e ano fora da faixa são
           exigência, não ponto: não casando, o carro não vira match. Os pesos são os mesmos
