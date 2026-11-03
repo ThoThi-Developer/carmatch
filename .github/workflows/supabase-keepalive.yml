@@ -13,7 +13,7 @@ jobs:
       - name: Ping Supabase health endpoint
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://saelhbdtbatnzdypktkr.supabase.co/rest/v1/" \
+            "https://saelhbdtbatnzdypktkr.supabase.co/rest/v1/lojas?select=id&limit=1" \
             -H "apikey: sb_publishable_xcZxOY-oq6ZjTUg7tyZ5UA_8-wutnQZ")
           echo "Response status: $STATUS"
           if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 500 ]; then
