@@ -9,12 +9,12 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
+      # Chave PÚBLICA (pode ficar no arquivo). A anon antiga sai com a troca de chaves (H4).
       - name: Ping Supabase health endpoint
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
             "https://saelhbdtbatnzdypktkr.supabase.co/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+            -H "apikey: sb_publishable_xcZxOY-oq6ZjTUg7tyZ5UA_8-wutnQZ")
           echo "Response status: $STATUS"
           if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 500 ]; then
             echo "Unexpected status $STATUS — Supabase may be down or paused."
