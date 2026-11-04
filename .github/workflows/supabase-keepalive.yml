@@ -16,8 +16,8 @@ jobs:
             "https://saelhbdtbatnzdypktkr.supabase.co/rest/v1/lojas?select=id&limit=1" \
             -H "apikey: sb_publishable_xcZxOY-oq6ZjTUg7tyZ5UA_8-wutnQZ")
           echo "Response status: $STATUS"
-          if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 500 ]; then
-            echo "Unexpected status $STATUS — Supabase may be down or paused."
+          if [ "$STATUS" -ne 200 ]; then
+            echo "Unexpected status $STATUS — Supabase down, paused, or the key was rejected."
             exit 1
           fi
           echo "Supabase is alive."
