@@ -207,6 +207,14 @@ footer a{display:block;color:rgba(241,237,234,.6);text-decoration:none;margin-bo
 footer a:hover{color:var(--paper)}
 footer .base{padding-top:28px;display:flex;justify-content:space-between;gap:20px;
              flex-wrap:wrap;font-size:13.5px;color:rgba(241,237,234,.42)}
+footer .base{align-items:center}
+footer .base .thothi-copy{text-align:right}
+@media(max-width:640px){footer .base{flex-direction:column;align-items:flex-start}footer .base .thothi-copy{text-align:left}}
+/* Camada ThoThi — mesma estrutura no ucm, ShowTracker e MatchMotors */
+.thothi-badge{display:inline-flex;align-items:center;gap:8px;margin:0;padding:6px 13px 6px 10px;border-radius:980px;border:1px solid rgba(255,255,255,.14);color:rgba(241,237,234,.72);font-size:13px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s}
+.thothi-badge:hover{color:#fff;border-color:rgba(255,255,255,.34);text-decoration:none}
+.thothi-badge img{width:20px;height:auto;display:block}
+.thothi-badge b{color:#fff;font-weight:700}
 
 /* ---- Responsivo ---- */
 .rot-curto{display:none}
@@ -371,6 +379,19 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
   .platefield .chip{opacity:1;transform:none}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "MatchMotors",
+  "operatingSystem": "iOS",
+  "applicationCategory": "BusinessApplication",
+  "inLanguage": "pt-BR",
+  "url": "https://matchmotorsbr.com",
+  "downloadUrl": "https://apps.apple.com/br/app/id6773832088",
+  "publisher": { "@type": "Organization", "name": "ThoThi Technologies", "url": "https://thothi.app" }
+}
+</script>
 </head>
 <body>
 <script>document.documentElement.classList.add("js")</script>
@@ -846,8 +867,11 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
       </div>
     </div>
     <div class="base">
-      <span>© 2026 ThoThi Technologies. Todos os direitos reservados.</span>
-      <span>MatchMotors é uma marca da ThoThi Technologies.</span>
+      <a class="thothi-badge" href="https://thothi.app" aria-label="ThoThi Technologies — thothi.app">
+        <img src="/thothi/mark.svg" alt="" width="20" height="18">
+        <span>Um app da <b>ThoThi</b></span>
+      </a>
+      <span class="thothi-copy">© <span data-year>2026</span> ThoThi Technologies. Todos os direitos reservados.<br>MatchMotors é uma marca da ThoThi Technologies.</span>
     </div>
   </div>
 </footer>
@@ -951,5 +975,6 @@ header.mm-stuck{box-shadow:0 10px 30px -22px rgba(20,17,16,.75);
   });
 })();
 </script>
+<script>document.querySelectorAll('[data-year]').forEach(function(el){el.textContent=String(new Date().getFullYear())});</script>
 </body>
 </html>

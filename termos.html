@@ -291,6 +291,11 @@
     transition: color 0.2s;
   }
   footer a:hover { color: var(--text-muted); }
+/* Camada ThoThi — mesma estrutura no ucm, ShowTracker e MatchMotors */
+.thothi-badge{display:inline-flex;align-items:center;gap:8px;margin:0;padding:6px 13px 6px 10px;border-radius:980px;border:1px solid rgba(255,255,255,.14);color:rgba(241,237,234,.72);font-size:13px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s}
+.thothi-badge:hover{color:#fff;border-color:rgba(255,255,255,.34);text-decoration:none}
+.thothi-badge img{width:20px;height:auto;display:block}
+.thothi-badge b{color:#fff;font-weight:700}
 </style>
 </head>
 <body>
@@ -539,15 +544,23 @@
 
 <footer>
   <div class="container">
-    <div>MatchMotors · ThoThi Technologies · 2026</div>
-    <div>suporte@matchmotorsbr.com</div>
+    <a class="thothi-badge" href="https://thothi.app" aria-label="ThoThi Technologies — thothi.app">
+        <img src="/thothi/mark.svg" alt="" width="20" height="18">
+        <span>Um app da <b>ThoThi</b></span>
+      </a>
+    <div>© <span data-year>2026</span> ThoThi Technologies. Todos os direitos reservados.</div>
     <div>
+      <a href="/">MatchMotors</a>
+      &nbsp;·&nbsp;
       <a href="privacidade.html">Política de Privacidade</a>
       &nbsp;·&nbsp;
       <a href="termos.html">Termos de Uso</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:suporte@matchmotorsbr.com">suporte@matchmotorsbr.com</a>
     </div>
   </div>
 </footer>
 
+<script>document.querySelectorAll('[data-year]').forEach(function(el){el.textContent=String(new Date().getFullYear())});</script>
 </body>
 </html>
