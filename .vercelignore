@@ -1,0 +1,10 @@
+# O site sobe a raiz do repositório. Sem esta lista, a Vercel servia arquivos
+# internos: /.claude/launch.json e /.github/workflows/supabase-keepalive.yml
+# (achado de varredura, 26-nov-2026). A Vercel já esconde README e vercel.json
+# sozinha, mas não pastas com ponto.
+#
+# Regra: nada que começa com ponto vai para o site. Se um dia precisar de
+# /.well-known (ex.: apple-app-site-association), liberar só ela com
+# !.well-known
+.*
+README.md
